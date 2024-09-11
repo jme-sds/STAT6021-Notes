@@ -1,0 +1,46 @@
+Traditional R,dplyr,description
+"read.csv(filepath,header=TRUE)",none,to read in data to data frame from file
+dim(dataframe),none,"to see dimensions of data frame (rows,cols)"
+colnames(dataframe),none,to see column names
+"Data[c(1,3,4),c(1,5,8)]",none,access multiple rows/columns
+Data$Year,"Dataframe%>%
+         select(col)",access full column
+"Data[,1]","select(Dataframe,Column)",access full column
+"Data[,-c(2:8)]",none,access full column
+Data[c(1:3)],none,access full row
+"which(Data$Sport==""Soccer"")","Dataframe%>%
+         filter(condition)",select observation by condition
+"names(Data)[7]<-""Comp""","Data<-Data%>%
+          rename(Yr=Year,Comp=Computer)",change column names
+"Data[!complete.cases(Data),]",none,return rows that are not complete
+"apply(Data[,c(2,4)],2,mean,na.rm=T)","Data%>%
+      summarize(mean(col,na.rm=T),more stats…)
+
+summarize(avgCol=mean(Col,na.rm=T))","summarize variables, can use median too"
+"tapply(numcol,groupcol,median,na.rm=T)","Data%>%
+  group_by(Yr)%>%
+  summarize(medSleep=median(Sleep,na.rm=T))",summarize variable by group
+"factor(col,levels=c(""levels""))","Data<- Data%>%
+  mutate(Yr = Yr%>%
+         fct_relevel(c(""First"",""Second"",""Third"",""Fourth"")))",factor levels to put in better order
+"tapply(...,list(groupcols),...)","group_by(Yr,Comp)%>% (within dataframe pipe)",summarize by many different groups
+newvar<-oldvar*60,"Data<-Data%>%
+  mutate(Sleep_mins = Sleep*60)",create new variable based on old
+"bin<-ifelse(cond.,T,F)","Data<-Data%>%
+  mutate(deprived=ifelse(Sleep<7, ""yes"", ""no""))",create binary variable based on numeric
+"cut(Col,breaks=c(..),labels=c(..)","Data<-Data%>%
+  mutate(CourseLoad=case_when(Courses <= 3 ~ ""light"", 
+                              Courses >3 & Courses <=5 ~ ""regular"", 
+                              Courses > 5 ~ ""heavy""))",create categorical variable based on numeric
+levels(col),none,show levels for given column
+"new.levels<-c(""und"", ""und"", ""up"",""up"")
+Year2<-factor(new.levels[Data$Yr])
+levels(Year2)","Data<-Data%>%
+  mutate(UpUnder=fct_collapse(Yr,under=c(""First"",""Second""),up=c(""Third"",""Fourth"")))",collapse levels
+"data.frame(dataframes,vectors,etc…)",none,combine data frames based on same observations
+"cbind(dataframes,vectors,etc…)","bind_cols(col1,col2)","another way to combine dataframes, cols only"
+rbind(…),"bind_rows(row1,row2)","combine data frames with same columns, different rows"
+"write.csv(dataframe,filename,row.names=F)",none,write data frame to file
+"ordered<-Data[order(Data$col),]","Data_by_age<-Data%>%
+  arrange(Age)",sort column
+rm(list=ls()),none,clear environment variables

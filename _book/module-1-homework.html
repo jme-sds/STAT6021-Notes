@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 1 Homework | Linear Methods for Data Science Notes</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 1 Homework | Linear Methods for Data Science Notes" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 1 Homework | Linear Methods for Data Science Notes" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="John Michael Epperson" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-wrangling-with-r.html"/>
+<link rel="next" href="data-visualization-with-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Models for Data Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="syllabus-week.html"><a href="syllabus-week.html"><i class="fa fa-check"></i>Syllabus Week</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="syllabus-week.html"><a href="syllabus-week.html#agenda"><i class="fa fa-check"></i><b>0.1</b> Agenda</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html"><i class="fa fa-check"></i><b>1</b> Data Wrangling with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#cheat-sheet"><i class="fa fa-check"></i>Cheat Sheet</a></li>
+<li class="chapter" data-level="1.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#data-wrangling-using-base-r-functions"><i class="fa fa-check"></i><b>1.1</b> Data Wrangling Using Base R Functions</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#changing-column-names"><i class="fa fa-check"></i><b>1.1.1</b> Changing Column Names</a></li>
+<li class="chapter" data-level="1.1.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variables"><i class="fa fa-check"></i><b>1.1.2</b> <strong>Summarizing Variables</strong></a></li>
+<li class="chapter" data-level="1.1.3" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variable-by-groups"><i class="fa fa-check"></i><b>1.1.3</b> <strong>Summarizing variable by groups</strong></a></li>
+<li class="chapter" data-level="1.1.4" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#create-a-new-variable-based-on-existing-variable"><i class="fa fa-check"></i><b>1.1.4</b> <strong>Create a new variable based on existing variable</strong></a></li>
+<li class="chapter" data-level="1.1.5" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#combine-data-frames"><i class="fa fa-check"></i><b>1.1.5</b> <strong>Combine data frames</strong></a></li>
+<li class="chapter" data-level="1.1.6" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#sort-data-frame-by-column-values"><i class="fa fa-check"></i><b>1.1.6</b> <strong>Sort data frame by column values</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#data-wrangling-using-dplyr-functions"><i class="fa fa-check"></i><b>1.2</b> Data Wrangling Using dplyr Functions</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#select-specific-columns-of-a-data-fram"><i class="fa fa-check"></i><b>1.2.1</b> Select Specific Columns of a Data Fram</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#select-observations-by-conditions"><i class="fa fa-check"></i><b>1.2.2</b> Select observations by conditions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#change-column-name"><i class="fa fa-check"></i><b>1.2.3</b> Change Column Name</a></li>
+<li class="chapter" data-level="1.2.4" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variables-1"><i class="fa fa-check"></i><b>1.2.4</b> Summarizing Variables</a></li>
+<li class="chapter" data-level="1.2.5" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variable-by-groups-1"><i class="fa fa-check"></i><b>1.2.5</b> Summarizing Variable by Groups</a></li>
+<li class="chapter" data-level="1.2.6" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#create-a-new-variable-based-on-existing-variables"><i class="fa fa-check"></i><b>1.2.6</b> Create a New Variable Based on Existing Variable(s)</a></li>
+<li class="chapter" data-level="1.2.7" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#combine-data-frames-1"><i class="fa fa-check"></i><b>1.2.7</b> Combine Data Frames</a></li>
+<li class="chapter" data-level="1.2.8" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#sort-data-frame-by-column-values-1"><i class="fa fa-check"></i><b>1.2.8</b> Sort data frame by column values</a></li>
+<li class="chapter" data-level="1.2.9" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#more-about-combining-datasets"><i class="fa fa-check"></i><b>1.2.9</b> More About Combining Datasets</a></li>
+<li class="chapter" data-level="1.2.10" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#a-note-about-missing-values"><i class="fa fa-check"></i><b>1.2.10</b> A Note About Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#module-1-guided-question-set"><i class="fa fa-check"></i>Module 1 Guided Question Set</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-1-homework.html"><a href="module-1-homework.html"><i class="fa fa-check"></i>Module 1 Homework</a></li>
+<li class="chapter" data-level="2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html"><i class="fa fa-check"></i><b>2</b> Data Visualization with R</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#appendix-appendix"><i class="fa fa-check"></i>(APPENDIX) Appendix</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#cheat-sheet-1"><i class="fa fa-check"></i>Cheat Sheet</a></li>
+<li class="chapter" data-level="2.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#introduction-to-the-lesson"><i class="fa fa-check"></i><b>2.1</b> Introduction to the Lesson</a></li>
+<li class="chapter" data-level="2.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#sampling-distributions"><i class="fa fa-check"></i><b>2.2</b> Sampling Distributions</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#normal-distribution"><i class="fa fa-check"></i><b>2.2.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#population-samples"><i class="fa fa-check"></i><b>2.2.2</b> Population &amp; Samples</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#sampling-distribution-of-sample-means"><i class="fa fa-check"></i><b>2.2.3</b> Sampling Distribution of Sample Means</a></li>
+<li class="chapter" data-level="2.2.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#worked-example-textbook-spending"><i class="fa fa-check"></i><b>2.2.4</b> Worked Example: Textbook Spending</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#confidence-intervals"><i class="fa fa-check"></i><b>2.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#intro-to-confidence-intervals"><i class="fa fa-check"></i><b>2.3.1</b> Intro to Confidence Intervals</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#finding-multipliers"><i class="fa fa-check"></i><b>2.3.2</b> Finding Multipliers</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#t-distributions"><i class="fa fa-check"></i><b>2.3.3</b> t distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#hypothesis-testing"><i class="fa fa-check"></i><b>2.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#hypotheses"><i class="fa fa-check"></i><b>2.4.1</b> Hypotheses</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#evaluating-evidence-p-values"><i class="fa fa-check"></i><b>2.4.2</b> Evaluating Evidence: p-values</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#evaluating-evidence-critical-value-approach"><i class="fa fa-check"></i><b>2.4.3</b> Evaluating Evidence: Critical Value Approach</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#summary"><i class="fa fa-check"></i><b>2.4.4</b> Summary</a></li>
+<li class="chapter" data-level="2.4.5" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#worked-examples"><i class="fa fa-check"></i><b>2.4.5</b> Worked Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#practice-questions"><i class="fa fa-check"></i><b>2.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#sampling-distributions-1"><i class="fa fa-check"></i><b>2.5.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#confidence-intervals-1"><i class="fa fa-check"></i><b>2.5.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="2.5.3" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>2.5.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="2.5.4" data-path="data-visualization-with-r.html"><a href="data-visualization-with-r.html#general-questions"><i class="fa fa-check"></i><b>2.5.4</b> General Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="basics-of-r.html"><a href="basics-of-r.html"><i class="fa fa-check"></i><b>3</b> Basics of R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="basics-of-r.html"><a href="basics-of-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>3.1</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-1"><i class="fa fa-check"></i><b>3.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="3.1.2" data-path="basics-of-r.html"><a href="basics-of-r.html#question-2"><i class="fa fa-check"></i><b>3.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="3.1.3" data-path="basics-of-r.html"><a href="basics-of-r.html#question-3"><i class="fa fa-check"></i><b>3.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="3.1.4" data-path="basics-of-r.html"><a href="basics-of-r.html#question-4"><i class="fa fa-check"></i><b>3.1.4</b> Question 4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="basics-of-r.html"><a href="basics-of-r.html#topic-b.3-data-types-structures-in-r"><i class="fa fa-check"></i><b>3.2</b> Topic B.3: Data Types &amp; Structures in R</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-5"><i class="fa fa-check"></i><b>3.2.1</b> Question 5</a></li>
+<li class="chapter" data-level="3.2.2" data-path="basics-of-r.html"><a href="basics-of-r.html#question-6"><i class="fa fa-check"></i><b>3.2.2</b> Question 6</a></li>
+<li class="chapter" data-level="3.2.3" data-path="basics-of-r.html"><a href="basics-of-r.html#question-7"><i class="fa fa-check"></i><b>3.2.3</b> Question 7</a></li>
+<li class="chapter" data-level="3.2.4" data-path="basics-of-r.html"><a href="basics-of-r.html#question-8"><i class="fa fa-check"></i><b>3.2.4</b> Question 8</a></li>
+<li class="chapter" data-level="3.2.5" data-path="basics-of-r.html"><a href="basics-of-r.html#question-9"><i class="fa fa-check"></i><b>3.2.5</b> Question 9</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="basics-of-r.html"><a href="basics-of-r.html#r-markdown"><i class="fa fa-check"></i><b>3.3</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-10"><i class="fa fa-check"></i><b>3.3.1</b> Question 10</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Methods for Data Science Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-1-homework" class="section level1 unnumbered hasAnchor">
+<h1>Module 1 Homework<a href="module-1-homework.html#module-1-homework" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Name: John Michael Epperson<br />
+Course: STAT 6021 | Fall 2024<br />
+Professor: Jeffrey Woo, PhD<br />
+Date: 05-Sep-2024</strong></p>
+<p><strong>1. County level data</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>create dataset ‘latest’ that has:</li>
+</ol>
+<ul>
+<li>only rows pertaining to data from June 3 2021</li>
+<li>remove rows pertaining to “Unknown” counties</li>
+<li>remove columns ‘date’ and ‘fips’</li>
+<li>order by county then state alphabetically</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="module-1-homework.html#cb1-1" tabindex="-1"></a>latest<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="module-1-homework.html#cb1-2" tabindex="-1"></a>  <span class="fu">filter</span>(date<span class="sc">==</span><span class="st">&#39;2021-06-03&#39;</span> <span class="sc">&amp;</span> county<span class="sc">!=</span><span class="st">&quot;Unknown&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="module-1-homework.html#cb1-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date=</span><span class="cn">NULL</span>,<span class="at">fips=</span><span class="cn">NULL</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="module-1-homework.html#cb1-4" tabindex="-1"></a>  <span class="fu">arrange</span>(county,state)</span>
+<span id="cb1-5"><a href="module-1-homework.html#cb1-5" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="module-1-homework.html#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="module-1-homework.html#cb1-7" tabindex="-1"></a><span class="fu">head</span>(latest)</span></code></pre></div>
+<pre><code>##      county          state cases deaths
+## 1 Abbeville South Carolina  2599     41
+## 2    Acadia      Louisiana  6703    195
+## 3  Accomack       Virginia  2862     43
+## 4       Ada          Idaho 52964    475
+## 5     Adair           Iowa   873     32
+## 6     Adair       Kentucky  1944     54</code></pre>
+<p><strong>b. Calculate case fatality rate and store as ‘death.rate’</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="module-1-homework.html#cb3-1" tabindex="-1"></a>latest<span class="ot">&lt;-</span>latest <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="module-1-homework.html#cb3-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">death.rate=</span><span class="fu">round</span>((deaths<span class="sc">/</span>cases)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>))</span>
+<span id="cb3-3"><a href="module-1-homework.html#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="module-1-homework.html#cb3-4" tabindex="-1"></a><span class="fu">head</span>(latest)</span></code></pre></div>
+<pre><code>##      county          state cases deaths death.rate
+## 1 Abbeville South Carolina  2599     41       1.58
+## 2    Acadia      Louisiana  6703    195       2.91
+## 3  Accomack       Virginia  2862     43       1.50
+## 4       Ada          Idaho 52964    475       0.90
+## 5     Adair           Iowa   873     32       3.67
+## 6     Adair       Kentucky  1944     54       2.78</code></pre>
+<p><strong>c. Top 10 Counties for Number of Cases</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="module-1-homework.html#cb5-1" tabindex="-1"></a>latest <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="module-1-homework.html#cb5-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cases)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="module-1-homework.html#cb5-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##            county      state   cases deaths death.rate
+## 1     Los Angeles California 1245127  24375       1.96
+## 2   New York City   New York  949986  33257       3.50
+## 3            Cook   Illinois  554390  10893       1.96
+## 4        Maricopa    Arizona  551509  10084       1.83
+## 5      Miami-Dade    Florida  501925   6472       1.29
+## 6          Harris      Texas  401345   6462       1.61
+## 7          Dallas      Texas  303533   4082       1.34
+## 8       Riverside California  300879   4614       1.53
+## 9  San Bernardino California  298599   4760       1.59
+## 10      San Diego California  280410   3760       1.34</code></pre>
+<p><strong>d. Top 10 Counties for Number of Deaths</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="module-1-homework.html#cb7-1" tabindex="-1"></a>latest <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="module-1-homework.html#cb7-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(deaths)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="module-1-homework.html#cb7-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##            county      state   cases deaths death.rate
+## 1   New York City   New York  949986  33257       3.50
+## 2     Los Angeles California 1245127  24375       1.96
+## 3            Cook   Illinois  554390  10893       1.96
+## 4        Maricopa    Arizona  551509  10084       1.83
+## 5      Miami-Dade    Florida  501925   6472       1.29
+## 6          Harris      Texas  401345   6462       1.61
+## 7          Orange California  272242   5070       1.86
+## 8           Wayne   Michigan  164612   5048       3.07
+## 9  San Bernardino California  298599   4760       1.59
+## 10      Riverside California  300879   4614       1.53</code></pre>
+<p><strong>e. Top 10 Counties for Case Fatality Rate</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="module-1-homework.html#cb9-1" tabindex="-1"></a>latest <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="module-1-homework.html#cb9-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(death.rate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="module-1-homework.html#cb9-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##          county      state cases deaths death.rate
+## 1         Grant   Nebraska    41      4       9.76
+## 2        Sabine      Texas   524     45       8.59
+## 3       Harding New Mexico    12      1       8.33
+## 4     Petroleum    Montana    12      1       8.33
+## 5         Foard      Texas   124     10       8.06
+## 6       Hancock    Georgia   928     68       7.33
+## 7      Glascock    Georgia   269     19       7.06
+## 8        Motley      Texas   116      8       6.90
+## 9       Candler    Georgia   978     67       6.85
+## 10 Throckmorton      Texas    73      5       6.85</code></pre>
+<ul>
+<li>I notice that the counties with the highest case fatality rates all had relatively few cases (&lt;1000).</li>
+</ul>
+<p><strong>f. Top 10 Counties for Case Fatality Rate (&gt;100,000 Cases)</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="module-1-homework.html#cb11-1" tabindex="-1"></a>latest <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="module-1-homework.html#cb11-2" tabindex="-1"></a>  <span class="fu">filter</span>(cases<span class="sc">&gt;=</span><span class="dv">100000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="module-1-homework.html#cb11-3" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(death.rate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="module-1-homework.html#cb11-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##           county         state  cases deaths death.rate
+## 1  New York City      New York 949986  33257       3.50
+## 2          Wayne      Michigan 164612   5048       3.07
+## 3      Middlesex Massachusetts 134980   3761       2.79
+## 4         Bergen    New Jersey 104301   2868       2.75
+## 5         Macomb      Michigan 100190   2441       2.44
+## 6   Philadelphia  Pennsylvania 153521   3692       2.40
+## 7      St. Louis      Missouri 100195   2249       2.24
+## 8      Fairfield   Connecticut 100093   2198       2.20
+## 9           Pima       Arizona 116997   2406       2.06
+## 10       Oakland      Michigan 118035   2368       2.01</code></pre>
+<p><strong>g. Cases for Albemarle &amp; Charlottesville City</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="module-1-homework.html#cb13-1" tabindex="-1"></a>latest <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="module-1-homework.html#cb13-2" tabindex="-1"></a>  <span class="fu">filter</span>(state<span class="sc">==</span><span class="st">&quot;Virginia&quot;</span> <span class="sc">&amp;</span> (county<span class="sc">==</span><span class="st">&quot;Albemarle&quot;</span> <span class="sc">|</span> county<span class="sc">==</span><span class="st">&quot;Charlottesville city&quot;</span>))</span></code></pre></div>
+<pre><code>##                 county    state cases deaths death.rate
+## 1            Albemarle Virginia  5801     83       1.43
+## 2 Charlottesville city Virginia  4014     57       1.42</code></pre>
+<p><strong>2. State level data</strong></p>
+<p><strong>a. create data frame ‘state.level’ that:</strong></p>
+<ul>
+<li>has 55 rows, 1 for each state, DC, and territory</li>
+<li>3 columns: name of state, case count, death count</li>
+<li>ordered alphabetically by state</li>
+<li>only has data from June 3 2021</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="module-1-homework.html#cb15-1" tabindex="-1"></a>state.level<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="module-1-homework.html#cb15-2" tabindex="-1"></a>  <span class="fu">filter</span>(date<span class="sc">==</span><span class="st">&quot;2021-06-03&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="module-1-homework.html#cb15-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fips=</span><span class="cn">NULL</span>,<span class="at">date=</span><span class="cn">NULL</span>,<span class="at">county=</span><span class="cn">NULL</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="module-1-homework.html#cb15-4" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="module-1-homework.html#cb15-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cases=</span><span class="fu">sum</span>(cases),<span class="at">deaths=</span><span class="fu">sum</span>(deaths)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="module-1-homework.html#cb15-6" tabindex="-1"></a>  <span class="fu">arrange</span>(state)</span>
+<span id="cb15-7"><a href="module-1-homework.html#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="module-1-homework.html#cb15-8" tabindex="-1"></a><span class="fu">head</span>(state.level)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   state        cases deaths
+##   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
+## 1 Alabama     545028  11188
+## 2 Alaska       69826    352
+## 3 Arizona     882691  17653
+## 4 Arkansas    341889   5842
+## 5 California 3793055  63345
+## 6 Colorado    547961   6746</code></pre>
+<p><strong>b. Calculate case fatality rate ‘state.rate’ for each state.</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="module-1-homework.html#cb17-1" tabindex="-1"></a>state.level<span class="ot">&lt;-</span>state.level <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="module-1-homework.html#cb17-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state.rate=</span><span class="fu">round</span>((deaths<span class="sc">/</span>cases)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>))</span>
+<span id="cb17-3"><a href="module-1-homework.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="module-1-homework.html#cb17-4" tabindex="-1"></a><span class="fu">head</span>(state.level)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   state        cases deaths state.rate
+##   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+## 1 Alabama     545028  11188       2.05
+## 2 Alaska       69826    352       0.5 
+## 3 Arizona     882691  17653       2   
+## 4 Arkansas    341889   5842       1.71
+## 5 California 3793055  63345       1.67
+## 6 Colorado    547961   6746       1.23</code></pre>
+<p><strong>c. Case fatality rate in Virginia?</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="module-1-homework.html#cb19-1" tabindex="-1"></a>state.level <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="module-1-homework.html#cb19-2" tabindex="-1"></a>  <span class="fu">filter</span>(state<span class="sc">==</span><span class="st">&quot;Virginia&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   state     cases deaths state.rate
+##   &lt;chr&gt;     &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+## 1 Virginia 676041  11216       1.66</code></pre>
+<ul>
+<li>The case fatality rate for Virginia on June 3 2021 was 1.66%.</li>
+</ul>
+<p><strong>d. Case fatality rate in Puerto Rico?</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="module-1-homework.html#cb21-1" tabindex="-1"></a>state.level <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="module-1-homework.html#cb21-2" tabindex="-1"></a>  <span class="fu">filter</span>(state<span class="sc">==</span><span class="st">&quot;Puerto Rico&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   state        cases deaths state.rate
+##   &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+## 1 Puerto Rico 172414     NA         NA</code></pre>
+<ul>
+<li><p>We don’t have any information on the case fatality rate on June 3 2021 in Puerto Rico.</p>
+<p><strong>e. Which states have the 10 highest case fatality rates?</strong></p></li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="module-1-homework.html#cb23-1" tabindex="-1"></a>state.level <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="module-1-homework.html#cb23-2" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(state.rate)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="module-1-homework.html#cb23-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 4
+##    state                  cases deaths state.rate
+##    &lt;chr&gt;                  &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+##  1 New Jersey           1017044  26253       2.58
+##  2 Massachusetts         707523  17893       2.53
+##  3 New York             2102003  52811       2.51
+##  4 Connecticut           347748   8245       2.37
+##  5 District of Columbia   49041   1136       2.32
+##  6 Mississippi           318048   7324       2.3 
+##  7 Pennsylvania         1208879  27349       2.26
+##  8 Louisiana             472617  10605       2.24
+##  9 New Mexico            203330   4275       2.1 
+## 10 Maryland              460406   9626       2.09</code></pre>
+<ul>
+<li>New Jersey, Massachusetts, New York, Connecticut, District of Columbia, Mississipi, Pennsylvania, Louisiana, New Mexico, and Maryland - in descending order - had the highest case fatality rates on June 3 2021.</li>
+</ul>
+<p><strong>f. Which states had the 10 lowest case fatality rates?</strong></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="module-1-homework.html#cb25-1" tabindex="-1"></a>state.level <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="module-1-homework.html#cb25-2" tabindex="-1"></a>  <span class="fu">arrange</span>(state.rate) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="module-1-homework.html#cb25-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 4
+##    state                     cases deaths state.rate
+##    &lt;chr&gt;                     &lt;int&gt;  &lt;int&gt;      &lt;dbl&gt;
+##  1 Alaska                    69826    352       0.5 
+##  2 Utah                     406895   2308       0.57
+##  3 Virgin Islands             3512     28       0.8 
+##  4 Vermont                   24240    255       1.05
+##  5 Nebraska                 223517   2385       1.07
+##  6 Idaho                    192704   2103       1.09
+##  7 Northern Mariana Islands    183      2       1.09
+##  8 Wisconsin                675152   7923       1.17
+##  9 Wyoming                   60543    720       1.19
+## 10 Colorado                 547961   6746       1.23</code></pre>
+<ul>
+<li>In order from lowest case fatality rate to highest: Alaska, Utah, Virgin Islands, Vermont, Nebraska, Idaho, Northern Mariana Islands, Wisconsin, Wyoming, and Colorado had the lowest case fatality rates on June 3 2021.</li>
+</ul>
+<p><strong>g. Export dataset to file called <em>stateCovid.csv</em></strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="module-1-homework.html#cb27-1" tabindex="-1"></a><span class="fu">write.csv</span>(state.level,<span class="st">&quot;datasets/stateCovid.csv&quot;</span>)</span></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling-with-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualization-with-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01b-mod1hw.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

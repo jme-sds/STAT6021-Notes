@@ -1,0 +1,130 @@
+# Basics of R
+
+## Getting Started with R
+
+### Question 1
+
+**(a)**
+```{r}
+cars.df<-mtcars
+```
+
+**(b)** 
+According to the environment window, there are 32 observations of 11 variables in the dataset *mtcars*.
+
+### Question 2
+
+**(a)**
+```{r}
+students.df<-read.table("datasets/students.txt",header=TRUE)
+```
+
+**(b)**
+According to the environment window, there are 249 observations of 9 variables in the dataset *students.txt*.
+
+### Question 3
+**(a) - (h)**
+
+The packages *tidyverse, faraway, MASS, leaps, ROCR, nycflights13, gapminder, palmerpenguins* were installed.
+
+### Question 4
+
+```{r}
+library(faraway)
+corn.df<-cornnit
+```
+
+## Topic B.3: Data Types & Structures in R
+
+### Question 5
+
+**(a)** 2020_Major    Valid
+
+**(b)** .2020.Age   Invalid, number follows .
+
+**(c)** #Courses.2020   Invalid, # not allowed
+
+**(d)** _courses_2020   Invalid, cannot start with underscore
+
+**(e)** Fav_Sport20   Valid
+
+**(f)** major 2020    Invalid, space not allowed
+
+**(g)** age(2020)   Invalid, parentheses not allowed
+
+**(h)** FavSport_2020   Valid
+
+### Question 6
+
+```{r}
+practice<-c(13,91,36,95,9,3,61,20,22,97)
+class(practice)
+```
+### Question 7
+
+**(a)** practice[5]==5    False
+```{r}
+practice[5]==5
+```
+
+**(b)** practice[10]!=97    False
+```{r}
+practice[10]!=97 
+```
+
+**(c)** (practice[1]+practice[2])<104    False
+```{r}
+(practice[1]+practice[2])<104
+```
+
+**(d)** (practice[1]+practice[2])<=104   True
+```{r}
+(practice[1]+practice[2])<=104
+```
+
+**(e)** (practice[2]==91) & (practice[9]==22)   True * True=True
+```{r}
+(practice[2]==91) & (practice[9]==22)
+```
+
+**(f)** (practice[5]<9) | (practice[6]>=4)    False + False = False
+```{r}
+(practice[5]<9) | (practice[6]>=4)
+```
+
+### Question 8
+
+```{r}
+Mat.A<-matrix(c(4,6,1,2,3,1),nrow = 2,ncol = 3)
+
+Mat.A
+```
+
+**(a)**
+```{r}
+colnames(Mat.A)<-c("Huey","Dewey","Louie")
+
+Mat.A
+```
+**(b)** Output of Mat.A[2,1] would be 6.
+```{r}
+Mat.A[2,1]
+```
+
+**(c)** Output of dim(Mat.A) would be (2,3).
+```{r}
+dim(Mat.A)
+```
+
+### Question 9
+```{r}
+factor(practice)
+```
+
+The order of the levels in the factor *practice* are:
+3 9 13 20 22 36 61 91 95 97
+
+## R Markdown
+
+### Question 10
+As evidenced by the above, my answers were typed up using R Markdown, and an HTML file was created.

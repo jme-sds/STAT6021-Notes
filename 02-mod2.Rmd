@@ -1,0 +1,467 @@
+# Data Visualization with R Using `ggplot2`
+
+## Introduction
+
+Data viz tools summarize data in ways that people unfamiliar with statistics can easily interpret and understand.
+
+In this module, we will learn how to create common data visualizations. The choice of viz is usually determined by whether we're looking at a categorical or quantitative variable. Discrete variables may be viewed as either categorical or quantitative depending on the context.
+
+We'll be using functions from `ggplot2` to create visualizations. `ggplot2` is included in the `tidyverse` package.
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+We'll use the dataset `ClassDataPrevious.csv` as an example.
+
+```{r}
+Data<-read.csv("datasets/ClassDataPrevious.csv")
+```
+
+## Visualizations with a Single Categorical Variable
+
+### Frequency Tables
+
+Frequency tables are a  common tool to summarize categorical variables, giving us the number of observations, or counts, that belong to a categorical variable. These tables are created through the `table()` function.
+
+Number of students in each year in our data; factoring first:
+
+```{r}
+Data$Year<-factor(Data$Year, levels = c("First","Second","Third","Fourth"))
+mytab<-table(Data$Year)
+mytab
+```
+
+We can report these numbers using proportions instead of counts using `prop.table()`
+
+```{r}
+prop.table(mytab)
+```
+
+Or percentages by multiplying by 100, rounded to 2 decimal places:
+
+```{r}
+round(prop.table(mytab)*100,2)
+```
+
+### Bar Charts
+
+Bar charts are a simple way to visualize data, and can be viewed as a visual representation of frequency tables. To create a bar chart for the years of a these students, we use:
+
+```{r}
+ggplot(Data,aes(x=Year))+
+  geom_bar()
+```
+
+We can read the number of students who are first, second, third, and fourth years by reading off the corresponding value on the vertical axis.
+
+From these two lines of code, we can see the basic structure of visualizations with the `ggplot()` function:
+
+  1. Supply `ggplot()` function with dataframe, and the x- and y- vars via the `aes()` function. End line with `+` and go to next line
+  2. Specify graph type we want to create (called `geoms`) for a bar chart, this is `geom_bar()`.
+
+These two _layers_ of code must be supplied for all data visualizations with `ggplot()`.
+
+Additional layers may be added. e.g. we can change the orientation of the bar chart:
+
+```{r}
+ggplot(Data,aes(x=Year))+
+  geom_bar()+
+  coord_flip()
+```
+
+It is recommended that each layer is typed on a new line. Like pipes, you need a `+` to add another layer below.
+
+Change colors of bars:
+
+```{r}
+ggplot(Data,aes(x=Year))+
+  geom_bar(fill="purple")
+```
+
+To change outline of bars:
+
+```{r}
+ggplot(Data,aes(x=Year))+
+  geom_bar(fill="blue",color="orange")
+```
+
+
+#### Customize Title and Labels of Axes in Bar Charts
+
+To change orientatino of labels on x axis we add extra layer called `theme`. This will be useful when we have many classes and/or labels with long names.
+
+To rotate labels on x-axis 90 degrees
+
+```{r}
+ggplot(Data,aes(x=Year))+
+  geom_bar()+
+  theme(axis.text.x=element_text(angle=90))
+```
+
+As we create more visualizations, it is good practice to give good axis titles and chart titles. To do this we use `labs()`:
+
+```{r}
+ggplot(Data, aes(x=Year))+
+  geom_bar()+
+  theme(axis.text.x = element_text(angle = 90))+
+  labs(x="Year", y="Number of Students", title="Dist of Years")
+```
+
+Adjust the position of the title, center justify via `theme
+
+```{r}
+ggplot(Data, aes(x=Year))+
+  geom_bar()+
+  theme(axis.text.x = element_text(angle = 90)
+        ,plot.title = element_text(hjust=0.5))+
+  labs(x="Year", y="Number of Students", title="Dist of Years")
+```
+
+#### Create a Bar Chart using Proportions
+
+Some steps involved in creating a bar chart with proportions rather than counts. First, create new dataframe, where each row is a year, then add proportion of each year into new column
+
+```{r}
+newData<-Data %>% 
+  group_by(Year) %>% 
+  summarize(Counts=n()) %>% 
+  mutate(Percent=Counts/nrow(Data))
+```
+
+Here's what the code is doing, line by line
+
+  1. Create new data from called `newData` from `Data`,
+  2. and then groups the observations by `Year`,
+  3. and then counts the number of observations in each `Year` and stores these values in a vector called `Counts`,
+  4. and then creates a new vector called `Percent` by using the mathematical operations as specified in `mutate()`. `Percent` is added to `newData`.
+  
+Let's take a look at `newData`:
+
+```{r}
+newData
+```
+
+Now we can create a bar chart using proportions:
+
+```{r}
+ggplot(newData,aes(x=Year,y=Percent))+
+  geom_bar(stat = "identity")+
+  theme(axis.text.x = element_text(angle=90),
+        plot.title = element_text(hjust=0.5))+
+  labs(x="Year",y="Percentage of Students",title = "Dist of Years")
+```
+
+Note the following:
+
+  1. In first layer we use `newData` instead of the old data frame. In `aes()` we specified a y-var, which we want to be `Percent`.
+  2. In second layer, we specified `stat="identity"` inside `geom_bar()`.
+  
+## Visualizations with  a Single Quantitative Variable
+
+### 5 Number Summary
+
+The `summary()` function, when applied to a quantitative variable, produces the **5 Number Summary**: the minimum, first quartile (25^th^ percentile), median (50^th^ percentile), the mean, the third quartile (75^th^ percentile), and the maximum. For example, to obtain the five number summary of the ages of these students:
+
+```{r}
+summary(Data$Age)
+```
+
+Average is 19.57 years old. Notice the first quartile and median are both 19 years old, which means at least a quarter of the observations are 19 years old. Also not the max of 51 years old, so we have a student who is quite a lot older than the rest.
+
+### Boxplots
+
+A boxplot is a graphical representation fo the 5 number summary. To create a generic boxplot, use `ggplot()` with a layer specifying `geom_boxplot()`:
+
+```{r}
+ggplot(Data,aes(y=Age))+
+  geom_boxplot()
+```
+
+Note we are still using the same structure when creating data visualizations with `ggplot()`.
+  
+  1. supply `ggplot()` with dataframe, x- and or y-variables via `aes()` function. End line with `+`
+  2. next line specify graph type, in this case `geom_boxplot()`.
+  
+Notice there are outliers (observations that are a lot older or younger) that are denoted by the dots. One is the 51 year old, and 22 year olds are deemed to be outliers. The rule being used is the $1.5\times IQR$ rule.
+
+Similar to bar charts, we can change the orientation of boxplots by adding an additional layer as before, can also change colors:
+
+```{r}
+ggplot(Data,aes(y=Age))+
+  geom_boxplot(color="blue",fill="blue",outlier.color="brown")+
+  coord_flip()
+```
+
+### Histograms
+
+Histogram displays number of observations within each bin on the x-axis.
+
+```{r}
+ggplot(Data,aes(x=Age))+
+  geom_histogram()
+```
+
+Note warning displayed when creating basic histogram, use `binwidth` arg within `geom_histogram()`. Try `binwidth=1` for now, which gives us a width of 1 unit for each bin.
+
+```{r}
+ggplot(Data,aes(x=Age))+
+  geom_histogram(binwidth = 1)
+```
+
+The ages of the students are mostly young, with 19 and 20 year olds being the most commonly occuring.
+
+A well-known drawback of histograms is that the width of the bins can drastically affect the visual. Change `binwidth` to 2 to see:
+
+```{r}
+ggplot(Data,aes(x=Age))+
+  geom_histogram(binwidth = 2)
+```
+
+Each bar contains two ages now: the first contains 18 and 19 year olds. Notice how the shape has been changed? No good...
+
+### Density Plots
+
+Density plots are similar to histograms where the plot attempts to use a smooth mathematical function to approximate the shape of the histogram, is unaffected by binwidth:
+
+```{r}
+ggplot(Data,aes(x=Age))+
+  geom_density(color="red")
+```
+
+Here it is easyt o see that 19 and 20 year olds are the most common ages in this data. Be careful interpreting values on the vertical axis: **these do not represent proportions**. A characteristic of density plots is that the area under the plot is always one.
+
+## Bivariate Visualizations
+
+Bivariate visualizations help show the relationship between **two variables**.
+
+We will be using a new dataset as an example, so we'll clear the environment.
+
+```{r}
+rm(list=ls())
+```
+
+Use dataset `gapminder` from `gapminder` package.
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+Take a look at `gapminder` dataset:
+
+```{r}
+head(gapminder)
+```
+
+Variables are:
+  1. `country`
+  2. `continent`
+  3. `year` from 1952 to 2007 in increments of 5 years
+  4. `lifeExp` life expectancy at birth in years
+  5. `pop` as in population of country
+  6. `gdpPercap` GDP per capita in US dollars, adjusted for inflation
+
+Note that the data here are collected from each contry across many different years: 1952 to 2007 in increments of 5 years. We will mainly focus on data from the most recent year, 2007.
+
+```{r}
+Data<-gapminder %>% 
+  filter(year==2007)
+```
+
+The specific visuals to use will again depend on the type of variables we are using, whether they are categorical or quantitative.
+
+### Compare Quantitative Variable Across Categories
+
+#### Side-by-Side Boxplots
+
+These are useful to compare a quantitative variable across different classes of a categorical variable. e.g. we want to compare life expectancy across different continents in year 2007
+
+```{r}
+ggplot(Data,aes(x=continent,y=lifeExp))+
+  geom_boxplot(fill="red")+
+  labs(x="Continent",y="Life Exp.",title = "Dist. of Life Expectancies by Continent")
+```
+
+As we can see, countries in Oceania region have long life expectancies with little variation. Comparing the Americas to Asia, the median life expectancies are similar, but the spread is larger in Asia.
+
+#### Violin Plots
+
+Violin plots are alternative to boxplots. Here's how it's done:
+
+```{r}
+ggplot(Data,aes(x=continent,y=lifeExp))+
+  geom_violin(fill="purple")+
+  labs(x="Continent",y="Life Exp.",title = "Dist. of Life Expectancies by Continent")
+```
+
+The width of the violin informs us which values are more commonly occurring. For example, look at Europe: violin is wider at high life expectancies, so longer life expectancies are more common in European countries.
+
+### Summarizing Two Categorical Variables
+
+create new binary variable called `expectancy`, which will be denoted as `low` if the life expectancy is less than 70 years, `high` otherwise:
+
+```{r}
+Data<-Data %>% 
+  mutate(expectancy=ifelse(lifeExp<70,"Low","High"))
+```
+
+#### Two-Way Tables
+
+See how expectancy varies across the continents. **Two-way table** can be created to produce counts when **two categorical variables** are involved.
+
+```{r}
+Data<-Data %>% 
+  mutate(expectancy=expectancy %>% 
+           fct_relevel(c("Low","High")))
+mytab2<-table(Data$continent,Data$expectancy)
+mytab2
+```
+
+First variable in `table()` will be placed in the rows, second will be columns.
+
+From this table, we can see that 22 countries in the Americas have high life expectancies, and only 3 with low life expectancies.
+
+If interested in proportions, rather than counts, convert using `prop.table()`:
+
+```{r}
+round(prop.table(mytab2,1)*100,2)
+```
+
+Here, the second argument to `prop.table()` indicates that the **rows** should add up to 1, if instead we want the **columns** to add to 1, we should set the second argument to 2.
+
+#### Stacked Bar Charts
+
+A stacked bar chart can be used to display relationship between binary variable `expectancy` across continents.
+
+```{r}
+ggplot(Data,aes(x=continent,fill=expectancy))+
+  geom_bar(position = "stack")+
+  labs(x="Continent", y="Count", title="Life Expectancies by Continent")
+```
+
+Shows how many countries exist in each continent and how many of these have high or low life expectancies. About 25 countries in the Americas, where the majority have high life expectancies.
+
+Can change the way the bar chart is displayed by changing `position` in `geom_bar()` to `position = dodge` or `position = fill`, the latter being more useful for proportions instead of counts:
+
+```{r}
+ggplot(Data, aes(x=continent, fill=expectancy))+
+  geom_bar(position = "dodge") 
+```
+
+```{r}
+ggplot(Data, aes(x=continent, fill=expectancy))+
+  geom_bar(position = "fill")+
+  labs(x="Continent", y="Proportion", 
+       title="Proportion of Life Expectancies by Continent")
+```
+
+### Summarizing Two Quantitative Variables
+
+#### Scatterplots
+
+Scatterplots are pretty standard for two quantitative variables
+
+Let's see life expectancy vs GDP per capita
+
+```{r}
+ggplot(Data,aes(x=gdpPercap,y=lifeExp))+
+  geom_point(color="blue")
+```
+
+A curved relationship between lifeExp and GDP per cap is clearly visible here. Countries with higher GDP tend to have longer life expectancy.
+
+Since some observations may overlap, we may want to add a transparency scale called `alpha=0.2` inside `geom_point()`:
+
+```{r}
+ggplot(Data, aes(x=gdpPercap,y=lifeExp))+
+  geom_point(alpha=0.5)+
+  labs(x="GDP", y="Life Exp", 
+       title="Scatterplot of Life Exp against GDP")
+```
+
+Default value for `alpha` is 1, which means the points are not at all transparent. Closer to 0 means more transparent. Darker points indicate more observations with those values on both variables. Can see hot spots easily.
+
+## Multivariate Visualizations
+
+Multivariate Visualizations explore the relationship between **multiple** (more than two) variables.
+
+### Bar Charts
+
+Let's do a multivariate bar chart; suppose we want to compare life expectancy between continents, throughout the years.
+
+```{r}
+Data.all<-gapminder %>% 
+  mutate(expectancy=ifelse(lifeExp<70,"Low","High"))
+
+ggplot(Data.all,aes(x=continent,fill=expectancy))+
+  geom_bar(position="fill")+
+  facet_wrap(~year)
+```
+
+Note that three categorical values are summarized in this bar chart. How should we improve this bar chart?
+
+  * We could rotate the labels on the x-axis:
+  
+```{r}
+Data.all<-gapminder %>% 
+  mutate(expectancy=ifelse(lifeExp<70,"Low","High"))
+
+ggplot(Data.all,aes(x=continent,fill=expectancy))+
+  geom_bar(position="fill")+
+  facet_wrap(~year)+
+  theme(axis.text.x = element_text(angle=90))
+```
+
+
+### Scatterplots
+
+Let's do a multivariate scatterplot, like the one earlier - life expectancy vs GDP per capita - but make the size of the plots denote the population of the countries. This is supplied via `size` in `aes()`:
+
+```{r}
+ggplot(Data,aes(x=gdpPercap,y=lifeExp,size=pop))+
+  geom_point()
+```
+
+We can adjust the size of the plots by adding a layer `scale_size()`:
+
+```{r}
+ggplot(Data, aes(x=gdpPercap,y=lifeExp,size=pop))+
+  geom_point()+
+  scale_size(range=c(0.1,12))
+```
+
+We can use different-colored plots to denote which continent each point belongs to:
+
+```{r}
+ggplot(Data,aes(x=gdpPercap,y=lifeExp,size=pop,color=continent))+
+  geom_point()+
+  scale_size(range=c(0.1,12))
+```
+
+This summarizes three quantitative variables and one categorical variables.
+
+Finally, we can adjust the plots by changing its shape and making it more translucent via `shape` and `alpha` in `aes()`:
+
+```{r}
+ggplot(Data,aes(x=gdpPercap,y=lifeExp,size = pop,fill = continent))+
+  geom_point(shape=21,alpha=0.5)+
+  scale_size(range=c(0.1,12))+
+  labs(x="GDP", y="Life Exp", title="Scatterplot of Life Exp against GDP")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

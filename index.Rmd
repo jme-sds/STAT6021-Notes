@@ -1,0 +1,29 @@
+--- 
+title: "Linear Methods for Data Science Notes"
+author: "John Michael Epperson"
+site: bookdown::bookdown_site
+documentclass: book
+classoption: openany
+geometry: margin=3cm
+bibliography:
+- book.bib
+- packages.bib
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  set in the _output.yml file.
+  The HTML output format for this example is bookdown::gitbook,
+link-citations: true
+---
+
+# About {-}
+
+These are my notes for the Fall 2024 session of STAT 6021: Linear Methods for Data Science at the School of Data Science at the University of Virginia.
+
+The course is taught by Jeffrey Woo.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

@@ -1,0 +1,992 @@
+# (APPENDIX) Appendix {.unnumbered}
+
+# Review of Statistical Inference
+
+## Cheat Sheet {-}
+
+**Central Limit Theorem**: Tells us that with a large enough sample size, we can use the normal distribution to find probabilities associated with sample means
+
+**Confidence Intervals**
+
+- Given by $\bar{x}\pm t_{1-\alpha,k}\frac{s}{\sqrt{n}}$
+- $t_{1-\alpha,k}$ is given by the R function qt(percentile,df)
+
+## Introduction to the Lesson
+
+In many statistical studies or experiments, we want to get answers to questions regarding a population of interest. For example, what is the average annual income of American adults? In this example, the population of interest is American adults. Ideally, we would like to obtain the data from every single American adult. However, due to constraints such as time and money, we are unable to obtain the data from every person who makes up the population. We then typically collect data from a random sample of American adults. A sample is ideally a subset and is representative of the population. We then collect data from the sample, and then use the characteristics of the sample, called statistics, to make an inference about the characteristics of the population, called parameters.
+
+Consider the sample mean annual income among 500 American adults is \$52,000. Does this mean the population mean annual income among all American adults is \$52,000? Probably not. The sample mean, even if it comes from a representative and large sample, is probably close to the population mean, but unlikely to be exactly equal to the population mean. This uncertainty is simply due to the variability associated with the sample mean. Another random sample of 500 American adults may result in a sample mean with a different value, for example, \$51,000. This is where statistical inference comes in. Statistical inference allows us to quantify the variability associated with statistics and allows us to make inferences about the parameter. The main inferential methods we will use are confidence intervals and hypothesis tests.
+
+\newpage
+
+## Sampling Distributions
+
+A probability density function (pdf) is a mathematical representation of the distribution of data and must
+
+-   be non-negative, and
+-   integrate to 1
+
+Common Probability Density Functions
+
+-   Normal Distribution
+    -   The one we'll mostly look at
+-   *t* distribution
+-   $\chi^2$ distribution
+-   *F* distribution
+
+### Normal Distribution
+
+A normal distribution is a symmetric, bell shaped-distribution. A normal distribution with a mean $\mu$ and standard deviation $\sigma$ is denoted by $N(\mu,\sigma)$. Its pdf is
+
+```{=tex}
+\begin{equation}
+  f(x)=\frac{1}{(\sigma\sqrt{2\pi}e^(\frac{1}{2}(\frac{x-\mu}{\sigma})^2)}
+  (\#eq:ndist)
+\end{equation}
+```
+If \@ref(eq:ndist) is a good approximation for the distribution of data, we can estimate probabilities by integrating \@ref(eq:ndist) over the relevant range(s).
+
+-   A normal distribution with mean 0 and standard deviation 1 is called a **standard normal distribution**.
+-   It turns out that any normal distribution *X* with mean \mu and standard deviation \sigma can be standardized by:
+
+```{=tex}
+\begin{equation}
+  Z=\frac{X-\mu}{\sigma}
+  (\#eq:zscore)
+\end{equation}
+```
+-   Then *Z* follows a standard normal distribution.
+    -   This \@ref(eq:zscore) is also called the *Z-score*.
+
+------------------------------------------------------------------------
+
+### Population & Samples
+
+#### Motivation
+
+In many studies, we want to get answers to questions regarding a population of interest. For example, what is the average income of American adults? - Ideally, we would like to obtain the data from every single American adult - however, due to constraints (e.g. time and money), we are unable to obtain the data from every single American adult - We then typically collect data from a random sample of American adults - We then use characteristics of the sample to estimate the characteristics of the population
+
+The above is the basic way we conduct statistical analysis.
+
+-   Population: The group of all items in our study.
+-   Sample: The items from which we actually collect data.
+
+#### Example
+
+A manufacturing company produces 5 million parts. To estimate the proportion of parts that are defective, 300 parts are randomly selected and carefully inspected for defects. What is the: - population of interest? - All 5 million parts - sample? - the 300 randomly selected parts
+
+#### Parameter vs. Statistic
+
+-   A **parameter** is a number describing a characteristic of the population. Parameters are fixed values, but in practice we do not know their numerical values
+-   A **statistic** is a number describing a characteristic of a sample. Statistics vary from sample to sample.
+
+We often use a statistic to estimate an unknown parameter.
+
+One could take many sample groups together to estimate the population characteristics.
+
+Each time we take a random sample from a population, we are likely to get a different set of individuals and calculate a different statistic. There is **variability** in the statistics.
+
+**Question:** Can we quantify this variability without having to obtain many different random samples?
+
+-   Yes, we can take lots of random samples of the same size from a given population, the distribution of the sample statistics, **the sampling distribution**, will follow a predictable shape.
+-   Under some circumstances, the sampling distribution can be well-approximated by a specific distribution and its pdf.
+-   The variance of the statistics generally decreases as the sample size increases.
+    -   $variance = \sigma^2$
+
+------------------------------------------------------------------------
+
+### Sampling Distribution of Sample Means
+
+When a continuous variable, *X*, in a population follows a *N*(\mu,\sigma) distribution, the sampling distribution of the sample mean, $\bar{x}$, for all possible samples of size *n* is *N*(\mu,$\frac{\sigma}{\sqrt{n}}$).
+
+-   1st random sample of size 50, $\bar{x}$ = 63.7
+-   2nd is $\bar{x}$ = 64.3
+-   3rd is $\bar{x}$ = 65.8
+
+Mean is the same, but standard deviation is reduced by $\sqrt(n)$
+
+#### Central Limit Theorem
+
+Consider a quantitative variable, *X*, in a population that has mean $\mu$ and standard deviation $\sigma$, and is not necessarily normally distributed. If *n* is **large enough**, the sampling distribution of the sample mean, $\bar{x}$, for all possible samples of size *n* is approximately *N*($\mu,\frac{\sigma}{\sqrt{n}}$).
+
+This is known as the **Central Limit Theorem**.
+
+**Implication**: With a large enough sample size, we can use the normal distribution to find probabilities associated with sample means.
+
+-   **Large enough** is relative, many say 25 or 30, but 24 is still better than 23, ya dig?
+
+------------------------------------------------------------------------
+
+### Worked Example: Textbook Spending
+
+**Question**: Based on data from Spring 2017 semester, the mean amount spent on textbooks for the semester is \$405.17 with standard deviation \$210.59. The histogram for the variable amount spent on textbooks that semester is displayed below. How would you describe the shape of this histogram?
+
+The distribution is right skewed, can't use a normal distribution to describe this.
+
+**Question**: Suppose we take repeated samples of size 25. What do we expect the sampling distribution for the sample mean to be? How about if we take repeated samples of size 50?
+
+$n=25, \bar{x}_n=25 ~ N(\$405.17,\frac{210.59}{\sqrt{25}}) = \$42.118$
+
+$n=50, \bar{x}_n=25 ~ N(\$405.17,\frac{210.59}{\sqrt{50}}) = \$29.782$
+
+**Question**: Suppose I have a random sample of 25 students. What is the probability that the sample mean is less than \$415?
+
+```{r}
+n<-25
+sigma<-210.59
+mu<-405.17
+guess<-415
+
+sample_sig<-sigma/sqrt(n)
+zscore<-(guess-mu)/sample_sig
+pnorm(zscore)
+```
+
+What if I have a random sample of 50 students instead?
+
+```{r}
+n<-50
+
+sample_sig<-sigma/sqrt(n)
+zscore<-(guess-mu)/sample_sig
+pnorm(zscore)
+```
+
+So, the probability that the sample mean is less than \$415 increases with more samples.
+
+#### Practice Exercise
+
+**Question**: Suppose I have a random sample of 50 students. What is the probability that the sample mean is more than \$400?
+
+```{r}
+n<-50
+guess<-400
+
+sample_sig<-sigma/sqrt(n)
+zscore<-(guess-mu)/sample_sig
+1-pnorm(zscore)
+```
+
+#### Where do we go from here?
+
+-   We know that the sample mean, $\bar{x}$, describes our particular sample. However, if we select another random sample, the sample mean will probably be different.
+-   We do know that with a large enough sample size, the distribution of the sample means can be approximated by a normal distribution.
+-   We also know that with larger sample size, the sample means will be closer to the population mean, on average.
+
+**Reality**: we will not know the value of the population mean, \mu. So how do we use the sample mean, $\bar{x}$, to estimate \mu?
+
+This brings us to Confidence Intervals...
+
+\newpage
+
+## Confidence Intervals
+
+### Intro to Confidence Intervals
+
+Goals of Confidence Intervals - Provide and estimate for the unknown parameter of interest - Provide a **range of plausible values** for the unknown paramter of interest - Provide a measure of **uncertainty**
+
+#### General Form of Confidence Intervals
+
+Confidence intervals generally take the following form:
+
+```{=tex}
+\begin{equation}
+\text{Estimate} \pm \text{margin of error}.
+(\#eq:cigeneral)
+\end{equation}
+```
+The **margin of error** reflects how precise we believe our estimate is, and is calculated using the confidence level $C=1-\alpha$.
+
+*C* = 0.95 is considered the standard.
+
+#### Confidence Levels and Margin of Error
+
+-   **Confidence Level**: If we obtain many random samples of the same sample size *n*, and construct a confidence interval with *C*% confidence level based on each sample, *C*% of samples will have a confidence interval that contains the population mean \mu.
+-   **Margin of Error**: Suppose we obtain many random samples of the same size *n*, and construct a confidence interval with *C*% confidence level based on each sample. The difference between the sample mean and population mean in *C*% of samples will be no greater than the value of the margin of error.
+
+To illustrate these concepts, consider samples of number of hours of sleep for college students, with margin of error = 0.2:
+
+-   1^st^ sample: $\bar{x_1}$ = 5.3, CI = (5.1,5.5)
+-   2^nd^ sample: $\bar{x_1}$ = 5.5, CI = (5.3,5.7)
+-   3^rd^ sample: $\bar{x_1}$ = 5.2, CI = (5.0,5.4)
+-   and many more...
+
+Out of all these CIs, 95% of these samples contain the true population mean.
+
+Difference between actual mean, say 5.47, and the sample mean will be no greater than margin of error in 95% of samples.
+
+#### Confidence Interval for Population Mean
+
+The confidence interval for population mean is given by:
+
+```{=tex}
+\begin{equation}
+\bar{x}\pm z_{1-\alpha/2} \times \frac{\sigma}{\sqrt{n}}
+(\#eq:cipop)
+\end{equation}
+```
+-   $z_{1-\alpha/2}$ denotes the value of the standard normal distribution that corresponds to the $(1-\frac{\alpha}{2})$^th^ percentile. In a confidence interval, this is also called a **multiplier**.
+-   Generally speaking, the margin of error can be viewed as multiplier \times standard deviation of estimate.
+
+------------------------------------------------------------------------
+
+### Finding Multipliers
+
+#### Finding Multiplier in CI
+
+Recall from \@ref(eq:cipop), $z_{1-\alpha/2}$ denotes the value of the standard normal distribution that corresponds to the $(1-\frac{\alpha}{2})$^th^ percentile.
+
+We want a CI at 1-\alpha confidence. \alpha is typically 0.05.
+
+Since we know that $\bar{x}\approx N(\mu,\frac{\sigma}{\sqrt{n}})$, we can rewrite the equation for *Z-score*, \@ref(eq:zscore), as:
+
+```{=tex}
+\begin{equation}
+Z=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\approx N(0,1)
+(\#eq:zstannorm)
+\end{equation}
+```
+Now we can apply these facts to find out why equation is the way it is.
+
+```{r stnormpdf, echo=FALSE, fig.align='center',fig.cap="Standard Normal PDF"}
+knitr::include_graphics("images/standardnormpdf.png")
+```
+
+Looking at Figure \@ref(fig:stnormpdf), we can see that the section in the middle corresponds to the $1-\alpha$ percentile, that's our 95% CI.
+
+The sections on the left and right must be equal to $\alpha/2$ since for a standard normal pdf, the whole thing must add up to exactly 1.
+
+These two $\alpha/2$ sections on the left and right of Figure \@ref(fig:stnormpdf) refer to the $Z_{\alpha/2}$ and $Z_{1-\alpha/2}$ percentiles, respectively.
+
+**Note**: Due to symmetry, the two \alpha/2 z-scores will be the same magnitude, i.e. $-Z_{\alpha/2}=Z_{1-\alpha/2}$. We can use this fact to our advantage.
+
+One could say that the probability we are in the middle area of Figure \@ref(fig:stnormpdf) is:
+
+```{=tex}
+\begin{equation}
+P(Z_{\alpha/2}\le Z\le Z_{1-\alpha/2})=1-\alpha
+\end{equation}
+```
+Equation \@ref(eq:zstannorm) implies that:
+
+```{=tex}
+\begin{equation}
+P(Z_{\alpha/2}\le \frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\le Z_{1-\alpha/2})=1-\alpha
+\end{equation}
+```
+To isolate $\mu$ in the above equation, we can substitute $Z_{\alpha/2}$ with $-Z_{1-\alpha/2}$ from earlier, then multiply by $-\sigma/\sqrt{n}$, and finally add $\bar{x}$ to get:
+
+```{=tex}
+\begin{equation}
+P(\bar{x}+Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}\ge \mu \ge \bar{x}-Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}) = 1-\alpha
+(\#eq:moederived)
+\end{equation}
+```
+So this means that the population mean must be within the interval given by $\bar{x}\pm Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}$, which is the definition of our confidence interval.
+
+So how do we get the numerical value of the Z-score?
+
+Type qnorm(percentile) in R to find z_percentile.
+
+So, if $1-\alpha = 0.95$, then $1-\alpha/2 = 0.975$, then to R we go...
+
+```{r}
+qnorm(0.975)
+```
+
+$\approx 2$
+
+Voila!
+
+pnorm is the inverse of qnorm:
+
+pnorm(z-score) = percentile qnorm(percentile) = z-score
+
+#### Exercise
+
+1.  Find the z multiplier at 90% confidence
+
+for 90% confidence, $1-\alpha=0.90$, so $1-\alpha/2=0.95$, so plugging into R
+
+```{r}
+qnorm(0.95)
+```
+
+2.  Find the z multiplier at 98% confidence
+
+for 98% confidence $1-\alpha=0.98$, so $1-\alpha/2=0.99$
+
+```{r}
+qnorm(0.99)
+```
+
+3.  Find the z multiplier at 99% confidence
+
+for 99% confidence $1-\alpha=0.99$, so $1-\alpha/2=0.995$
+
+```{r}
+qnorm(0.995)
+```
+
+**Question**: Do you notice a trend in the *z* multiplier as confidence level increases? Does this make sense?
+
+-   The multiplier increases as the confidence level increases. This makes sense because as the confidence level increases, the range that $1-\alpha$ encompasses must expand, meaning the *z* multiplier must also increase in kind. In other words, we're more confident our sample mean contains the population mean because we increased our margin of error.
+
+Looking back at Equation \@ref(eq:moederived), is anything strange?
+
+$\bar{x}\pm Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}$
+
+$\sigma$ represents population variance, which is rarely known! So how can we apply this formula?
+
+Using sample variance is the right direction.
+
+------------------------------------------------------------------------
+
+### t distributions
+
+Recall that the population variance is
+
+```{=tex}
+\begin{equation}
+\sigma^2 = \frac{\sum{(x_i-\mu)^2}}{N}
+\end{equation}
+```
+and the sample variance is
+
+```{=tex}
+\begin{equation}
+s^2 = \frac{\sum{(x_i-\bar{x})^2}}{n-1}
+\end{equation}
+```
+When $\sigma$ is **unknown**, we use the sample standard deviation, *s*, to estimate $\sigma$.
+
+-   Previously we computed the standard deviation of sample mean, $sd(\bar{x})$, as $\frac{\sigma}{\sqrt{n}}$.
+-   When $\sigma$ is unknown, we compute the **standard error** of the sample mean: $se(\bar{x})=\frac{s}{\sqrt{n}}$.
+
+When the standard deviation of a statistic is estimated from the data, the result is the **standard error of the statistic**.
+
+In reality, we'll calculate the standard error much more frequently.
+
+**Scenario**: A random sample of size *n* is drawn from $N(\mu,\sigma)$.
+
+-   When $\sigma$ is known, $\bar{x}\approx N(\mu,\frac{\sigma}{\sqrt{n}})$, and so $Z=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\approx N(0,1)$
+-   When $\sigma$ is known and estimated using *s*, the sampling distribution of $\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}$ is approximated by a *t* **distribution with degrees of freedom** *n*-1.
+-   If we do not have a normal proportion, the approximation to the *t* distribution works well if we have a large enough sample size.
+
+#### Degrees of Freedom
+
+-   *t* distributions are specified by their **degrees of freedom**.
+-   We specify *t* distributions using *t_k*, where *k* is the degrees of freedom.
+
+So CI for $\mu$, df: $k=n-1$ since we lose one degree of freedom because the equality $\frac{\sum{x_i}}{n}=\bar{x}$ must hold.
+
+#### *t* Distribution vs Standard Normal
+
+Both distributions are centered at 0, symmetric, and bell-shaped. Their differences are: - *t_k* has associated degrees of freedom. - *t_k* has slightly **larger spread**. As the sample size (degrees of freedom) increases, *t_k* approaches the standard normal.
+
+*t* distribution has more area at extremes or tails of pdf.
+
+#### Confidence Interval for Population Mean
+
+We use *s* to estimate $\sigma$ when it is unknown. THe level *C* CI for a population mean becomes:
+
+```{=tex}
+\begin{equation}
+\bar{x}\pm t_{1-\alpha/2,k}\frac{s}{\sqrt{n}}
+(\#eq:ciestimate)
+\end{equation}
+```
+Where $t_{1-\alpha/2,k}$ is the value from the *t_k* curve with area *C* between $t_{\alpha/2,k}$ and $t_{1-\alpha/2,k}$. The degrees of freedom is $k=n-1$.
+
+#### Finding Multiplier
+
+In R, type qt(percentile, df) to find *t\_{percentile,df}*. 1. Find the *t* multiplier at 90% confidence with 10df
+
+```{r}
+qt(.95,10)
+```
+
+2.  Find the *t* multiplier at 92% confidence with 35df
+
+```{r}
+qt(.96,35)
+```
+
+3.  Find the *t* multiplier at 98% confidence with 50df
+
+```{r}
+qt(.99,50)
+```
+
+#### Worked Example: Banks' Loan-to-Deposit Ratio (LTDR)
+
+**Question**: The sample mean LTDR for 110 randomly selected American banks is 76.7 and the sample standard deviation is 12.3. Compute a 95% CI for the population mean LTDR. Based on this CI, is it reasonable to say that the average LTDR is less than 80 for the population?
+
+So, stating our variables:
+
+```{r}
+n<-110
+xbar<-76.7
+s<-12.3
+```
+
+Using Equation \@ref(eq:ciestimate):
+
+```{=tex}
+\begin{equation}
+\bar{x}\pm t_{1-\alpha/2,k}\frac{s}{\sqrt{n}}
+\end{equation}
+```
+and plugging in our variables we get:
+
+```{=tex}
+\begin{equation}
+76.7\pm t_{1-\alpha/2,k}\frac{12.3}{\sqrt{110}}
+\end{equation}
+```
+and $t_{1-\alpha/2,k}$ is found using qt(percentile,df), where percentile is $0.95+\frac{1-0.95}{2} = 0.975$ and $df=n-1=110-1=109$:
+
+```{r}
+qt(0.975,109)
+```
+
+So plugging this back into Equation \@ref(eq:ciestimate) we get margin of error equal to:
+
+```{r}
+qt(0.975,n-1)*s/sqrt(n)
+```
+
+So our 95% CI is given by:
+
+$76.7\pm 2.3$ or $(74.4,79.0)$
+
+So, it is reasonable to say that the average LTDR is less than 80 for the population. In other words we're 95% sure that the average LTDR for the population is less than 80.
+
+Or say:
+
+Yes, since the entire CI is less than 80.
+
+\newpage
+
+## Hypothesis Testing
+
+### Hypotheses
+
+#### Motivation
+
+The general approach to hypothesis testing is the following: we perform probability calculations to distinguish patterns seen in data between those that are due to **chance** and those that **reflect a real feature** of the phenomenon under study.
+
+#### Example
+
+You are in charge of quality control in your food company. You randomly sample 40 apcks of cherry tomatoes, each labeled 1/2 lb. (227 g), and find their average weight is 226.5 g. Obviously, we cannot expect boxes filled with whole tomatoes to all weight exactly half a pound. Thus, - is the weight in our sample due to chance? - is the weight in our sample evidence the machine that sorts the tomatoes needs revision?
+
+#### Stating Hypotheses
+
+Hypothesis testing uses sample data to decide on the validity of a hypothesis. A **hypothesis** is an assumption or a theory about the characteristics of one or more variables in one or more populations. - What you want to know: does the calibrating machine that sorts cherry tomatoes into packs need revision? - The same question reframed statistically: Is the population mean $\mu$ for the distribution of weights of cherry tomato packages different from 227 g (i.e., half a pound)?
+
+The statement being tested in a test of significance is called the **null hypothesis**, $H_0$. The test of significance is designed to assess the strength of the evidence against the null hypothesis. The null hypothesis is usually a statement of "no effect" or "no difference."
+
+The **alternative hypothesis**, $H_a$ is the statement we suspect is true instead of the null hypothesis.
+
+-   $H_0: \mu=227g$
+-   $H_a: \mu\ne227g$
+
+#### One-sided and Two-sided Tests
+
+-   A two-sided test of the population mean has the following hypotheses
+
+    -   $H_0: \mu=\text{specific number } (\mu_0)$
+    -   $H_a: \mu \ne \text{specific number } (\mu_0)$
+
+-   A one-sided test of the population mean has the following hypotheses
+
+    -   $H_0: \mu=\text{specific number } (\mu_0)$
+    -   $H_a: \mu < \text{specific number } (\mu_0)$
+
+    OR
+
+    -   $H_0: \mu = \text{specific number } (\mu_0)$
+    -   $H_a: \mu > \text{specific number } (\mu_0)$
+
+What determines the choice of a one-sided versus a two-sided test is what we know about the problem **before** we perform a test of statistical significance.
+
+**Question**: You are in charge of quality control in your food company. You randomly sample 40 apcks of cherry tomatoes, each labeled 1/2 lb. (227 g), and find their average weight is 226.5 g. A consumer advocacy group is trying to claim that consumers are being cheated by the food company. What should the null and alternative hypotheses be in this scenario?
+
+-   $H_0: \mu=227g$
+-   $H_a: \mu<227g$
+
+Consumers would only be cheated if the weight of tomatoes they got was **less than** the amount on the package.
+
+------------------------------------------------------------------------
+
+### Evaluating Evidence: p-values
+
+Next, we evaluate the evidence our data provides **against** the null hypothesis. This evaluation is done by - assuming the null hypothesis is true - computing a test statistic to measure how dissimilar our sample is with the null hypothesis - comparing our test statistic with a benchmark to decide if we have enough evidence against the null hypothesis We then end by making a relevant conclusion
+
+#### Test Statistics
+
+-   The test statistic measures how dissimilar our sampled data is with the null hypothesis.
+-   In a hypothesis test for a mean the test statistic is \begin{equation}
+    t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+    (\#eq:hyptstmean)
+    \end{equation} where $\mu_0$ represents the value in the null hypothesis $H_0$
+-   The larger (in magnitude) the test statistic, the more evidence we have against the null hypothesis.
+
+#### Statistic Level
+
+Before deciding if our test statistic provides enough evidence against the null hypothesis, we first decide on an appropriate **significance level**, $\alpha$. THe scientific standard is 0.05, although this value should change based on the context of your problem
+
+-   The significance level, $\alpha$, is the probability of wrongly rejecting the null hypothesis (when the null hypothesis is true, a false positive).
+-   The benchmark with which we decide if we have enough evidence against the null hypothesis is based on $\alpha$. There are actually two, equivalent, approaches.
+
+#### The p-value Approach
+
+**p-value**: The probability of obtaining your particular random sample result (or more extreme) if the null hypothesis, $H_0$, were true.
+
+-   A high p-value implies that a random sample result is consistent with $H_0$.
+-   A small p-value implies that a random variation alone is unlikely to account for the difference between $H_0$ and the observation from our random sample. Our sample is inconsistent with $H_0$.
+-   The smaller the p-value, the stronger the evidence against $H_0$.
+-   With a small p-value we reject $H_0$, and say that our data support $H_a$. We reject $H_0$ when the p-value is **less than** the significance level, $\alpha$.
+
+#### Distribution of a Statistic
+
+Since the test statistic for testing a mean is Equation \@ref(eq:hyptstmean), \begin{equation}
+t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}} \tag{\@ref{eq:hyptstmean} revisited}
+\end{equation} our test statistic is compared with a *t_k* distribution.
+
+#### Finding the p-value
+
+The p-value is represented by the area under the sampling distribution for values at least as extreme, in the direction of $H_a$, as that of our random sample.
+
+-   In this case, the *sampling distribution* is a *t*-distribution.
+
+Assuming the $H_0$ is true, $t\approx t_k$ where $k=n-1$.
+
+-   $H_a: \mu \ne \mu_0$ (two sided test)
+
+To find area under distribution for all points greater than the magnitude of *t*, or $|t|$ in R, use \*pt($-|t|,df$) then multiply by two for both tails of the distribution.
+
+-   One Sided test
+    -   $H_a: \mu < \mu_0$, use pt$(t,df)$, since you just want all area to the left of *t*.
+    -   You are looking for the probability that the population mean is less than the sample mean.
+    -   $H_a: \mu > \mu_0$, use $1-$pt$(t,df)$, since you want all area to the right of *t*.
+    -   You are looking for the probability that the population mean is greater than the sample mean.
+
+#### Decision
+
+We compare the p-value with the **significance level**, $\alpha$.
+
+-   If the p-value is less than or equal to $\alpha$, we reject $H_0$. Our data support $H_a$.
+-   If the p-value is greater than $\alpha$, we fail to reject $H_0$. Our data do not support $H_a$.
+    -   Does not mean we support the null hypothesis, just weren't able to reject it.
+
+Rejecting $H_0$ is said to be a "statistically significant result". Failing to reject $H_0$ is said to be a "statistically insignificant result".
+
+------------------------------------------------------------------------
+
+### Evaluating Evidence: Critical Value Approach
+
+**Critical value**: the value of the test statistic that results in a p-value equal to the significance level
+
+-   The larger the test statistic, the more evidence we have against $H_0$.
+-   If the magnitude of the test statistic is larger than the critical value, we reject $H_0$.
+
+#### Finding the Critical Value
+
+Critical value, *t*\*: the value of t-statistic whose p-value is equal to significance level, $\alpha$.
+
+```{r 2sidecv, echo=FALSE, fig.align='center',fig.cap="t* for 2-Sided Critical Value"}
+knitr::include_graphics("images/critval2sided.png")
+```
+
+As seen in Figure \@ref(fig:2sidecv), the value of *t*\* for a two-sided test will be given by typing into R the following:
+
+qt(1-$\frac{\alpha}{2}$,df)
+
+This is because *t*\* will be the area in the region $1-\alpha + \alpha/2 = 1-\alpha/2$
+
+**Nota bene**: Remember that qt and pt are the approximations of qnorm and pnorm, respectively, which take into account the degrees of freedom.
+
+For a one sided test, we have two possible scenarios
+
+-   $H_a: \mu > \mu_0$ in this case, the area to the right of *t*\* will be represented by $\alpha$, so we will type qt(1-$\alpha$) to find *t*\*.
+
+-   $H_a: \mu < \mu_0$ in this case, the area to the left of - *t*\* will be represented by $\alpha$, so we will type qt($\alpha$) to find - *t*\*, or -qt($\alpha$) to find *t*\*
+
+**Note**: By symmetry notice that -qt($\alpha$) = qt(1-$\alpha$,df), thus typically for a one-sided test we will typically use qt(1-$\alpha$,df).
+
+In review:
+
+-   Two-sided test
+    -   qt(1-$\frac{\alpha}{2}$,df)
+-   One-sided test
+    -   qt(1-$\alpha$,df)
+
+#### Exercises
+
+1.  Find critical value of two-sided *t*-test at $\alpha=0.1$ with 10 df.
+
+```{r}
+qt(1-0.1/2,10)
+```
+
+2.  Find critical value of one-sided *t*-test at $\alpha=0.02$ with 55 df.
+
+```{r}
+qt(1-0.02,55)
+```
+
+3.  Find critical value of one-sided *t*-test at $\alpha=0.01$ with 70 df.
+
+```{r}
+qt(1-0.01,70)
+```
+
+------------------------------------------------------------------------
+
+### Summary
+
+-   Based on your question of interest, write $H_0$ and $H_a$.
+-   Evaluate how dissimilar your sample is from $H_0$ by calculating the test statistic.
+-   Compare you sample with a benchmark. Two equivalent approaches:
+    1.  Compare p-value with significance level $\alpha$.
+    2.  Compare your test statistic with the critical value.
+-   Write relevant conclusion for your analysis
+
+------------------------------------------------------------------------
+
+### Worked Examples
+
+**Question 1**: You are in charge of quality control in your food company. You randomly sample 40 packs of cherry tomatoes, each labeled 1/2 lb. (227 g), and find their average weight is 226.5 g. Is the weight in our sample evidence that the machine that sorts the tomatoes needs revision? Suppose the sample standard deviation is 1.5 g.
+
+I think I'd want a two-sided test, so first we find the test statistic using Equation \@ref(eq:hyptstmean),
+
+$t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}$,
+
+plug that into pt(t,df), then compare to significance value of 0.05.
+
+So,
+
+$t=\frac{226.5-227}{1.5/\sqrt{40}}=-2.108$
+
+```{r}
+pt((226.5-227)/(1.5/sqrt(40)),39)
+```
+
+Multiplying this by 2 (to account for both sides of the distribution) to get our p-value gives us $\text{p-value}\approx 0.04$.
+
+Since this is less than the significance level of 0.05, we reject the null hypothesis. This is enough evidence that the machine needs revision. Stated statistically, the probability, or p-value, that we would get a sample mean of 226.5 g or less if the true population mean, or $\mu$, was actually equal to 227 g is so low ($\approx 4\%$), that we cannot say this is a chance happening and something is amiss with the sorting machine.
+
+**Using the Critical Value Method**
+
+-   This time we find *t*\* using the significance level $\alpha=0.05$ and compare to the absolute value of our *t-stat* which we previously found to be -2.108.
+-   use qt(1-alpha/2,df)
+
+```{r}
+qt(1-0.05/2,39)
+```
+
+Since $t^*<t$, we reject the null hypothesis. Our data support the claim that the population average weight of cherry tomato packs is different from 227 g.
+
+**Question 2**: A consumer advocacy group is trying to claim that consumers are being cheated by the food company. Carry out an appropriate hypothesis test.
+
+-   $H_a: \mu > \mu_0$
+
+Only difference here from Question 1 is that now $t=0.95$ since for a one-sided test $t=1-\alpha$. So,
+
+```{r}
+qt(0.95,39)
+```
+
+------------------------------------------------------------------------
+
+\newpage
+
+## Practice Questions
+
+### Sampling Distributions
+
+1.  Statistical theory tells us the distribution of the sample means with a fixed sample size, under certain circumstances. The sampling distribution is an approximation of the density histogram of the sample means. WE know the sample means vary from sample to sample. The sampling distribution tells us the expected value (mean) of the distribution, and the standard deviation of the sample means.
+
+```{=html}
+<!-- -->
+```
+a.  Suppose the variable *X* follows a normal distribution with mean $\mu$ and standard deviation $\sigma$. Consider taking random samples, each with size *n*, repeatedly. What is the sampling distribution of the mean?
+
+The sampling distribution is $N(\mu,\frac{\sigma}{\sqrt{n}})$ since $X\approx N(\mu,\sigma)$
+
+b.  Suppose the variable *X* has an unknown distribution but known mean $\mu$ and known standard deviation $\sigma$. What is the name of the statistical theory that informs us that the sampling distribution of the sample mean, $\bar{x}$, can be well-approximated by a normal distribution?
+
+The Central Limit Theorem
+
+2.  An automatic machine in a manufacturing process produces sub-components. The lengths of the sub-components follow a normal distribution of the sample mean of 116 cm and a standard deviation of 4.8 cm.
+
+```{=html}
+<!-- -->
+```
+a.  Find the probability that one selected sub-component is longer than 118 cm.
+
+Z-score here is $\frac{118-116}{4.8}$
+
+```{r}
+1-pnorm(2/4.8)
+```
+
+b.  Find the probability that if 3 sub-components are randomly selected, their mean length exceeds 118 cm.
+
+z-score here is $\frac{118-116}{4.8/\sqrt{3}}$
+
+```{r}
+zscore<-(118-116)/(4.8/sqrt(3))
+1-pnorm(zscore)
+```
+
+### Confidence Intervals
+
+3.  What are the goals of constructing a confidence interval?
+
+-   A confidence interval shows in what range we expect to find a sample mean (range of plausible values)
+-   provide estimate for unknown parameter of interest
+-   provide measure of uncertainty
+
+4.  How does increasing the confidence level affect the margin of error and the width of the confidence interval? Hint: sketching the standard normal distribution will be helpful
+
+-   When the confidence level increases, the margin of error and the width of the confidence interval increase as well. This is because we can be more certain the unknown parameter is contained within the confidence interval when it is wider, but this also increases the range within which it can be found, leading to a larger margin of error.
+
+5.  How does increasing the sample size affect the margin of error and width of the confidence interval? Briefly explain.
+
+-   Increasing the sample size decreases the margin of error and width of confidence interval. This is because the margin of error and width of confidence interval are proportional to $\frac{1}{\sqrt{n}}$ where *n* is the sample size. So increasing *n* decreases the MOE and CI width.
+
+6.  Use R to find the value of the t-multiplier when constructing a confidence interval for the mean in the following situations:
+
+```{=html}
+<!-- -->
+```
+(a) 94% CI with $n=49$.
+
+```{r}
+qt(.97,48)
+```
+
+(b) 86% CI with $n=82$.
+
+```{r}
+qt(.93,81)
+```
+
+(a) 74% CI with $n=150$.
+
+```{r}
+qt(.87,149)
+```
+
+7.  A random sample of 100 students had a mean grade point average (GPA) of 3.2 with a standard deviation of 0.2.
+
+```{=html}
+<!-- -->
+```
+a.  Calculate a 97% CI for the mean GPA for all students
+
+-   Confidence interval is given by $\bar{x} \pm t_{mult} \times \frac{s}{\sqrt{n}}$
+
+-   Where the right half is the MOE. So,
+
+```{r}
+qt(0.985,99)*0.2/sqrt(100)
+```
+
+-   So confidence interval is $3.2 \pm 0.044$ or (3.156,3.244)
+
+b.  What is the margin of error for the confidence interval found in the previous part? what is the margin of error telling us?
+
+-   The margin of error is about 0.044 grade points. This tells us the range within which we expect the true mean GPA to be; it also gives us a measure of uncertainty of the mean GPA.
+
+c.  Based on this confidence interval, is it reasonable to say that the mean GPA of all students is 3.25 or greater?
+
+-   Because 3.25 falls outside of our confidence interval, it is unlikely that that the true mean GPA of all students is 3.25 or greater.
+
+### Hypothesis Testing
+
+8.  What is the goal of conducting a hypothesis test?
+
+-   The goal of hypothesis testing is to determine the likelihood of obtaining a particular sample mean
+-   distinguish if sample statistic is due to random chance or reflects a real feature of phenomenon under study
+
+9.  Hypothesis statements are always about the **population / sample statistic** (choose one) of interest.
+
+-   sample statistic
+
+10. For each of the situations, state the appropriate null and alternative hypotheses, in symbols and in words. Sketch how you would find the p-value based on the calculated test-statistic.
+
+```{=html}
+<!-- -->
+```
+a.  David's car averages 29 miles per gallon on the highway. He just switched to a new motor oil that is advertised as increasing gas mileage. He wants to investigate if the advertisement is accurate.
+
+-   $H_0: \mu = 29 \text{ mpg}$
+-   $H_a: \mu < 29 \text{ mpg}$
+
+b.  The diameter of a spindle in a small motor is supposed to be 4 millimeters. If the spindle is too small or too large, the motor will not function properly. The manufacturer wants to investigate further whether the mean diameter is moved away from the target.
+
+-   $H_0: \mu = 4 \text{ mm}$
+-   $H_a: \mu \ne 4 \text{ mm}$
+
+c.  The average time in traffic between 2 points of a congested highway used to be 2 hours. The government invested money to improve travel times by building extra lanes and overpasses. Citizens want to access if travel times have improved, on average.
+
+-   $H_0: \mu = 2 \text{ hr}$
+-   $H_a: \mu < 2 \text{ hr}$
+
+11. To have more evidence against the null hypothesis, our test statistic should be **larger / smaller** (choose one) in magnitude. Briefly explain.
+
+-   Larger, since the test statistic is a measure of how dissimilar the sampled data is from the null hypothesis, a larger test statistic is more evidence against the null hypothesis.
+
+12. How does increasing the difference between the sample mean and the population mean under the null hypothesis affect the test statistic and the evidence against the null hypothesis?
+
+- Increasing the difference between the sample mean and population mean will increase the test statistic and provide more evidence against the null hypothesis.
+
+13. How does increasing the sample size affect the test statistic and the evidence against the null hypothesis?
+
+- Test statistic is given by $t=\frac{\bar{x}-\mu}{s/\sqrt{n}}=\frac{(\bar{x}-\mu)\sqrt{n}}{s}$, so an increase in sample size will also increase the test-statistic and provide more evidence against the null hypothesis.
+
+14. Use R to obtain the critical values of the following hypothesis tests:
+
+-find t-stat whose p-value is equal to the significance level $\alpha$.
+
+  a. $H_0: \mu = 3.5, H_a: \mu \ne 3.5, \text{ with } \alpha=0.8 \text{ and } n=96$
+  
+```{r}
+qt(0.96,95)
+```
+
+  
+  b. $H_0: \mu = 75, H_a: \mu < 75, \text{ with } \alpha=0.12 \text{ and } n=43$
+  
+```{r}
+qt(0.88,42)
+```
+
+  
+  c. $H_0: \mu = 10, H_a: \mu > 10, \text{ with } \alpha=0.045 \text{ and } n=132$
+  
+```{r}
+qt(1-0.045,131)
+```
+
+15. Use R to obtain the p-values of the following hypothesis tests:
+
+  a. $H_0: \mu=48, H_a: \mu \ne 48, \text{ with } t-stat=2.14 \text{ and } n=50.$
+  - for a two sided test, multiply p-value by 2 to account for  both sides
+```{r}
+(1-pt(2.14,49))*2
+```
+  
+  b. $H_0: \mu=3, H_a: \mu >3, \text{ with } t-stat=0.78 \text{ and } n=316.$
+```{r}
+1-pt(0.78,315)
+```
+  
+  c. $H_0: \mu=12, H_a: \mu <12, \text{ with } t-stat=1.57 \text{ and } n=34.$
+```{r}
+pt(1.57,33)
+```
+  
+16. The 10-year historical average yield of corn in the United States is 160 bushels per acre. A survey of 50 farmers this year gives a sample mean yield of 158.4 bushels per acre, with a standard deviation of 5 bushels per acre. Does this sample provide evidence that the yield of corn has decreased from the 10-year historical average? Conduct an appropriate hypothesis test.
+
+  a. State the null and alternative hypotheses.
+  
+  - $H_0: \mu = 160 \text{ bushels per acre}$
+  - $H_a: \mu < 160 \text{ bushels per acre}$
+  
+  b. Calculate the test-statistic.
+  
+  - Given by $t^* = \frac{\bar{x}-\mu}{s/\sqrt{n}}$ so,
+```{r}
+tstar16<-(158.4-160)/((5/sqrt(50)))
+tstar16
+```
+  c. Find the p-value and the critical value.
+  
+  - Usign significance level, $\alpha$, of 0.05:
+  - **p-value approach**
+```{r}
+pt(tstar16,49)
+```
+  - **critical value approach**
+```{r}
+qt(0.95,49)
+```
+
+  d. State a conclusion in context.
+  
+  - Because the p-value is less than the significance level, and because the critical value is less than the magnitude of the t-statistic, we must reject the null hypothesis. Our data support the claim that the yield of corn this year has decreased from the 10-year historical average.
+  
+  e. How would you interpret the calculated p-value?
+  
+  - There is a probability of 0.014 that we will obtain a sample mean of 158.4 bushels per acre if the average yield this year is truly 160 bushels per acre.
+
+### General Questions
+
+17. Obtain the critical value of a hypothesis test where $H_0: \mu=145,H_a: \mu \ne 145,\text{ with significance level } \alpha=0.02$. Suppose the sample size is 50.
+
+  - This is a **two-sided** test, so I'll use qt($1-\alpha/2$,df)
+```{r}
+qt(0.99,49)
+```
+
+18. Obtain the t-multiplier for a 98% confidence interval. Suppose the sample size is 50.
+
+  - To find t-multiplier, I'll use qt($1-\alpha/2$,df)
+```{r}
+qt(0.99,49)
+```
+
+19. Compare the critical value and the t-multiplier found in the previous two parts. What is the implication based on this comparison?
+
+  - The two values are equal. The implication is that conclusions from a two-sided hypothesis test conducted at significance level $\alpha$ will be consistent with conclusions from a $(1-\alpha) \times$ 100% confidence interval.
+  
+20. Suppose the hypothesis test in question 17 is carried out and the p-value is 0.043. Which of the following confidence intervals is/are possible?
+
+  - (143.2,144.5)
+  - (151.3,154.6)
+  - (144.5,163.5)
+
+  -  Since the p-value is higher than the significance level, $\alpha=0.02$, we fail to reject the null hypothesis. Thus 145 must fall within the confidence interval, so only the CI (144.5,163.5) is possible.
+  
+21. A random sample of 85 banded archerfish were collected, and their lengths were measured and recorded. Their average length was 20cm with a standard deviation of 3cm.
+
+  a. Construct a 95% confidence interval for the population mean length of banded archerfish.
+  
+  - So $\alpha = 0.05$ since the CI is 95%. Need to find t-multiplier and variance $\frac{s}{\sqrt{n}}$
+```{r}
+qt(0.975,84)*3/sqrt(85)
+```
+  - CI is $20\pm 0.647$ or (19.353,20.647)
+
+  b. Based on your confidence interval, is it plausible that the population mean length of banded archerfish is 21cm? Briefly explain.
+  
+  - It is not plausible that the population mean length is 21cm since 21cm falls outside of the 95% confidence interval.
+  
+  c. Suppose you conduct the following hypothesis test. $H_0: \mu=21,H_a:\mu \ne 21$. Without actually performing any additional calculations, what do you expect the p-value of this hypothesis test will be? Briefly explain.
+  
+  - greater than 0.05
+  - less than 0.05
+  
+  - The p-value will be smaller than 0.05, since this means that if the the probability that a sample mean will be 21. 
+    
+  d. Conduct the hypothesis test to verify your answer to the previous part.
+  
+  - Find p-value using pt()
+  
+```{r}
+t21<-(20-21)/(3/sqrt(85))
+t21
+2*pt(t21,84)
+```
+  - Find critical value
+```{r}
+qt(0.975,84)
+```
+
+
+  - Since this is lower than $\alpha=0.05$ and the magnitude of the critical value (1.989 < |-3.073|) we reject the null hypothesis. Our data supports the claim that the population mean does not equal 21cm.
+  

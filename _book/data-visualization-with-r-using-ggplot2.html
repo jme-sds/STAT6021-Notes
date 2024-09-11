@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 2 Data Visualization with R Using ggplot2 | Linear Methods for Data Science Notes</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 2 Data Visualization with R Using ggplot2 | Linear Methods for Data Science Notes" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 2 Data Visualization with R Using ggplot2 | Linear Methods for Data Science Notes" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="John Michael Epperson" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-wrangling-with-r.html"/>
+<link rel="next" href="review-of-statistical-inference.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Models for Data Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="syllabus-week.html"><a href="syllabus-week.html"><i class="fa fa-check"></i>Syllabus Week</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="syllabus-week.html"><a href="syllabus-week.html#agenda"><i class="fa fa-check"></i><b>0.1</b> Agenda</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html"><i class="fa fa-check"></i><b>1</b> Data Wrangling with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#cheat-sheet"><i class="fa fa-check"></i>Cheat Sheet</a></li>
+<li class="chapter" data-level="1.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#data-wrangling-using-base-r-functions"><i class="fa fa-check"></i><b>1.1</b> Data Wrangling Using Base R Functions</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#changing-column-names"><i class="fa fa-check"></i><b>1.1.1</b> Changing Column Names</a></li>
+<li class="chapter" data-level="1.1.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variables"><i class="fa fa-check"></i><b>1.1.2</b> <strong>Summarizing Variables</strong></a></li>
+<li class="chapter" data-level="1.1.3" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variable-by-groups"><i class="fa fa-check"></i><b>1.1.3</b> <strong>Summarizing variable by groups</strong></a></li>
+<li class="chapter" data-level="1.1.4" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#create-a-new-variable-based-on-existing-variable"><i class="fa fa-check"></i><b>1.1.4</b> <strong>Create a new variable based on existing variable</strong></a></li>
+<li class="chapter" data-level="1.1.5" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#combine-data-frames"><i class="fa fa-check"></i><b>1.1.5</b> <strong>Combine data frames</strong></a></li>
+<li class="chapter" data-level="1.1.6" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#sort-data-frame-by-column-values"><i class="fa fa-check"></i><b>1.1.6</b> <strong>Sort data frame by column values</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#data-wrangling-using-dplyr-functions"><i class="fa fa-check"></i><b>1.2</b> Data Wrangling Using dplyr Functions</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#select-specific-columns-of-a-data-fram"><i class="fa fa-check"></i><b>1.2.1</b> Select Specific Columns of a Data Fram</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#select-observations-by-conditions"><i class="fa fa-check"></i><b>1.2.2</b> Select observations by conditions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#change-column-name"><i class="fa fa-check"></i><b>1.2.3</b> Change Column Name</a></li>
+<li class="chapter" data-level="1.2.4" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variables-1"><i class="fa fa-check"></i><b>1.2.4</b> Summarizing Variables</a></li>
+<li class="chapter" data-level="1.2.5" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variable-by-groups-1"><i class="fa fa-check"></i><b>1.2.5</b> Summarizing Variable by Groups</a></li>
+<li class="chapter" data-level="1.2.6" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#create-a-new-variable-based-on-existing-variables"><i class="fa fa-check"></i><b>1.2.6</b> Create a New Variable Based on Existing Variable(s)</a></li>
+<li class="chapter" data-level="1.2.7" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#combine-data-frames-1"><i class="fa fa-check"></i><b>1.2.7</b> Combine Data Frames</a></li>
+<li class="chapter" data-level="1.2.8" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#sort-data-frame-by-column-values-1"><i class="fa fa-check"></i><b>1.2.8</b> Sort data frame by column values</a></li>
+<li class="chapter" data-level="1.2.9" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#more-about-combining-datasets"><i class="fa fa-check"></i><b>1.2.9</b> More About Combining Datasets</a></li>
+<li class="chapter" data-level="1.2.10" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#a-note-about-missing-values"><i class="fa fa-check"></i><b>1.2.10</b> A Note About Missing Values</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html"><i class="fa fa-check"></i><b>2</b> Data Visualization with R Using <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#visualizations-with-a-single-categorical-variable"><i class="fa fa-check"></i><b>2.2</b> Visualizations with a Single Categorical Variable</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#frequency-tables"><i class="fa fa-check"></i><b>2.2.1</b> Frequency Tables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#bar-charts"><i class="fa fa-check"></i><b>2.2.2</b> Bar Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#visualizations-with-a-single-quantitative-variable"><i class="fa fa-check"></i><b>2.3</b> Visualizations with a Single Quantitative Variable</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#number-summary"><i class="fa fa-check"></i><b>2.3.1</b> 5 Number Summary</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#boxplots"><i class="fa fa-check"></i><b>2.3.2</b> Boxplots</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#histograms"><i class="fa fa-check"></i><b>2.3.3</b> Histograms</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#density-plots"><i class="fa fa-check"></i><b>2.3.4</b> Density Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#bivariate-visualizations"><i class="fa fa-check"></i><b>2.4</b> Bivariate Visualizations</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#compare-quantitative-variable-across-categories"><i class="fa fa-check"></i><b>2.4.1</b> Compare Quantitative Variable Across Categories</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#summarizing-two-categorical-variables"><i class="fa fa-check"></i><b>2.4.2</b> Summarizing Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#summarizing-two-quantitative-variables"><i class="fa fa-check"></i><b>2.4.3</b> Summarizing Two Quantitative Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#multivariate-visualizations"><i class="fa fa-check"></i><b>2.5</b> Multivariate Visualizations</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#bar-charts-1"><i class="fa fa-check"></i><b>2.5.1</b> Bar Charts</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#scatterplots-1"><i class="fa fa-check"></i><b>2.5.2</b> Scatterplots</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html"><i class="fa fa-check"></i><b>A</b> Review of Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#cheat-sheet-1"><i class="fa fa-check"></i>Cheat Sheet</a></li>
+<li class="chapter" data-level="A.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#introduction-to-the-lesson"><i class="fa fa-check"></i><b>A.1</b> Introduction to the Lesson</a></li>
+<li class="chapter" data-level="A.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#sampling-distributions"><i class="fa fa-check"></i><b>A.2</b> Sampling Distributions</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#normal-distribution"><i class="fa fa-check"></i><b>A.2.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="A.2.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#population-samples"><i class="fa fa-check"></i><b>A.2.2</b> Population &amp; Samples</a></li>
+<li class="chapter" data-level="A.2.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#sampling-distribution-of-sample-means"><i class="fa fa-check"></i><b>A.2.3</b> Sampling Distribution of Sample Means</a></li>
+<li class="chapter" data-level="A.2.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#worked-example-textbook-spending"><i class="fa fa-check"></i><b>A.2.4</b> Worked Example: Textbook Spending</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>A.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#intro-to-confidence-intervals"><i class="fa fa-check"></i><b>A.3.1</b> Intro to Confidence Intervals</a></li>
+<li class="chapter" data-level="A.3.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#finding-multipliers"><i class="fa fa-check"></i><b>A.3.2</b> Finding Multipliers</a></li>
+<li class="chapter" data-level="A.3.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#t-distributions"><i class="fa fa-check"></i><b>A.3.3</b> t distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="A.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#hypothesis-testing"><i class="fa fa-check"></i><b>A.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="A.4.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#hypotheses"><i class="fa fa-check"></i><b>A.4.1</b> Hypotheses</a></li>
+<li class="chapter" data-level="A.4.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#evaluating-evidence-p-values"><i class="fa fa-check"></i><b>A.4.2</b> Evaluating Evidence: p-values</a></li>
+<li class="chapter" data-level="A.4.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#evaluating-evidence-critical-value-approach"><i class="fa fa-check"></i><b>A.4.3</b> Evaluating Evidence: Critical Value Approach</a></li>
+<li class="chapter" data-level="A.4.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#summary"><i class="fa fa-check"></i><b>A.4.4</b> Summary</a></li>
+<li class="chapter" data-level="A.4.5" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#worked-examples"><i class="fa fa-check"></i><b>A.4.5</b> Worked Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="A.5" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#practice-questions"><i class="fa fa-check"></i><b>A.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="A.5.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#sampling-distributions-1"><i class="fa fa-check"></i><b>A.5.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="A.5.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#confidence-intervals-1"><i class="fa fa-check"></i><b>A.5.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="A.5.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>A.5.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="A.5.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#general-questions"><i class="fa fa-check"></i><b>A.5.4</b> General Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="basics-of-r.html"><a href="basics-of-r.html"><i class="fa fa-check"></i><b>B</b> Basics of R</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="basics-of-r.html"><a href="basics-of-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>B.1</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-1"><i class="fa fa-check"></i><b>B.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="B.1.2" data-path="basics-of-r.html"><a href="basics-of-r.html#question-2"><i class="fa fa-check"></i><b>B.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="B.1.3" data-path="basics-of-r.html"><a href="basics-of-r.html#question-3"><i class="fa fa-check"></i><b>B.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="B.1.4" data-path="basics-of-r.html"><a href="basics-of-r.html#question-4"><i class="fa fa-check"></i><b>B.1.4</b> Question 4</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="basics-of-r.html"><a href="basics-of-r.html#topic-b.3-data-types-structures-in-r"><i class="fa fa-check"></i><b>B.2</b> Topic B.3: Data Types &amp; Structures in R</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-5"><i class="fa fa-check"></i><b>B.2.1</b> Question 5</a></li>
+<li class="chapter" data-level="B.2.2" data-path="basics-of-r.html"><a href="basics-of-r.html#question-6"><i class="fa fa-check"></i><b>B.2.2</b> Question 6</a></li>
+<li class="chapter" data-level="B.2.3" data-path="basics-of-r.html"><a href="basics-of-r.html#question-7"><i class="fa fa-check"></i><b>B.2.3</b> Question 7</a></li>
+<li class="chapter" data-level="B.2.4" data-path="basics-of-r.html"><a href="basics-of-r.html#question-8"><i class="fa fa-check"></i><b>B.2.4</b> Question 8</a></li>
+<li class="chapter" data-level="B.2.5" data-path="basics-of-r.html"><a href="basics-of-r.html#question-9"><i class="fa fa-check"></i><b>B.2.5</b> Question 9</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="basics-of-r.html"><a href="basics-of-r.html#r-markdown"><i class="fa fa-check"></i><b>B.3</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-10"><i class="fa fa-check"></i><b>B.3.1</b> Question 10</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Methods for Data Science Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-visualization-with-r-using-ggplot2" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Module 2</span> Data Visualization with R Using <code>ggplot2</code><a href="data-visualization-with-r-using-ggplot2.html#data-visualization-with-r-using-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction<a href="data-visualization-with-r-using-ggplot2.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Data viz tools summarize data in ways that people unfamiliar with statistics can easily interpret and understand.</p>
+<p>In this module, we will learn how to create common data visualizations. The choice of viz is usually determined by whether we’re looking at a categorical or quantitative variable. Discrete variables may be viewed as either categorical or quantitative depending on the context.</p>
+<p>We’ll be using functions from <code>ggplot2</code> to create visualizations. <code>ggplot2</code> is included in the <code>tidyverse</code> package.</p>
+<p>We’ll use the dataset <code>ClassDataPrevious.csv</code> as an example.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="data-visualization-with-r-using-ggplot2.html#cb87-1" tabindex="-1"></a>Data<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;datasets/ClassDataPrevious.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="visualizations-with-a-single-categorical-variable" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Visualizations with a Single Categorical Variable<a href="data-visualization-with-r-using-ggplot2.html#visualizations-with-a-single-categorical-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="frequency-tables" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Frequency Tables<a href="data-visualization-with-r-using-ggplot2.html#frequency-tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Frequency tables are a common tool to summarize categorical variables, giving us the number of observations, or counts, that belong to a categorical variable. These tables are created through the <code>table()</code> function.</p>
+<p>Number of students in each year in our data; factoring first:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-visualization-with-r-using-ggplot2.html#cb88-1" tabindex="-1"></a>Data<span class="sc">$</span>Year<span class="ot">&lt;-</span><span class="fu">factor</span>(Data<span class="sc">$</span>Year, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;First&quot;</span>,<span class="st">&quot;Second&quot;</span>,<span class="st">&quot;Third&quot;</span>,<span class="st">&quot;Fourth&quot;</span>))</span>
+<span id="cb88-2"><a href="data-visualization-with-r-using-ggplot2.html#cb88-2" tabindex="-1"></a>mytab<span class="ot">&lt;-</span><span class="fu">table</span>(Data<span class="sc">$</span>Year)</span>
+<span id="cb88-3"><a href="data-visualization-with-r-using-ggplot2.html#cb88-3" tabindex="-1"></a>mytab</span></code></pre></div>
+<pre><code>## 
+##  First Second  Third Fourth 
+##     83    139     46     30</code></pre>
+<p>We can report these numbers using proportions instead of counts using <code>prop.table()</code></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="data-visualization-with-r-using-ggplot2.html#cb90-1" tabindex="-1"></a><span class="fu">prop.table</span>(mytab)</span></code></pre></div>
+<pre><code>## 
+##     First    Second     Third    Fourth 
+## 0.2785235 0.4664430 0.1543624 0.1006711</code></pre>
+<p>Or percentages by multiplying by 100, rounded to 2 decimal places:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="data-visualization-with-r-using-ggplot2.html#cb92-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(mytab)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+##  First Second  Third Fourth 
+##  27.85  46.64  15.44  10.07</code></pre>
+</div>
+<div id="bar-charts" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Bar Charts<a href="data-visualization-with-r-using-ggplot2.html#bar-charts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bar charts are a simple way to visualize data, and can be viewed as a visual representation of frequency tables. To create a bar chart for the years of a these students, we use:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="data-visualization-with-r-using-ggplot2.html#cb94-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb94-2"><a href="data-visualization-with-r-using-ggplot2.html#cb94-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>We can read the number of students who are first, second, third, and fourth years by reading off the corresponding value on the vertical axis.</p>
+<p>From these two lines of code, we can see the basic structure of visualizations with the <code>ggplot()</code> function:</p>
+<ol style="list-style-type: decimal">
+<li>Supply <code>ggplot()</code> function with dataframe, and the x- and y- vars via the <code>aes()</code> function. End line with <code>+</code> and go to next line</li>
+<li>Specify graph type we want to create (called <code>geoms</code>) for a bar chart, this is <code>geom_bar()</code>.</li>
+</ol>
+<p>These two <em>layers</em> of code must be supplied for all data visualizations with <code>ggplot()</code>.</p>
+<p>Additional layers may be added. e.g. we can change the orientation of the bar chart:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="data-visualization-with-r-using-ggplot2.html#cb95-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb95-2"><a href="data-visualization-with-r-using-ggplot2.html#cb95-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb95-3"><a href="data-visualization-with-r-using-ggplot2.html#cb95-3" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>It is recommended that each layer is typed on a new line. Like pipes, you need a <code>+</code> to add another layer below.</p>
+<p>Change colors of bars:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="data-visualization-with-r-using-ggplot2.html#cb96-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb96-2"><a href="data-visualization-with-r-using-ggplot2.html#cb96-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p>To change outline of bars:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="data-visualization-with-r-using-ggplot2.html#cb97-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb97-2"><a href="data-visualization-with-r-using-ggplot2.html#cb97-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>,<span class="at">color=</span><span class="st">&quot;orange&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<div id="customize-title-and-labels-of-axes-in-bar-charts" class="section level4 hasAnchor" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> Customize Title and Labels of Axes in Bar Charts<a href="data-visualization-with-r-using-ggplot2.html#customize-title-and-labels-of-axes-in-bar-charts" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To change orientatino of labels on x axis we add extra layer called <code>theme</code>. This will be useful when we have many classes and/or labels with long names.</p>
+<p>To rotate labels on x-axis 90 degrees</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="data-visualization-with-r-using-ggplot2.html#cb98-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb98-2"><a href="data-visualization-with-r-using-ggplot2.html#cb98-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb98-3"><a href="data-visualization-with-r-using-ggplot2.html#cb98-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x=</span><span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p>As we create more visualizations, it is good practice to give good axis titles and chart titles. To do this we use <code>labs()</code>:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="data-visualization-with-r-using-ggplot2.html#cb99-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data, <span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb99-2"><a href="data-visualization-with-r-using-ggplot2.html#cb99-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb99-3"><a href="data-visualization-with-r-using-ggplot2.html#cb99-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))<span class="sc">+</span></span>
+<span id="cb99-4"><a href="data-visualization-with-r-using-ggplot2.html#cb99-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;Number of Students&quot;</span>, <span class="at">title=</span><span class="st">&quot;Dist of Years&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p>Adjust the position of the title, center justify via `theme</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="data-visualization-with-r-using-ggplot2.html#cb100-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data, <span class="fu">aes</span>(<span class="at">x=</span>Year))<span class="sc">+</span></span>
+<span id="cb100-2"><a href="data-visualization-with-r-using-ggplot2.html#cb100-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb100-3"><a href="data-visualization-with-r-using-ggplot2.html#cb100-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>)</span>
+<span id="cb100-4"><a href="data-visualization-with-r-using-ggplot2.html#cb100-4" tabindex="-1"></a>        ,<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb100-5"><a href="data-visualization-with-r-using-ggplot2.html#cb100-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>, <span class="at">y=</span><span class="st">&quot;Number of Students&quot;</span>, <span class="at">title=</span><span class="st">&quot;Dist of Years&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+</div>
+<div id="create-a-bar-chart-using-proportions" class="section level4 hasAnchor" number="2.2.2.2">
+<h4><span class="header-section-number">2.2.2.2</span> Create a Bar Chart using Proportions<a href="data-visualization-with-r-using-ggplot2.html#create-a-bar-chart-using-proportions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Some steps involved in creating a bar chart with proportions rather than counts. First, create new dataframe, where each row is a year, then add proportion of each year into new column</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="data-visualization-with-r-using-ggplot2.html#cb101-1" tabindex="-1"></a>newData<span class="ot">&lt;-</span>Data <span class="sc">%&gt;%</span> </span>
+<span id="cb101-2"><a href="data-visualization-with-r-using-ggplot2.html#cb101-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="data-visualization-with-r-using-ggplot2.html#cb101-3" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Counts=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-4"><a href="data-visualization-with-r-using-ggplot2.html#cb101-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percent=</span>Counts<span class="sc">/</span><span class="fu">nrow</span>(Data))</span></code></pre></div>
+<p>Here’s what the code is doing, line by line</p>
+<ol style="list-style-type: decimal">
+<li>Create new data from called <code>newData</code> from <code>Data</code>,</li>
+<li>and then groups the observations by <code>Year</code>,</li>
+<li>and then counts the number of observations in each <code>Year</code> and stores these values in a vector called <code>Counts</code>,</li>
+<li>and then creates a new vector called <code>Percent</code> by using the mathematical operations as specified in <code>mutate()</code>. <code>Percent</code> is added to <code>newData</code>.</li>
+</ol>
+<p>Let’s take a look at <code>newData</code>:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="data-visualization-with-r-using-ggplot2.html#cb102-1" tabindex="-1"></a>newData</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   Year   Counts Percent
+##   &lt;fct&gt;   &lt;int&gt;   &lt;dbl&gt;
+## 1 First      83   0.279
+## 2 Second    139   0.466
+## 3 Third      46   0.154
+## 4 Fourth     30   0.101</code></pre>
+<p>Now we can create a bar chart using proportions:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data-visualization-with-r-using-ggplot2.html#cb104-1" tabindex="-1"></a><span class="fu">ggplot</span>(newData,<span class="fu">aes</span>(<span class="at">x=</span>Year,<span class="at">y=</span>Percent))<span class="sc">+</span></span>
+<span id="cb104-2"><a href="data-visualization-with-r-using-ggplot2.html#cb104-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb104-3"><a href="data-visualization-with-r-using-ggplot2.html#cb104-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>),</span>
+<span id="cb104-4"><a href="data-visualization-with-r-using-ggplot2.html#cb104-4" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb104-5"><a href="data-visualization-with-r-using-ggplot2.html#cb104-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Year&quot;</span>,<span class="at">y=</span><span class="st">&quot;Percentage of Students&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Dist of Years&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p>Note the following:</p>
+<ol style="list-style-type: decimal">
+<li>In first layer we use <code>newData</code> instead of the old data frame. In <code>aes()</code> we specified a y-var, which we want to be <code>Percent</code>.</li>
+<li>In second layer, we specified <code>stat="identity"</code> inside <code>geom_bar()</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="visualizations-with-a-single-quantitative-variable" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Visualizations with a Single Quantitative Variable<a href="data-visualization-with-r-using-ggplot2.html#visualizations-with-a-single-quantitative-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="number-summary" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> 5 Number Summary<a href="data-visualization-with-r-using-ggplot2.html#number-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>summary()</code> function, when applied to a quantitative variable, produces the <strong>5 Number Summary</strong>: the minimum, first quartile (25<sup>th</sup> percentile), median (50<sup>th</sup> percentile), the mean, the third quartile (75<sup>th</sup> percentile), and the maximum. For example, to obtain the five number summary of the ages of these students:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="data-visualization-with-r-using-ggplot2.html#cb105-1" tabindex="-1"></a><span class="fu">summary</span>(Data<span class="sc">$</span>Age)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   18.00   19.00   19.00   19.57   20.00   51.00</code></pre>
+<p>Average is 19.57 years old. Notice the first quartile and median are both 19 years old, which means at least a quarter of the observations are 19 years old. Also not the max of 51 years old, so we have a student who is quite a lot older than the rest.</p>
+</div>
+<div id="boxplots" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Boxplots<a href="data-visualization-with-r-using-ggplot2.html#boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A boxplot is a graphical representation fo the 5 number summary. To create a generic boxplot, use <code>ggplot()</code> with a layer specifying <code>geom_boxplot()</code>:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="data-visualization-with-r-using-ggplot2.html#cb107-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">y=</span>Age))<span class="sc">+</span></span>
+<span id="cb107-2"><a href="data-visualization-with-r-using-ggplot2.html#cb107-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>Note we are still using the same structure when creating data visualizations with <code>ggplot()</code>.</p>
+<ol style="list-style-type: decimal">
+<li>supply <code>ggplot()</code> with dataframe, x- and or y-variables via <code>aes()</code> function. End line with <code>+</code></li>
+<li>next line specify graph type, in this case <code>geom_boxplot()</code>.</li>
+</ol>
+<p>Notice there are outliers (observations that are a lot older or younger) that are denoted by the dots. One is the 51 year old, and 22 year olds are deemed to be outliers. The rule being used is the <span class="math inline">\(1.5\times IQR\)</span> rule.</p>
+<p>Similar to bar charts, we can change the orientation of boxplots by adding an additional layer as before, can also change colors:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data-visualization-with-r-using-ggplot2.html#cb108-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">y=</span>Age))<span class="sc">+</span></span>
+<span id="cb108-2"><a href="data-visualization-with-r-using-ggplot2.html#cb108-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>,<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>,<span class="at">outlier.color=</span><span class="st">&quot;brown&quot;</span>)<span class="sc">+</span></span>
+<span id="cb108-3"><a href="data-visualization-with-r-using-ggplot2.html#cb108-3" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+</div>
+<div id="histograms" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Histograms<a href="data-visualization-with-r-using-ggplot2.html#histograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Histogram displays number of observations within each bin on the x-axis.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="data-visualization-with-r-using-ggplot2.html#cb109-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Age))<span class="sc">+</span></span>
+<span id="cb109-2"><a href="data-visualization-with-r-using-ggplot2.html#cb109-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better
+## value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>Note warning displayed when creating basic histogram, use <code>binwidth</code> arg within <code>geom_histogram()</code>. Try <code>binwidth=1</code> for now, which gives us a width of 1 unit for each bin.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="data-visualization-with-r-using-ggplot2.html#cb111-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Age))<span class="sc">+</span></span>
+<span id="cb111-2"><a href="data-visualization-with-r-using-ggplot2.html#cb111-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>The ages of the students are mostly young, with 19 and 20 year olds being the most commonly occuring.</p>
+<p>A well-known drawback of histograms is that the width of the bins can drastically affect the visual. Change <code>binwidth</code> to 2 to see:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="data-visualization-with-r-using-ggplot2.html#cb112-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Age))<span class="sc">+</span></span>
+<span id="cb112-2"><a href="data-visualization-with-r-using-ggplot2.html#cb112-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p>Each bar contains two ages now: the first contains 18 and 19 year olds. Notice how the shape has been changed? No good…</p>
+</div>
+<div id="density-plots" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Density Plots<a href="data-visualization-with-r-using-ggplot2.html#density-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Density plots are similar to histograms where the plot attempts to use a smooth mathematical function to approximate the shape of the histogram, is unaffected by binwidth:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="data-visualization-with-r-using-ggplot2.html#cb113-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>Age))<span class="sc">+</span></span>
+<span id="cb113-2"><a href="data-visualization-with-r-using-ggplot2.html#cb113-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p>Here it is easyt o see that 19 and 20 year olds are the most common ages in this data. Be careful interpreting values on the vertical axis: <strong>these do not represent proportions</strong>. A characteristic of density plots is that the area under the plot is always one.</p>
+</div>
+</div>
+<div id="bivariate-visualizations" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Bivariate Visualizations<a href="data-visualization-with-r-using-ggplot2.html#bivariate-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bivariate visualizations help show the relationship between <strong>two variables</strong>.</p>
+<p>We will be using a new dataset as an example, so we’ll clear the environment.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-visualization-with-r-using-ggplot2.html#cb114-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span></code></pre></div>
+<p>Use dataset <code>gapminder</code> from <code>gapminder</code> package.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="data-visualization-with-r-using-ggplot2.html#cb115-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb115-2"><a href="data-visualization-with-r-using-ggplot2.html#cb115-2" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code></pre></div>
+<p>Take a look at <code>gapminder</code> dataset:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-visualization-with-r-using-ggplot2.html#cb116-1" tabindex="-1"></a><span class="fu">head</span>(gapminder)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## 6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
+<p>Variables are:
+1. <code>country</code>
+2. <code>continent</code>
+3. <code>year</code> from 1952 to 2007 in increments of 5 years
+4. <code>lifeExp</code> life expectancy at birth in years
+5. <code>pop</code> as in population of country
+6. <code>gdpPercap</code> GDP per capita in US dollars, adjusted for inflation</p>
+<p>Note that the data here are collected from each contry across many different years: 1952 to 2007 in increments of 5 years. We will mainly focus on data from the most recent year, 2007.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-visualization-with-r-using-ggplot2.html#cb118-1" tabindex="-1"></a>Data<span class="ot">&lt;-</span>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="data-visualization-with-r-using-ggplot2.html#cb118-2" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">==</span><span class="dv">2007</span>)</span></code></pre></div>
+<p>The specific visuals to use will again depend on the type of variables we are using, whether they are categorical or quantitative.</p>
+<div id="compare-quantitative-variable-across-categories" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Compare Quantitative Variable Across Categories<a href="data-visualization-with-r-using-ggplot2.html#compare-quantitative-variable-across-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="side-by-side-boxplots" class="section level4 hasAnchor" number="2.4.1.1">
+<h4><span class="header-section-number">2.4.1.1</span> Side-by-Side Boxplots<a href="data-visualization-with-r-using-ggplot2.html#side-by-side-boxplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>These are useful to compare a quantitative variable across different classes of a categorical variable. e.g. we want to compare life expectancy across different continents in year 2007</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="data-visualization-with-r-using-ggplot2.html#cb119-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>continent,<span class="at">y=</span>lifeExp))<span class="sc">+</span></span>
+<span id="cb119-2"><a href="data-visualization-with-r-using-ggplot2.html#cb119-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb119-3"><a href="data-visualization-with-r-using-ggplot2.html#cb119-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Continent&quot;</span>,<span class="at">y=</span><span class="st">&quot;Life Exp.&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Dist. of Life Expectancies by Continent&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p>As we can see, countries in Oceania region have long life expectancies with little variation. Comparing the Americas to Asia, the median life expectancies are similar, but the spread is larger in Asia.</p>
+</div>
+<div id="violin-plots" class="section level4 hasAnchor" number="2.4.1.2">
+<h4><span class="header-section-number">2.4.1.2</span> Violin Plots<a href="data-visualization-with-r-using-ggplot2.html#violin-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Violin plots are alternative to boxplots. Here’s how it’s done:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-visualization-with-r-using-ggplot2.html#cb120-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>continent,<span class="at">y=</span>lifeExp))<span class="sc">+</span></span>
+<span id="cb120-2"><a href="data-visualization-with-r-using-ggplot2.html#cb120-2" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">fill=</span><span class="st">&quot;purple&quot;</span>)<span class="sc">+</span></span>
+<span id="cb120-3"><a href="data-visualization-with-r-using-ggplot2.html#cb120-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Continent&quot;</span>,<span class="at">y=</span><span class="st">&quot;Life Exp.&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Dist. of Life Expectancies by Continent&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<p>The width of the violin informs us which values are more commonly occurring. For example, look at Europe: violin is wider at high life expectancies, so longer life expectancies are more common in European countries.</p>
+</div>
+</div>
+<div id="summarizing-two-categorical-variables" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Summarizing Two Categorical Variables<a href="data-visualization-with-r-using-ggplot2.html#summarizing-two-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>create new binary variable called <code>expectancy</code>, which will be denoted as <code>low</code> if the life expectancy is less than 70 years, <code>high</code> otherwise:</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="data-visualization-with-r-using-ggplot2.html#cb121-1" tabindex="-1"></a>Data<span class="ot">&lt;-</span>Data <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="data-visualization-with-r-using-ggplot2.html#cb121-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expectancy=</span><span class="fu">ifelse</span>(lifeExp<span class="sc">&lt;</span><span class="dv">70</span>,<span class="st">&quot;Low&quot;</span>,<span class="st">&quot;High&quot;</span>))</span></code></pre></div>
+<div id="two-way-tables" class="section level4 hasAnchor" number="2.4.2.1">
+<h4><span class="header-section-number">2.4.2.1</span> Two-Way Tables<a href="data-visualization-with-r-using-ggplot2.html#two-way-tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>See how expectancy varies across the continents. <strong>Two-way table</strong> can be created to produce counts when <strong>two categorical variables</strong> are involved.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="data-visualization-with-r-using-ggplot2.html#cb122-1" tabindex="-1"></a>Data<span class="ot">&lt;-</span>Data <span class="sc">%&gt;%</span> </span>
+<span id="cb122-2"><a href="data-visualization-with-r-using-ggplot2.html#cb122-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expectancy=</span>expectancy <span class="sc">%&gt;%</span> </span>
+<span id="cb122-3"><a href="data-visualization-with-r-using-ggplot2.html#cb122-3" tabindex="-1"></a>           <span class="fu">fct_relevel</span>(<span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>,<span class="st">&quot;High&quot;</span>)))</span>
+<span id="cb122-4"><a href="data-visualization-with-r-using-ggplot2.html#cb122-4" tabindex="-1"></a>mytab2<span class="ot">&lt;-</span><span class="fu">table</span>(Data<span class="sc">$</span>continent,Data<span class="sc">$</span>expectancy)</span>
+<span id="cb122-5"><a href="data-visualization-with-r-using-ggplot2.html#cb122-5" tabindex="-1"></a>mytab2</span></code></pre></div>
+<pre><code>##           
+##            Low High
+##   Africa    45    7
+##   Americas   3   22
+##   Asia      11   22
+##   Europe     0   30
+##   Oceania    0    2</code></pre>
+<p>First variable in <code>table()</code> will be placed in the rows, second will be columns.</p>
+<p>From this table, we can see that 22 countries in the Americas have high life expectancies, and only 3 with low life expectancies.</p>
+<p>If interested in proportions, rather than counts, convert using <code>prop.table()</code>:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="data-visualization-with-r-using-ggplot2.html#cb124-1" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(mytab2,<span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##           
+##               Low   High
+##   Africa    86.54  13.46
+##   Americas  12.00  88.00
+##   Asia      33.33  66.67
+##   Europe     0.00 100.00
+##   Oceania    0.00 100.00</code></pre>
+<p>Here, the second argument to <code>prop.table()</code> indicates that the <strong>rows</strong> should add up to 1, if instead we want the <strong>columns</strong> to add to 1, we should set the second argument to 2.</p>
+</div>
+<div id="stacked-bar-charts" class="section level4 hasAnchor" number="2.4.2.2">
+<h4><span class="header-section-number">2.4.2.2</span> Stacked Bar Charts<a href="data-visualization-with-r-using-ggplot2.html#stacked-bar-charts" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A stacked bar chart can be used to display relationship between binary variable <code>expectancy</code> across continents.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="data-visualization-with-r-using-ggplot2.html#cb126-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>continent,<span class="at">fill=</span>expectancy))<span class="sc">+</span></span>
+<span id="cb126-2"><a href="data-visualization-with-r-using-ggplot2.html#cb126-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;stack&quot;</span>)<span class="sc">+</span></span>
+<span id="cb126-3"><a href="data-visualization-with-r-using-ggplot2.html#cb126-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Continent&quot;</span>, <span class="at">y=</span><span class="st">&quot;Count&quot;</span>, <span class="at">title=</span><span class="st">&quot;Life Expectancies by Continent&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p>Shows how many countries exist in each continent and how many of these have high or low life expectancies. About 25 countries in the Americas, where the majority have high life expectancies.</p>
+<p>Can change the way the bar chart is displayed by changing <code>position</code> in <code>geom_bar()</code> to <code>position = dodge</code> or <code>position = fill</code>, the latter being more useful for proportions instead of counts:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="data-visualization-with-r-using-ggplot2.html#cb127-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data, <span class="fu">aes</span>(<span class="at">x=</span>continent, <span class="at">fill=</span>expectancy))<span class="sc">+</span></span>
+<span id="cb127-2"><a href="data-visualization-with-r-using-ggplot2.html#cb127-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-visualization-with-r-using-ggplot2.html#cb128-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data, <span class="fu">aes</span>(<span class="at">x=</span>continent, <span class="at">fill=</span>expectancy))<span class="sc">+</span></span>
+<span id="cb128-2"><a href="data-visualization-with-r-using-ggplot2.html#cb128-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">&quot;fill&quot;</span>)<span class="sc">+</span></span>
+<span id="cb128-3"><a href="data-visualization-with-r-using-ggplot2.html#cb128-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Continent&quot;</span>, <span class="at">y=</span><span class="st">&quot;Proportion&quot;</span>, </span>
+<span id="cb128-4"><a href="data-visualization-with-r-using-ggplot2.html#cb128-4" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Proportion of Life Expectancies by Continent&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+</div>
+</div>
+<div id="summarizing-two-quantitative-variables" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Summarizing Two Quantitative Variables<a href="data-visualization-with-r-using-ggplot2.html#summarizing-two-quantitative-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="scatterplots" class="section level4 hasAnchor" number="2.4.3.1">
+<h4><span class="header-section-number">2.4.3.1</span> Scatterplots<a href="data-visualization-with-r-using-ggplot2.html#scatterplots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Scatterplots are pretty standard for two quantitative variables</p>
+<p>Let’s see life expectancy vs GDP per capita</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="data-visualization-with-r-using-ggplot2.html#cb129-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>gdpPercap,<span class="at">y=</span>lifeExp))<span class="sc">+</span></span>
+<span id="cb129-2"><a href="data-visualization-with-r-using-ggplot2.html#cb129-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>A curved relationship between lifeExp and GDP per cap is clearly visible here. Countries with higher GDP tend to have longer life expectancy.</p>
+<p>Since some observations may overlap, we may want to add a transparency scale called <code>alpha=0.2</code> inside <code>geom_point()</code>:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="data-visualization-with-r-using-ggplot2.html#cb130-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data, <span class="fu">aes</span>(<span class="at">x=</span>gdpPercap,<span class="at">y=</span>lifeExp))<span class="sc">+</span></span>
+<span id="cb130-2"><a href="data-visualization-with-r-using-ggplot2.html#cb130-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb130-3"><a href="data-visualization-with-r-using-ggplot2.html#cb130-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;GDP&quot;</span>, <span class="at">y=</span><span class="st">&quot;Life Exp&quot;</span>, </span>
+<span id="cb130-4"><a href="data-visualization-with-r-using-ggplot2.html#cb130-4" tabindex="-1"></a>       <span class="at">title=</span><span class="st">&quot;Scatterplot of Life Exp against GDP&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p>Default value for <code>alpha</code> is 1, which means the points are not at all transparent. Closer to 0 means more transparent. Darker points indicate more observations with those values on both variables. Can see hot spots easily.</p>
+</div>
+</div>
+</div>
+<div id="multivariate-visualizations" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Multivariate Visualizations<a href="data-visualization-with-r-using-ggplot2.html#multivariate-visualizations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Multivariate Visualizations explore the relationship between <strong>multiple</strong> (more than two) variables.</p>
+<div id="bar-charts-1" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Bar Charts<a href="data-visualization-with-r-using-ggplot2.html#bar-charts-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s do a multivariate bar chart; suppose we want to compare life expectancy between continents, throughout the years.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="data-visualization-with-r-using-ggplot2.html#cb131-1" tabindex="-1"></a>Data.all<span class="ot">&lt;-</span>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb131-2"><a href="data-visualization-with-r-using-ggplot2.html#cb131-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expectancy=</span><span class="fu">ifelse</span>(lifeExp<span class="sc">&lt;</span><span class="dv">70</span>,<span class="st">&quot;Low&quot;</span>,<span class="st">&quot;High&quot;</span>))</span>
+<span id="cb131-3"><a href="data-visualization-with-r-using-ggplot2.html#cb131-3" tabindex="-1"></a></span>
+<span id="cb131-4"><a href="data-visualization-with-r-using-ggplot2.html#cb131-4" tabindex="-1"></a><span class="fu">ggplot</span>(Data.all,<span class="fu">aes</span>(<span class="at">x=</span>continent,<span class="at">fill=</span>expectancy))<span class="sc">+</span></span>
+<span id="cb131-5"><a href="data-visualization-with-r-using-ggplot2.html#cb131-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;fill&quot;</span>)<span class="sc">+</span></span>
+<span id="cb131-6"><a href="data-visualization-with-r-using-ggplot2.html#cb131-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p>Note that three categorical values are summarized in this bar chart. How should we improve this bar chart?</p>
+<ul>
+<li>We could rotate the labels on the x-axis:</li>
+</ul>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="data-visualization-with-r-using-ggplot2.html#cb132-1" tabindex="-1"></a>Data.all<span class="ot">&lt;-</span>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb132-2"><a href="data-visualization-with-r-using-ggplot2.html#cb132-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expectancy=</span><span class="fu">ifelse</span>(lifeExp<span class="sc">&lt;</span><span class="dv">70</span>,<span class="st">&quot;Low&quot;</span>,<span class="st">&quot;High&quot;</span>))</span>
+<span id="cb132-3"><a href="data-visualization-with-r-using-ggplot2.html#cb132-3" tabindex="-1"></a></span>
+<span id="cb132-4"><a href="data-visualization-with-r-using-ggplot2.html#cb132-4" tabindex="-1"></a><span class="fu">ggplot</span>(Data.all,<span class="fu">aes</span>(<span class="at">x=</span>continent,<span class="at">fill=</span>expectancy))<span class="sc">+</span></span>
+<span id="cb132-5"><a href="data-visualization-with-r-using-ggplot2.html#cb132-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;fill&quot;</span>)<span class="sc">+</span></span>
+<span id="cb132-6"><a href="data-visualization-with-r-using-ggplot2.html#cb132-6" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year)<span class="sc">+</span></span>
+<span id="cb132-7"><a href="data-visualization-with-r-using-ggplot2.html#cb132-7" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+</div>
+<div id="scatterplots-1" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Scatterplots<a href="data-visualization-with-r-using-ggplot2.html#scatterplots-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s do a multivariate scatterplot, like the one earlier - life expectancy vs GDP per capita - but make the size of the plots denote the population of the countries. This is supplied via <code>size</code> in <code>aes()</code>:</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="data-visualization-with-r-using-ggplot2.html#cb133-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>gdpPercap,<span class="at">y=</span>lifeExp,<span class="at">size=</span>pop))<span class="sc">+</span></span>
+<span id="cb133-2"><a href="data-visualization-with-r-using-ggplot2.html#cb133-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p>We can adjust the size of the plots by adding a layer <code>scale_size()</code>:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="data-visualization-with-r-using-ggplot2.html#cb134-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data, <span class="fu">aes</span>(<span class="at">x=</span>gdpPercap,<span class="at">y=</span>lifeExp,<span class="at">size=</span>pop))<span class="sc">+</span></span>
+<span id="cb134-2"><a href="data-visualization-with-r-using-ggplot2.html#cb134-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb134-3"><a href="data-visualization-with-r-using-ggplot2.html#cb134-3" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range=</span><span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">12</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>We can use different-colored plots to denote which continent each point belongs to:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="data-visualization-with-r-using-ggplot2.html#cb135-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>gdpPercap,<span class="at">y=</span>lifeExp,<span class="at">size=</span>pop,<span class="at">color=</span>continent))<span class="sc">+</span></span>
+<span id="cb135-2"><a href="data-visualization-with-r-using-ggplot2.html#cb135-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb135-3"><a href="data-visualization-with-r-using-ggplot2.html#cb135-3" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range=</span><span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">12</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p>This summarizes three quantitative variables and one categorical variables.</p>
+<p>Finally, we can adjust the plots by changing its shape and making it more translucent via <code>shape</code> and <code>alpha</code> in <code>aes()</code>:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="data-visualization-with-r-using-ggplot2.html#cb136-1" tabindex="-1"></a><span class="fu">ggplot</span>(Data,<span class="fu">aes</span>(<span class="at">x=</span>gdpPercap,<span class="at">y=</span>lifeExp,<span class="at">size =</span> pop,<span class="at">fill =</span> continent))<span class="sc">+</span></span>
+<span id="cb136-2"><a href="data-visualization-with-r-using-ggplot2.html#cb136-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">21</span>,<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb136-3"><a href="data-visualization-with-r-using-ggplot2.html#cb136-3" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range=</span><span class="fu">c</span>(<span class="fl">0.1</span>,<span class="dv">12</span>))<span class="sc">+</span></span>
+<span id="cb136-4"><a href="data-visualization-with-r-using-ggplot2.html#cb136-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;GDP&quot;</span>, <span class="at">y=</span><span class="st">&quot;Life Exp&quot;</span>, <span class="at">title=</span><span class="st">&quot;Scatterplot of Life Exp against GDP&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling-with-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="review-of-statistical-inference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-mod2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Review of Statistical Inference | Linear Methods for Data Science Notes</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Review of Statistical Inference | Linear Methods for Data Science Notes" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Review of Statistical Inference | Linear Methods for Data Science Notes" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="John Michael Epperson" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualization-with-r-using-ggplot2.html"/>
+<link rel="next" href="basics-of-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Linear Models for Data Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="syllabus-week.html"><a href="syllabus-week.html"><i class="fa fa-check"></i>Syllabus Week</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="syllabus-week.html"><a href="syllabus-week.html#agenda"><i class="fa fa-check"></i><b>0.1</b> Agenda</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html"><i class="fa fa-check"></i><b>1</b> Data Wrangling with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#cheat-sheet"><i class="fa fa-check"></i>Cheat Sheet</a></li>
+<li class="chapter" data-level="1.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#data-wrangling-using-base-r-functions"><i class="fa fa-check"></i><b>1.1</b> Data Wrangling Using Base R Functions</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#changing-column-names"><i class="fa fa-check"></i><b>1.1.1</b> Changing Column Names</a></li>
+<li class="chapter" data-level="1.1.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variables"><i class="fa fa-check"></i><b>1.1.2</b> <strong>Summarizing Variables</strong></a></li>
+<li class="chapter" data-level="1.1.3" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variable-by-groups"><i class="fa fa-check"></i><b>1.1.3</b> <strong>Summarizing variable by groups</strong></a></li>
+<li class="chapter" data-level="1.1.4" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#create-a-new-variable-based-on-existing-variable"><i class="fa fa-check"></i><b>1.1.4</b> <strong>Create a new variable based on existing variable</strong></a></li>
+<li class="chapter" data-level="1.1.5" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#combine-data-frames"><i class="fa fa-check"></i><b>1.1.5</b> <strong>Combine data frames</strong></a></li>
+<li class="chapter" data-level="1.1.6" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#sort-data-frame-by-column-values"><i class="fa fa-check"></i><b>1.1.6</b> <strong>Sort data frame by column values</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#data-wrangling-using-dplyr-functions"><i class="fa fa-check"></i><b>1.2</b> Data Wrangling Using dplyr Functions</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#select-specific-columns-of-a-data-fram"><i class="fa fa-check"></i><b>1.2.1</b> Select Specific Columns of a Data Fram</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#select-observations-by-conditions"><i class="fa fa-check"></i><b>1.2.2</b> Select observations by conditions</a></li>
+<li class="chapter" data-level="1.2.3" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#change-column-name"><i class="fa fa-check"></i><b>1.2.3</b> Change Column Name</a></li>
+<li class="chapter" data-level="1.2.4" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variables-1"><i class="fa fa-check"></i><b>1.2.4</b> Summarizing Variables</a></li>
+<li class="chapter" data-level="1.2.5" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#summarizing-variable-by-groups-1"><i class="fa fa-check"></i><b>1.2.5</b> Summarizing Variable by Groups</a></li>
+<li class="chapter" data-level="1.2.6" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#create-a-new-variable-based-on-existing-variables"><i class="fa fa-check"></i><b>1.2.6</b> Create a New Variable Based on Existing Variable(s)</a></li>
+<li class="chapter" data-level="1.2.7" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#combine-data-frames-1"><i class="fa fa-check"></i><b>1.2.7</b> Combine Data Frames</a></li>
+<li class="chapter" data-level="1.2.8" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#sort-data-frame-by-column-values-1"><i class="fa fa-check"></i><b>1.2.8</b> Sort data frame by column values</a></li>
+<li class="chapter" data-level="1.2.9" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#more-about-combining-datasets"><i class="fa fa-check"></i><b>1.2.9</b> More About Combining Datasets</a></li>
+<li class="chapter" data-level="1.2.10" data-path="data-wrangling-with-r.html"><a href="data-wrangling-with-r.html#a-note-about-missing-values"><i class="fa fa-check"></i><b>1.2.10</b> A Note About Missing Values</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html"><i class="fa fa-check"></i><b>2</b> Data Visualization with R Using <code>ggplot2</code></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#visualizations-with-a-single-categorical-variable"><i class="fa fa-check"></i><b>2.2</b> Visualizations with a Single Categorical Variable</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#frequency-tables"><i class="fa fa-check"></i><b>2.2.1</b> Frequency Tables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#bar-charts"><i class="fa fa-check"></i><b>2.2.2</b> Bar Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#visualizations-with-a-single-quantitative-variable"><i class="fa fa-check"></i><b>2.3</b> Visualizations with a Single Quantitative Variable</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#number-summary"><i class="fa fa-check"></i><b>2.3.1</b> 5 Number Summary</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#boxplots"><i class="fa fa-check"></i><b>2.3.2</b> Boxplots</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#histograms"><i class="fa fa-check"></i><b>2.3.3</b> Histograms</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#density-plots"><i class="fa fa-check"></i><b>2.3.4</b> Density Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#bivariate-visualizations"><i class="fa fa-check"></i><b>2.4</b> Bivariate Visualizations</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#compare-quantitative-variable-across-categories"><i class="fa fa-check"></i><b>2.4.1</b> Compare Quantitative Variable Across Categories</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#summarizing-two-categorical-variables"><i class="fa fa-check"></i><b>2.4.2</b> Summarizing Two Categorical Variables</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#summarizing-two-quantitative-variables"><i class="fa fa-check"></i><b>2.4.3</b> Summarizing Two Quantitative Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#multivariate-visualizations"><i class="fa fa-check"></i><b>2.5</b> Multivariate Visualizations</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#bar-charts-1"><i class="fa fa-check"></i><b>2.5.1</b> Bar Charts</a></li>
+<li class="chapter" data-level="2.5.2" data-path="data-visualization-with-r-using-ggplot2.html"><a href="data-visualization-with-r-using-ggplot2.html#scatterplots-1"><i class="fa fa-check"></i><b>2.5.2</b> Scatterplots</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html"><i class="fa fa-check"></i><b>A</b> Review of Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#cheat-sheet-1"><i class="fa fa-check"></i>Cheat Sheet</a></li>
+<li class="chapter" data-level="A.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#introduction-to-the-lesson"><i class="fa fa-check"></i><b>A.1</b> Introduction to the Lesson</a></li>
+<li class="chapter" data-level="A.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#sampling-distributions"><i class="fa fa-check"></i><b>A.2</b> Sampling Distributions</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#normal-distribution"><i class="fa fa-check"></i><b>A.2.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="A.2.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#population-samples"><i class="fa fa-check"></i><b>A.2.2</b> Population &amp; Samples</a></li>
+<li class="chapter" data-level="A.2.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#sampling-distribution-of-sample-means"><i class="fa fa-check"></i><b>A.2.3</b> Sampling Distribution of Sample Means</a></li>
+<li class="chapter" data-level="A.2.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#worked-example-textbook-spending"><i class="fa fa-check"></i><b>A.2.4</b> Worked Example: Textbook Spending</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#confidence-intervals"><i class="fa fa-check"></i><b>A.3</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#intro-to-confidence-intervals"><i class="fa fa-check"></i><b>A.3.1</b> Intro to Confidence Intervals</a></li>
+<li class="chapter" data-level="A.3.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#finding-multipliers"><i class="fa fa-check"></i><b>A.3.2</b> Finding Multipliers</a></li>
+<li class="chapter" data-level="A.3.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#t-distributions"><i class="fa fa-check"></i><b>A.3.3</b> t distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="A.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#hypothesis-testing"><i class="fa fa-check"></i><b>A.4</b> Hypothesis Testing</a>
+<ul>
+<li class="chapter" data-level="A.4.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#hypotheses"><i class="fa fa-check"></i><b>A.4.1</b> Hypotheses</a></li>
+<li class="chapter" data-level="A.4.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#evaluating-evidence-p-values"><i class="fa fa-check"></i><b>A.4.2</b> Evaluating Evidence: p-values</a></li>
+<li class="chapter" data-level="A.4.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#evaluating-evidence-critical-value-approach"><i class="fa fa-check"></i><b>A.4.3</b> Evaluating Evidence: Critical Value Approach</a></li>
+<li class="chapter" data-level="A.4.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#summary"><i class="fa fa-check"></i><b>A.4.4</b> Summary</a></li>
+<li class="chapter" data-level="A.4.5" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#worked-examples"><i class="fa fa-check"></i><b>A.4.5</b> Worked Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="A.5" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#practice-questions"><i class="fa fa-check"></i><b>A.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="A.5.1" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#sampling-distributions-1"><i class="fa fa-check"></i><b>A.5.1</b> Sampling Distributions</a></li>
+<li class="chapter" data-level="A.5.2" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#confidence-intervals-1"><i class="fa fa-check"></i><b>A.5.2</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="A.5.3" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#hypothesis-testing-1"><i class="fa fa-check"></i><b>A.5.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="A.5.4" data-path="review-of-statistical-inference.html"><a href="review-of-statistical-inference.html#general-questions"><i class="fa fa-check"></i><b>A.5.4</b> General Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="basics-of-r.html"><a href="basics-of-r.html"><i class="fa fa-check"></i><b>B</b> Basics of R</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="basics-of-r.html"><a href="basics-of-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>B.1</b> Getting Started with R</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-1"><i class="fa fa-check"></i><b>B.1.1</b> Question 1</a></li>
+<li class="chapter" data-level="B.1.2" data-path="basics-of-r.html"><a href="basics-of-r.html#question-2"><i class="fa fa-check"></i><b>B.1.2</b> Question 2</a></li>
+<li class="chapter" data-level="B.1.3" data-path="basics-of-r.html"><a href="basics-of-r.html#question-3"><i class="fa fa-check"></i><b>B.1.3</b> Question 3</a></li>
+<li class="chapter" data-level="B.1.4" data-path="basics-of-r.html"><a href="basics-of-r.html#question-4"><i class="fa fa-check"></i><b>B.1.4</b> Question 4</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="basics-of-r.html"><a href="basics-of-r.html#topic-b.3-data-types-structures-in-r"><i class="fa fa-check"></i><b>B.2</b> Topic B.3: Data Types &amp; Structures in R</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-5"><i class="fa fa-check"></i><b>B.2.1</b> Question 5</a></li>
+<li class="chapter" data-level="B.2.2" data-path="basics-of-r.html"><a href="basics-of-r.html#question-6"><i class="fa fa-check"></i><b>B.2.2</b> Question 6</a></li>
+<li class="chapter" data-level="B.2.3" data-path="basics-of-r.html"><a href="basics-of-r.html#question-7"><i class="fa fa-check"></i><b>B.2.3</b> Question 7</a></li>
+<li class="chapter" data-level="B.2.4" data-path="basics-of-r.html"><a href="basics-of-r.html#question-8"><i class="fa fa-check"></i><b>B.2.4</b> Question 8</a></li>
+<li class="chapter" data-level="B.2.5" data-path="basics-of-r.html"><a href="basics-of-r.html#question-9"><i class="fa fa-check"></i><b>B.2.5</b> Question 9</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="basics-of-r.html"><a href="basics-of-r.html#r-markdown"><i class="fa fa-check"></i><b>B.3</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="basics-of-r.html"><a href="basics-of-r.html#question-10"><i class="fa fa-check"></i><b>B.3.1</b> Question 10</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Methods for Data Science Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="review-of-statistical-inference" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">A</span> Review of Statistical Inference<a href="review-of-statistical-inference.html#review-of-statistical-inference" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="cheat-sheet-1" class="section level2 unnumbered hasAnchor">
+<h2>Cheat Sheet<a href="review-of-statistical-inference.html#cheat-sheet-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Central Limit Theorem</strong>: Tells us that with a large enough sample size, we can use the normal distribution to find probabilities associated with sample means</p>
+<p><strong>Confidence Intervals</strong></p>
+<ul>
+<li>Given by <span class="math inline">\(\bar{x}\pm t_{1-\alpha,k}\frac{s}{\sqrt{n}}\)</span></li>
+<li><span class="math inline">\(t_{1-\alpha,k}\)</span> is given by the R function qt(percentile,df)</li>
+</ul>
+</div>
+<div id="introduction-to-the-lesson" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">A.1</span> Introduction to the Lesson<a href="review-of-statistical-inference.html#introduction-to-the-lesson" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In many statistical studies or experiments, we want to get answers to questions regarding a population of interest. For example, what is the average annual income of American adults? In this example, the population of interest is American adults. Ideally, we would like to obtain the data from every single American adult. However, due to constraints such as time and money, we are unable to obtain the data from every person who makes up the population. We then typically collect data from a random sample of American adults. A sample is ideally a subset and is representative of the population. We then collect data from the sample, and then use the characteristics of the sample, called statistics, to make an inference about the characteristics of the population, called parameters.</p>
+<p>Consider the sample mean annual income among 500 American adults is $52,000. Does this mean the population mean annual income among all American adults is $52,000? Probably not. The sample mean, even if it comes from a representative and large sample, is probably close to the population mean, but unlikely to be exactly equal to the population mean. This uncertainty is simply due to the variability associated with the sample mean. Another random sample of 500 American adults may result in a sample mean with a different value, for example, $51,000. This is where statistical inference comes in. Statistical inference allows us to quantify the variability associated with statistics and allows us to make inferences about the parameter. The main inferential methods we will use are confidence intervals and hypothesis tests.</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="sampling-distributions" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">A.2</span> Sampling Distributions<a href="review-of-statistical-inference.html#sampling-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A probability density function (pdf) is a mathematical representation of the distribution of data and must</p>
+<ul>
+<li>be non-negative, and</li>
+<li>integrate to 1</li>
+</ul>
+<p>Common Probability Density Functions</p>
+<ul>
+<li>Normal Distribution
+<ul>
+<li>The one we’ll mostly look at</li>
+</ul></li>
+<li><em>t</em> distribution</li>
+<li><span class="math inline">\(\chi^2\)</span> distribution</li>
+<li><em>F</em> distribution</li>
+</ul>
+<div id="normal-distribution" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">A.2.1</span> Normal Distribution<a href="review-of-statistical-inference.html#normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A normal distribution is a symmetric, bell shaped-distribution. A normal distribution with a mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> is denoted by <span class="math inline">\(N(\mu,\sigma)\)</span>. Its pdf is</p>
+<span class="math display" id="eq:ndist">\[\begin{equation}
+  f(x)=\frac{1}{(\sigma\sqrt{2\pi}e^(\frac{1}{2}(\frac{x-\mu}{\sigma})^2)}
+  \tag{A.1}
+\end{equation}\]</span>
+<p>If <a href="review-of-statistical-inference.html#eq:ndist">(A.1)</a> is a good approximation for the distribution of data, we can estimate probabilities by integrating <a href="review-of-statistical-inference.html#eq:ndist">(A.1)</a> over the relevant range(s).</p>
+<ul>
+<li>A normal distribution with mean 0 and standard deviation 1 is called a <strong>standard normal distribution</strong>.</li>
+<li>It turns out that any normal distribution <em>X</em> with mean and standard deviation can be standardized by:</li>
+</ul>
+<span class="math display" id="eq:zscore">\[\begin{equation}
+  Z=\frac{X-\mu}{\sigma}
+  \tag{A.2}
+\end{equation}\]</span>
+<ul>
+<li>Then <em>Z</em> follows a standard normal distribution.
+<ul>
+<li>This <a href="review-of-statistical-inference.html#eq:zscore">(A.2)</a> is also called the <em>Z-score</em>.</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="population-samples" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">A.2.2</span> Population &amp; Samples<a href="review-of-statistical-inference.html#population-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="motivation" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">A.2.2.1</span> Motivation<a href="review-of-statistical-inference.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In many studies, we want to get answers to questions regarding a population of interest. For example, what is the average income of American adults? - Ideally, we would like to obtain the data from every single American adult - however, due to constraints (e.g. time and money), we are unable to obtain the data from every single American adult - We then typically collect data from a random sample of American adults - We then use characteristics of the sample to estimate the characteristics of the population</p>
+<p>The above is the basic way we conduct statistical analysis.</p>
+<ul>
+<li>Population: The group of all items in our study.</li>
+<li>Sample: The items from which we actually collect data.</li>
+</ul>
+</div>
+<div id="example" class="section level4 hasAnchor" number="3.2.2.2">
+<h4><span class="header-section-number">A.2.2.2</span> Example<a href="review-of-statistical-inference.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A manufacturing company produces 5 million parts. To estimate the proportion of parts that are defective, 300 parts are randomly selected and carefully inspected for defects. What is the: - population of interest? - All 5 million parts - sample? - the 300 randomly selected parts</p>
+</div>
+<div id="parameter-vs.-statistic" class="section level4 hasAnchor" number="3.2.2.3">
+<h4><span class="header-section-number">A.2.2.3</span> Parameter vs. Statistic<a href="review-of-statistical-inference.html#parameter-vs.-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>A <strong>parameter</strong> is a number describing a characteristic of the population. Parameters are fixed values, but in practice we do not know their numerical values</li>
+<li>A <strong>statistic</strong> is a number describing a characteristic of a sample. Statistics vary from sample to sample.</li>
+</ul>
+<p>We often use a statistic to estimate an unknown parameter.</p>
+<p>One could take many sample groups together to estimate the population characteristics.</p>
+<p>Each time we take a random sample from a population, we are likely to get a different set of individuals and calculate a different statistic. There is <strong>variability</strong> in the statistics.</p>
+<p><strong>Question:</strong> Can we quantify this variability without having to obtain many different random samples?</p>
+<ul>
+<li>Yes, we can take lots of random samples of the same size from a given population, the distribution of the sample statistics, <strong>the sampling distribution</strong>, will follow a predictable shape.</li>
+<li>Under some circumstances, the sampling distribution can be well-approximated by a specific distribution and its pdf.</li>
+<li>The variance of the statistics generally decreases as the sample size increases.
+<ul>
+<li><span class="math inline">\(variance = \sigma^2\)</span></li>
+</ul></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="sampling-distribution-of-sample-means" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">A.2.3</span> Sampling Distribution of Sample Means<a href="review-of-statistical-inference.html#sampling-distribution-of-sample-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When a continuous variable, <em>X</em>, in a population follows a <em>N</em>(,) distribution, the sampling distribution of the sample mean, <span class="math inline">\(\bar{x}\)</span>, for all possible samples of size <em>n</em> is <em>N</em>(,<span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span>).</p>
+<ul>
+<li>1st random sample of size 50, <span class="math inline">\(\bar{x}\)</span> = 63.7</li>
+<li>2nd is <span class="math inline">\(\bar{x}\)</span> = 64.3</li>
+<li>3rd is <span class="math inline">\(\bar{x}\)</span> = 65.8</li>
+</ul>
+<p>Mean is the same, but standard deviation is reduced by <span class="math inline">\(\sqrt(n)\)</span></p>
+<div id="central-limit-theorem" class="section level4 hasAnchor" number="3.2.3.1">
+<h4><span class="header-section-number">A.2.3.1</span> Central Limit Theorem<a href="review-of-statistical-inference.html#central-limit-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Consider a quantitative variable, <em>X</em>, in a population that has mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>, and is not necessarily normally distributed. If <em>n</em> is <strong>large enough</strong>, the sampling distribution of the sample mean, <span class="math inline">\(\bar{x}\)</span>, for all possible samples of size <em>n</em> is approximately <em>N</em>(<span class="math inline">\(\mu,\frac{\sigma}{\sqrt{n}}\)</span>).</p>
+<p>This is known as the <strong>Central Limit Theorem</strong>.</p>
+<p><strong>Implication</strong>: With a large enough sample size, we can use the normal distribution to find probabilities associated with sample means.</p>
+<ul>
+<li><strong>Large enough</strong> is relative, many say 25 or 30, but 24 is still better than 23, ya dig?</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="worked-example-textbook-spending" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">A.2.4</span> Worked Example: Textbook Spending<a href="review-of-statistical-inference.html#worked-example-textbook-spending" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question</strong>: Based on data from Spring 2017 semester, the mean amount spent on textbooks for the semester is $405.17 with standard deviation $210.59. The histogram for the variable amount spent on textbooks that semester is displayed below. How would you describe the shape of this histogram?</p>
+<p>The distribution is right skewed, can’t use a normal distribution to describe this.</p>
+<p><strong>Question</strong>: Suppose we take repeated samples of size 25. What do we expect the sampling distribution for the sample mean to be? How about if we take repeated samples of size 50?</p>
+<p><span class="math inline">\(n=25, \bar{x}_n=25 ~ N(\$405.17,\frac{210.59}{\sqrt{25}}) = \$42.118\)</span></p>
+<p><span class="math inline">\(n=50, \bar{x}_n=25 ~ N(\$405.17,\frac{210.59}{\sqrt{50}}) = \$29.782\)</span></p>
+<p><strong>Question</strong>: Suppose I have a random sample of 25 students. What is the probability that the sample mean is less than $415?</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="review-of-statistical-inference.html#cb137-1" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">25</span></span>
+<span id="cb137-2"><a href="review-of-statistical-inference.html#cb137-2" tabindex="-1"></a>sigma<span class="ot">&lt;-</span><span class="fl">210.59</span></span>
+<span id="cb137-3"><a href="review-of-statistical-inference.html#cb137-3" tabindex="-1"></a>mu<span class="ot">&lt;-</span><span class="fl">405.17</span></span>
+<span id="cb137-4"><a href="review-of-statistical-inference.html#cb137-4" tabindex="-1"></a>guess<span class="ot">&lt;-</span><span class="dv">415</span></span>
+<span id="cb137-5"><a href="review-of-statistical-inference.html#cb137-5" tabindex="-1"></a></span>
+<span id="cb137-6"><a href="review-of-statistical-inference.html#cb137-6" tabindex="-1"></a>sample_sig<span class="ot">&lt;-</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb137-7"><a href="review-of-statistical-inference.html#cb137-7" tabindex="-1"></a>zscore<span class="ot">&lt;-</span>(guess<span class="sc">-</span>mu)<span class="sc">/</span>sample_sig</span>
+<span id="cb137-8"><a href="review-of-statistical-inference.html#cb137-8" tabindex="-1"></a><span class="fu">pnorm</span>(zscore)</span></code></pre></div>
+<pre><code>## [1] 0.5922714</code></pre>
+<p>What if I have a random sample of 50 students instead?</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="review-of-statistical-inference.html#cb139-1" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">50</span></span>
+<span id="cb139-2"><a href="review-of-statistical-inference.html#cb139-2" tabindex="-1"></a></span>
+<span id="cb139-3"><a href="review-of-statistical-inference.html#cb139-3" tabindex="-1"></a>sample_sig<span class="ot">&lt;-</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb139-4"><a href="review-of-statistical-inference.html#cb139-4" tabindex="-1"></a>zscore<span class="ot">&lt;-</span>(guess<span class="sc">-</span>mu)<span class="sc">/</span>sample_sig</span>
+<span id="cb139-5"><a href="review-of-statistical-inference.html#cb139-5" tabindex="-1"></a><span class="fu">pnorm</span>(zscore)</span></code></pre></div>
+<pre><code>## [1] 0.6293249</code></pre>
+<p>So, the probability that the sample mean is less than $415 increases with more samples.</p>
+<div id="practice-exercise" class="section level4 hasAnchor" number="3.2.4.1">
+<h4><span class="header-section-number">A.2.4.1</span> Practice Exercise<a href="review-of-statistical-inference.html#practice-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Question</strong>: Suppose I have a random sample of 50 students. What is the probability that the sample mean is more than $400?</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="review-of-statistical-inference.html#cb141-1" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">50</span></span>
+<span id="cb141-2"><a href="review-of-statistical-inference.html#cb141-2" tabindex="-1"></a>guess<span class="ot">&lt;-</span><span class="dv">400</span></span>
+<span id="cb141-3"><a href="review-of-statistical-inference.html#cb141-3" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="review-of-statistical-inference.html#cb141-4" tabindex="-1"></a>sample_sig<span class="ot">&lt;-</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb141-5"><a href="review-of-statistical-inference.html#cb141-5" tabindex="-1"></a>zscore<span class="ot">&lt;-</span>(guess<span class="sc">-</span>mu)<span class="sc">/</span>sample_sig</span>
+<span id="cb141-6"><a href="review-of-statistical-inference.html#cb141-6" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(zscore)</span></code></pre></div>
+<pre><code>## [1] 0.5689082</code></pre>
+</div>
+<div id="where-do-we-go-from-here" class="section level4 hasAnchor" number="3.2.4.2">
+<h4><span class="header-section-number">A.2.4.2</span> Where do we go from here?<a href="review-of-statistical-inference.html#where-do-we-go-from-here" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>We know that the sample mean, <span class="math inline">\(\bar{x}\)</span>, describes our particular sample. However, if we select another random sample, the sample mean will probably be different.</li>
+<li>We do know that with a large enough sample size, the distribution of the sample means can be approximated by a normal distribution.</li>
+<li>We also know that with larger sample size, the sample means will be closer to the population mean, on average.</li>
+</ul>
+<p><strong>Reality</strong>: we will not know the value of the population mean, . So how do we use the sample mean, <span class="math inline">\(\bar{x}\)</span>, to estimate ?</p>
+<p>This brings us to Confidence Intervals…</p>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div id="confidence-intervals" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">A.3</span> Confidence Intervals<a href="review-of-statistical-inference.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="intro-to-confidence-intervals" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">A.3.1</span> Intro to Confidence Intervals<a href="review-of-statistical-inference.html#intro-to-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Goals of Confidence Intervals - Provide and estimate for the unknown parameter of interest - Provide a <strong>range of plausible values</strong> for the unknown paramter of interest - Provide a measure of <strong>uncertainty</strong></p>
+<div id="general-form-of-confidence-intervals" class="section level4 hasAnchor" number="3.3.1.1">
+<h4><span class="header-section-number">A.3.1.1</span> General Form of Confidence Intervals<a href="review-of-statistical-inference.html#general-form-of-confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Confidence intervals generally take the following form:</p>
+<span class="math display" id="eq:cigeneral">\[\begin{equation}
+\text{Estimate} \pm \text{margin of error}.
+\tag{A.3}
+\end{equation}\]</span>
+<p>The <strong>margin of error</strong> reflects how precise we believe our estimate is, and is calculated using the confidence level <span class="math inline">\(C=1-\alpha\)</span>.</p>
+<p><em>C</em> = 0.95 is considered the standard.</p>
+</div>
+<div id="confidence-levels-and-margin-of-error" class="section level4 hasAnchor" number="3.3.1.2">
+<h4><span class="header-section-number">A.3.1.2</span> Confidence Levels and Margin of Error<a href="review-of-statistical-inference.html#confidence-levels-and-margin-of-error" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Confidence Level</strong>: If we obtain many random samples of the same sample size <em>n</em>, and construct a confidence interval with <em>C</em>% confidence level based on each sample, <em>C</em>% of samples will have a confidence interval that contains the population mean .</li>
+<li><strong>Margin of Error</strong>: Suppose we obtain many random samples of the same size <em>n</em>, and construct a confidence interval with <em>C</em>% confidence level based on each sample. The difference between the sample mean and population mean in <em>C</em>% of samples will be no greater than the value of the margin of error.</li>
+</ul>
+<p>To illustrate these concepts, consider samples of number of hours of sleep for college students, with margin of error = 0.2:</p>
+<ul>
+<li>1<sup>st</sup> sample: <span class="math inline">\(\bar{x_1}\)</span> = 5.3, CI = (5.1,5.5)</li>
+<li>2<sup>nd</sup> sample: <span class="math inline">\(\bar{x_1}\)</span> = 5.5, CI = (5.3,5.7)</li>
+<li>3<sup>rd</sup> sample: <span class="math inline">\(\bar{x_1}\)</span> = 5.2, CI = (5.0,5.4)</li>
+<li>and many more…</li>
+</ul>
+<p>Out of all these CIs, 95% of these samples contain the true population mean.</p>
+<p>Difference between actual mean, say 5.47, and the sample mean will be no greater than margin of error in 95% of samples.</p>
+</div>
+<div id="confidence-interval-for-population-mean" class="section level4 hasAnchor" number="3.3.1.3">
+<h4><span class="header-section-number">A.3.1.3</span> Confidence Interval for Population Mean<a href="review-of-statistical-inference.html#confidence-interval-for-population-mean" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The confidence interval for population mean is given by:</p>
+<span class="math display" id="eq:cipop">\[\begin{equation}
+\bar{x}\pm z_{1-\alpha/2} \times \frac{\sigma}{\sqrt{n}}
+\tag{A.4}
+\end{equation}\]</span>
+<ul>
+<li><span class="math inline">\(z_{1-\alpha/2}\)</span> denotes the value of the standard normal distribution that corresponds to the <span class="math inline">\((1-\frac{\alpha}{2})\)</span><sup>th</sup> percentile. In a confidence interval, this is also called a <strong>multiplier</strong>.</li>
+<li>Generally speaking, the margin of error can be viewed as multiplier standard deviation of estimate.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="finding-multipliers" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">A.3.2</span> Finding Multipliers<a href="review-of-statistical-inference.html#finding-multipliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="finding-multiplier-in-ci" class="section level4 hasAnchor" number="3.3.2.1">
+<h4><span class="header-section-number">A.3.2.1</span> Finding Multiplier in CI<a href="review-of-statistical-inference.html#finding-multiplier-in-ci" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Recall from <a href="review-of-statistical-inference.html#eq:cipop">(A.4)</a>, <span class="math inline">\(z_{1-\alpha/2}\)</span> denotes the value of the standard normal distribution that corresponds to the <span class="math inline">\((1-\frac{\alpha}{2})\)</span><sup>th</sup> percentile.</p>
+<p>We want a CI at 1-confidence. is typically 0.05.</p>
+<p>Since we know that <span class="math inline">\(\bar{x}\approx N(\mu,\frac{\sigma}{\sqrt{n}})\)</span>, we can rewrite the equation for <em>Z-score</em>, <a href="review-of-statistical-inference.html#eq:zscore">(A.2)</a>, as:</p>
+<span class="math display" id="eq:zstannorm">\[\begin{equation}
+Z=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\approx N(0,1)
+\tag{A.5}
+\end{equation}\]</span>
+<p>Now we can apply these facts to find out why equation is the way it is.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:stnormpdf"></span>
+<img src="images/standardnormpdf.png" alt="Standard Normal PDF" width="190" />
+<p class="caption">
+Figure A.1: Standard Normal PDF
+</p>
+</div>
+<p>Looking at Figure <a href="review-of-statistical-inference.html#fig:stnormpdf">A.1</a>, we can see that the section in the middle corresponds to the <span class="math inline">\(1-\alpha\)</span> percentile, that’s our 95% CI.</p>
+<p>The sections on the left and right must be equal to <span class="math inline">\(\alpha/2\)</span> since for a standard normal pdf, the whole thing must add up to exactly 1.</p>
+<p>These two <span class="math inline">\(\alpha/2\)</span> sections on the left and right of Figure <a href="review-of-statistical-inference.html#fig:stnormpdf">A.1</a> refer to the <span class="math inline">\(Z_{\alpha/2}\)</span> and <span class="math inline">\(Z_{1-\alpha/2}\)</span> percentiles, respectively.</p>
+<p><strong>Note</strong>: Due to symmetry, the two /2 z-scores will be the same magnitude, i.e. <span class="math inline">\(-Z_{\alpha/2}=Z_{1-\alpha/2}\)</span>. We can use this fact to our advantage.</p>
+<p>One could say that the probability we are in the middle area of Figure <a href="review-of-statistical-inference.html#fig:stnormpdf">A.1</a> is:</p>
+<span class="math display">\[\begin{equation}
+P(Z_{\alpha/2}\le Z\le Z_{1-\alpha/2})=1-\alpha
+\end{equation}\]</span>
+<p>Equation <a href="review-of-statistical-inference.html#eq:zstannorm">(A.5)</a> implies that:</p>
+<span class="math display">\[\begin{equation}
+P(Z_{\alpha/2}\le \frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\le Z_{1-\alpha/2})=1-\alpha
+\end{equation}\]</span>
+<p>To isolate <span class="math inline">\(\mu\)</span> in the above equation, we can substitute <span class="math inline">\(Z_{\alpha/2}\)</span> with <span class="math inline">\(-Z_{1-\alpha/2}\)</span> from earlier, then multiply by <span class="math inline">\(-\sigma/\sqrt{n}\)</span>, and finally add <span class="math inline">\(\bar{x}\)</span> to get:</p>
+<span class="math display" id="eq:moederived">\[\begin{equation}
+P(\bar{x}+Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}\ge \mu \ge \bar{x}-Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}) = 1-\alpha
+\tag{A.6}
+\end{equation}\]</span>
+<p>So this means that the population mean must be within the interval given by <span class="math inline">\(\bar{x}\pm Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}\)</span>, which is the definition of our confidence interval.</p>
+<p>So how do we get the numerical value of the Z-score?</p>
+<p>Type qnorm(percentile) in R to find z_percentile.</p>
+<p>So, if <span class="math inline">\(1-\alpha = 0.95\)</span>, then <span class="math inline">\(1-\alpha/2 = 0.975\)</span>, then to R we go…</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="review-of-statistical-inference.html#cb143-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span></code></pre></div>
+<pre><code>## [1] 1.959964</code></pre>
+<p><span class="math inline">\(\approx 2\)</span></p>
+<p>Voila!</p>
+<p>pnorm is the inverse of qnorm:</p>
+<p>pnorm(z-score) = percentile qnorm(percentile) = z-score</p>
+</div>
+<div id="exercise" class="section level4 hasAnchor" number="3.3.2.2">
+<h4><span class="header-section-number">A.3.2.2</span> Exercise<a href="review-of-statistical-inference.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Find the z multiplier at 90% confidence</li>
+</ol>
+<p>for 90% confidence, <span class="math inline">\(1-\alpha=0.90\)</span>, so <span class="math inline">\(1-\alpha/2=0.95\)</span>, so plugging into R</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="review-of-statistical-inference.html#cb145-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>## [1] 1.644854</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Find the z multiplier at 98% confidence</li>
+</ol>
+<p>for 98% confidence <span class="math inline">\(1-\alpha=0.98\)</span>, so <span class="math inline">\(1-\alpha/2=0.99\)</span></p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="review-of-statistical-inference.html#cb147-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.99</span>)</span></code></pre></div>
+<pre><code>## [1] 2.326348</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Find the z multiplier at 99% confidence</li>
+</ol>
+<p>for 99% confidence <span class="math inline">\(1-\alpha=0.99\)</span>, so <span class="math inline">\(1-\alpha/2=0.995\)</span></p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="review-of-statistical-inference.html#cb149-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.995</span>)</span></code></pre></div>
+<pre><code>## [1] 2.575829</code></pre>
+<p><strong>Question</strong>: Do you notice a trend in the <em>z</em> multiplier as confidence level increases? Does this make sense?</p>
+<ul>
+<li>The multiplier increases as the confidence level increases. This makes sense because as the confidence level increases, the range that <span class="math inline">\(1-\alpha\)</span> encompasses must expand, meaning the <em>z</em> multiplier must also increase in kind. In other words, we’re more confident our sample mean contains the population mean because we increased our margin of error.</li>
+</ul>
+<p>Looking back at Equation <a href="review-of-statistical-inference.html#eq:moederived">(A.6)</a>, is anything strange?</p>
+<p><span class="math inline">\(\bar{x}\pm Z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}\)</span></p>
+<p><span class="math inline">\(\sigma\)</span> represents population variance, which is rarely known! So how can we apply this formula?</p>
+<p>Using sample variance is the right direction.</p>
+<hr />
+</div>
+</div>
+<div id="t-distributions" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">A.3.3</span> t distributions<a href="review-of-statistical-inference.html#t-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that the population variance is</p>
+<span class="math display">\[\begin{equation}
+\sigma^2 = \frac{\sum{(x_i-\mu)^2}}{N}
+\end{equation}\]</span>
+<p>and the sample variance is</p>
+<span class="math display">\[\begin{equation}
+s^2 = \frac{\sum{(x_i-\bar{x})^2}}{n-1}
+\end{equation}\]</span>
+<p>When <span class="math inline">\(\sigma\)</span> is <strong>unknown</strong>, we use the sample standard deviation, <em>s</em>, to estimate <span class="math inline">\(\sigma\)</span>.</p>
+<ul>
+<li>Previously we computed the standard deviation of sample mean, <span class="math inline">\(sd(\bar{x})\)</span>, as <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span>.</li>
+<li>When <span class="math inline">\(\sigma\)</span> is unknown, we compute the <strong>standard error</strong> of the sample mean: <span class="math inline">\(se(\bar{x})=\frac{s}{\sqrt{n}}\)</span>.</li>
+</ul>
+<p>When the standard deviation of a statistic is estimated from the data, the result is the <strong>standard error of the statistic</strong>.</p>
+<p>In reality, we’ll calculate the standard error much more frequently.</p>
+<p><strong>Scenario</strong>: A random sample of size <em>n</em> is drawn from <span class="math inline">\(N(\mu,\sigma)\)</span>.</p>
+<ul>
+<li>When <span class="math inline">\(\sigma\)</span> is known, <span class="math inline">\(\bar{x}\approx N(\mu,\frac{\sigma}{\sqrt{n}})\)</span>, and so <span class="math inline">\(Z=\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\approx N(0,1)\)</span></li>
+<li>When <span class="math inline">\(\sigma\)</span> is known and estimated using <em>s</em>, the sampling distribution of <span class="math inline">\(\frac{\bar{x}-\mu}{\sigma/\sqrt{n}}\)</span> is approximated by a <em>t</em> <strong>distribution with degrees of freedom</strong> <em>n</em>-1.</li>
+<li>If we do not have a normal proportion, the approximation to the <em>t</em> distribution works well if we have a large enough sample size.</li>
+</ul>
+<div id="degrees-of-freedom" class="section level4 hasAnchor" number="3.3.3.1">
+<h4><span class="header-section-number">A.3.3.1</span> Degrees of Freedom<a href="review-of-statistical-inference.html#degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><em>t</em> distributions are specified by their <strong>degrees of freedom</strong>.</li>
+<li>We specify <em>t</em> distributions using <em>t_k</em>, where <em>k</em> is the degrees of freedom.</li>
+</ul>
+<p>So CI for <span class="math inline">\(\mu\)</span>, df: <span class="math inline">\(k=n-1\)</span> since we lose one degree of freedom because the equality <span class="math inline">\(\frac{\sum{x_i}}{n}=\bar{x}\)</span> must hold.</p>
+</div>
+<div id="t-distribution-vs-standard-normal" class="section level4 hasAnchor" number="3.3.3.2">
+<h4><span class="header-section-number">A.3.3.2</span> <em>t</em> Distribution vs Standard Normal<a href="review-of-statistical-inference.html#t-distribution-vs-standard-normal" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Both distributions are centered at 0, symmetric, and bell-shaped. Their differences are: - <em>t_k</em> has associated degrees of freedom. - <em>t_k</em> has slightly <strong>larger spread</strong>. As the sample size (degrees of freedom) increases, <em>t_k</em> approaches the standard normal.</p>
+<p><em>t</em> distribution has more area at extremes or tails of pdf.</p>
+</div>
+<div id="confidence-interval-for-population-mean-1" class="section level4 hasAnchor" number="3.3.3.3">
+<h4><span class="header-section-number">A.3.3.3</span> Confidence Interval for Population Mean<a href="review-of-statistical-inference.html#confidence-interval-for-population-mean-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We use <em>s</em> to estimate <span class="math inline">\(\sigma\)</span> when it is unknown. THe level <em>C</em> CI for a population mean becomes:</p>
+<span class="math display" id="eq:ciestimate">\[\begin{equation}
+\bar{x}\pm t_{1-\alpha/2,k}\frac{s}{\sqrt{n}}
+\tag{A.7}
+\end{equation}\]</span>
+<p>Where <span class="math inline">\(t_{1-\alpha/2,k}\)</span> is the value from the <em>t_k</em> curve with area <em>C</em> between <span class="math inline">\(t_{\alpha/2,k}\)</span> and <span class="math inline">\(t_{1-\alpha/2,k}\)</span>. The degrees of freedom is <span class="math inline">\(k=n-1\)</span>.</p>
+</div>
+<div id="finding-multiplier" class="section level4 hasAnchor" number="3.3.3.4">
+<h4><span class="header-section-number">A.3.3.4</span> Finding Multiplier<a href="review-of-statistical-inference.html#finding-multiplier" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In R, type qt(percentile, df) to find <em>t_{percentile,df}</em>. 1. Find the <em>t</em> multiplier at 90% confidence with 10df</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="review-of-statistical-inference.html#cb151-1" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">95</span>,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 1.812461</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Find the <em>t</em> multiplier at 92% confidence with 35df</li>
+</ol>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="review-of-statistical-inference.html#cb153-1" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">96</span>,<span class="dv">35</span>)</span></code></pre></div>
+<pre><code>## [1] 1.803024</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Find the <em>t</em> multiplier at 98% confidence with 50df</li>
+</ol>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="review-of-statistical-inference.html#cb155-1" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">99</span>,<span class="dv">50</span>)</span></code></pre></div>
+<pre><code>## [1] 2.403272</code></pre>
+</div>
+<div id="worked-example-banks-loan-to-deposit-ratio-ltdr" class="section level4 hasAnchor" number="3.3.3.5">
+<h4><span class="header-section-number">A.3.3.5</span> Worked Example: Banks’ Loan-to-Deposit Ratio (LTDR)<a href="review-of-statistical-inference.html#worked-example-banks-loan-to-deposit-ratio-ltdr" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Question</strong>: The sample mean LTDR for 110 randomly selected American banks is 76.7 and the sample standard deviation is 12.3. Compute a 95% CI for the population mean LTDR. Based on this CI, is it reasonable to say that the average LTDR is less than 80 for the population?</p>
+<p>So, stating our variables:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="review-of-statistical-inference.html#cb157-1" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">110</span></span>
+<span id="cb157-2"><a href="review-of-statistical-inference.html#cb157-2" tabindex="-1"></a>xbar<span class="ot">&lt;-</span><span class="fl">76.7</span></span>
+<span id="cb157-3"><a href="review-of-statistical-inference.html#cb157-3" tabindex="-1"></a>s<span class="ot">&lt;-</span><span class="fl">12.3</span></span></code></pre></div>
+<p>Using Equation <a href="review-of-statistical-inference.html#eq:ciestimate">(A.7)</a>:</p>
+<span class="math display">\[\begin{equation}
+\bar{x}\pm t_{1-\alpha/2,k}\frac{s}{\sqrt{n}}
+\end{equation}\]</span>
+<p>and plugging in our variables we get:</p>
+<span class="math display">\[\begin{equation}
+76.7\pm t_{1-\alpha/2,k}\frac{12.3}{\sqrt{110}}
+\end{equation}\]</span>
+<p>and <span class="math inline">\(t_{1-\alpha/2,k}\)</span> is found using qt(percentile,df), where percentile is <span class="math inline">\(0.95+\frac{1-0.95}{2} = 0.975\)</span> and <span class="math inline">\(df=n-1=110-1=109\)</span>:</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="review-of-statistical-inference.html#cb158-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">109</span>)</span></code></pre></div>
+<pre><code>## [1] 1.981967</code></pre>
+<p>So plugging this back into Equation <a href="review-of-statistical-inference.html#eq:ciestimate">(A.7)</a> we get margin of error equal to:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="review-of-statistical-inference.html#cb160-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span></code></pre></div>
+<pre><code>## [1] 2.32437</code></pre>
+<p>So our 95% CI is given by:</p>
+<p><span class="math inline">\(76.7\pm 2.3\)</span> or <span class="math inline">\((74.4,79.0)\)</span></p>
+<p>So, it is reasonable to say that the average LTDR is less than 80 for the population. In other words we’re 95% sure that the average LTDR for the population is less than 80.</p>
+<p>Or say:</p>
+<p>Yes, since the entire CI is less than 80.</p>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div id="hypothesis-testing" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">A.4</span> Hypothesis Testing<a href="review-of-statistical-inference.html#hypothesis-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hypotheses" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">A.4.1</span> Hypotheses<a href="review-of-statistical-inference.html#hypotheses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="motivation-1" class="section level4 hasAnchor" number="3.4.1.1">
+<h4><span class="header-section-number">A.4.1.1</span> Motivation<a href="review-of-statistical-inference.html#motivation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The general approach to hypothesis testing is the following: we perform probability calculations to distinguish patterns seen in data between those that are due to <strong>chance</strong> and those that <strong>reflect a real feature</strong> of the phenomenon under study.</p>
+</div>
+<div id="example-1" class="section level4 hasAnchor" number="3.4.1.2">
+<h4><span class="header-section-number">A.4.1.2</span> Example<a href="review-of-statistical-inference.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>You are in charge of quality control in your food company. You randomly sample 40 apcks of cherry tomatoes, each labeled 1/2 lb. (227 g), and find their average weight is 226.5 g. Obviously, we cannot expect boxes filled with whole tomatoes to all weight exactly half a pound. Thus, - is the weight in our sample due to chance? - is the weight in our sample evidence the machine that sorts the tomatoes needs revision?</p>
+</div>
+<div id="stating-hypotheses" class="section level4 hasAnchor" number="3.4.1.3">
+<h4><span class="header-section-number">A.4.1.3</span> Stating Hypotheses<a href="review-of-statistical-inference.html#stating-hypotheses" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Hypothesis testing uses sample data to decide on the validity of a hypothesis. A <strong>hypothesis</strong> is an assumption or a theory about the characteristics of one or more variables in one or more populations. - What you want to know: does the calibrating machine that sorts cherry tomatoes into packs need revision? - The same question reframed statistically: Is the population mean <span class="math inline">\(\mu\)</span> for the distribution of weights of cherry tomato packages different from 227 g (i.e., half a pound)?</p>
+<p>The statement being tested in a test of significance is called the <strong>null hypothesis</strong>, <span class="math inline">\(H_0\)</span>. The test of significance is designed to assess the strength of the evidence against the null hypothesis. The null hypothesis is usually a statement of “no effect” or “no difference.”</p>
+<p>The <strong>alternative hypothesis</strong>, <span class="math inline">\(H_a\)</span> is the statement we suspect is true instead of the null hypothesis.</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu=227g\)</span></li>
+<li><span class="math inline">\(H_a: \mu\ne227g\)</span></li>
+</ul>
+</div>
+<div id="one-sided-and-two-sided-tests" class="section level4 hasAnchor" number="3.4.1.4">
+<h4><span class="header-section-number">A.4.1.4</span> One-sided and Two-sided Tests<a href="review-of-statistical-inference.html#one-sided-and-two-sided-tests" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><p>A two-sided test of the population mean has the following hypotheses</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu=\text{specific number } (\mu_0)\)</span></li>
+<li><span class="math inline">\(H_a: \mu \ne \text{specific number } (\mu_0)\)</span></li>
+</ul></li>
+<li><p>A one-sided test of the population mean has the following hypotheses</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu=\text{specific number } (\mu_0)\)</span></li>
+<li><span class="math inline">\(H_a: \mu &lt; \text{specific number } (\mu_0)\)</span></li>
+</ul>
+<p>OR</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu = \text{specific number } (\mu_0)\)</span></li>
+<li><span class="math inline">\(H_a: \mu &gt; \text{specific number } (\mu_0)\)</span></li>
+</ul></li>
+</ul>
+<p>What determines the choice of a one-sided versus a two-sided test is what we know about the problem <strong>before</strong> we perform a test of statistical significance.</p>
+<p><strong>Question</strong>: You are in charge of quality control in your food company. You randomly sample 40 apcks of cherry tomatoes, each labeled 1/2 lb. (227 g), and find their average weight is 226.5 g. A consumer advocacy group is trying to claim that consumers are being cheated by the food company. What should the null and alternative hypotheses be in this scenario?</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu=227g\)</span></li>
+<li><span class="math inline">\(H_a: \mu&lt;227g\)</span></li>
+</ul>
+<p>Consumers would only be cheated if the weight of tomatoes they got was <strong>less than</strong> the amount on the package.</p>
+<hr />
+</div>
+</div>
+<div id="evaluating-evidence-p-values" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">A.4.2</span> Evaluating Evidence: p-values<a href="review-of-statistical-inference.html#evaluating-evidence-p-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we evaluate the evidence our data provides <strong>against</strong> the null hypothesis. This evaluation is done by - assuming the null hypothesis is true - computing a test statistic to measure how dissimilar our sample is with the null hypothesis - comparing our test statistic with a benchmark to decide if we have enough evidence against the null hypothesis We then end by making a relevant conclusion</p>
+<div id="test-statistics" class="section level4 hasAnchor" number="3.4.2.1">
+<h4><span class="header-section-number">A.4.2.1</span> Test Statistics<a href="review-of-statistical-inference.html#test-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>The test statistic measures how dissimilar our sampled data is with the null hypothesis.</li>
+<li>In a hypothesis test for a mean the test statistic is <span class="math display">\[\begin{equation}
+t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+(\#eq:hyptstmean)
+\end{equation}\]</span> where <span class="math inline">\(\mu_0\)</span> represents the value in the null hypothesis <span class="math inline">\(H_0\)</span></li>
+<li>The larger (in magnitude) the test statistic, the more evidence we have against the null hypothesis.</li>
+</ul>
+</div>
+<div id="statistic-level" class="section level4 hasAnchor" number="3.4.2.2">
+<h4><span class="header-section-number">A.4.2.2</span> Statistic Level<a href="review-of-statistical-inference.html#statistic-level" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Before deciding if our test statistic provides enough evidence against the null hypothesis, we first decide on an appropriate <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span>. THe scientific standard is 0.05, although this value should change based on the context of your problem</p>
+<ul>
+<li>The significance level, <span class="math inline">\(\alpha\)</span>, is the probability of wrongly rejecting the null hypothesis (when the null hypothesis is true, a false positive).</li>
+<li>The benchmark with which we decide if we have enough evidence against the null hypothesis is based on <span class="math inline">\(\alpha\)</span>. There are actually two, equivalent, approaches.</li>
+</ul>
+</div>
+<div id="the-p-value-approach" class="section level4 hasAnchor" number="3.4.2.3">
+<h4><span class="header-section-number">A.4.2.3</span> The p-value Approach<a href="review-of-statistical-inference.html#the-p-value-approach" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>p-value</strong>: The probability of obtaining your particular random sample result (or more extreme) if the null hypothesis, <span class="math inline">\(H_0\)</span>, were true.</p>
+<ul>
+<li>A high p-value implies that a random sample result is consistent with <span class="math inline">\(H_0\)</span>.</li>
+<li>A small p-value implies that a random variation alone is unlikely to account for the difference between <span class="math inline">\(H_0\)</span> and the observation from our random sample. Our sample is inconsistent with <span class="math inline">\(H_0\)</span>.</li>
+<li>The smaller the p-value, the stronger the evidence against <span class="math inline">\(H_0\)</span>.</li>
+<li>With a small p-value we reject <span class="math inline">\(H_0\)</span>, and say that our data support <span class="math inline">\(H_a\)</span>. We reject <span class="math inline">\(H_0\)</span> when the p-value is <strong>less than</strong> the significance level, <span class="math inline">\(\alpha\)</span>.</li>
+</ul>
+</div>
+<div id="distribution-of-a-statistic" class="section level4 hasAnchor" number="3.4.2.4">
+<h4><span class="header-section-number">A.4.2.4</span> Distribution of a Statistic<a href="review-of-statistical-inference.html#distribution-of-a-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Since the test statistic for testing a mean is Equation <a href="#eq:hyptstmean">(<strong>??</strong>)</a>, <span class="math display">\[\begin{equation}
+t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}} \tag{\@ref{eq:hyptstmean} revisited}
+\end{equation}\]</span> our test statistic is compared with a <em>t_k</em> distribution.</p>
+</div>
+<div id="finding-the-p-value" class="section level4 hasAnchor" number="3.4.2.5">
+<h4><span class="header-section-number">A.4.2.5</span> Finding the p-value<a href="review-of-statistical-inference.html#finding-the-p-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The p-value is represented by the area under the sampling distribution for values at least as extreme, in the direction of <span class="math inline">\(H_a\)</span>, as that of our random sample.</p>
+<ul>
+<li>In this case, the <em>sampling distribution</em> is a <em>t</em>-distribution.</li>
+</ul>
+<p>Assuming the <span class="math inline">\(H_0\)</span> is true, <span class="math inline">\(t\approx t_k\)</span> where <span class="math inline">\(k=n-1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(H_a: \mu \ne \mu_0\)</span> (two sided test)</li>
+</ul>
+<p>To find area under distribution for all points greater than the magnitude of <em>t</em>, or <span class="math inline">\(|t|\)</span> in R, use *pt(<span class="math inline">\(-|t|,df\)</span>) then multiply by two for both tails of the distribution.</p>
+<ul>
+<li>One Sided test
+<ul>
+<li><span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, use pt<span class="math inline">\((t,df)\)</span>, since you just want all area to the left of <em>t</em>.</li>
+<li>You are looking for the probability that the population mean is less than the sample mean.</li>
+<li><span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>, use <span class="math inline">\(1-\)</span>pt<span class="math inline">\((t,df)\)</span>, since you want all area to the right of <em>t</em>.</li>
+<li>You are looking for the probability that the population mean is greater than the sample mean.</li>
+</ul></li>
+</ul>
+</div>
+<div id="decision" class="section level4 hasAnchor" number="3.4.2.6">
+<h4><span class="header-section-number">A.4.2.6</span> Decision<a href="review-of-statistical-inference.html#decision" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We compare the p-value with the <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span>.</p>
+<ul>
+<li>If the p-value is less than or equal to <span class="math inline">\(\alpha\)</span>, we reject <span class="math inline">\(H_0\)</span>. Our data support <span class="math inline">\(H_a\)</span>.</li>
+<li>If the p-value is greater than <span class="math inline">\(\alpha\)</span>, we fail to reject <span class="math inline">\(H_0\)</span>. Our data do not support <span class="math inline">\(H_a\)</span>.
+<ul>
+<li>Does not mean we support the null hypothesis, just weren’t able to reject it.</li>
+</ul></li>
+</ul>
+<p>Rejecting <span class="math inline">\(H_0\)</span> is said to be a “statistically significant result”. Failing to reject <span class="math inline">\(H_0\)</span> is said to be a “statistically insignificant result”.</p>
+<hr />
+</div>
+</div>
+<div id="evaluating-evidence-critical-value-approach" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">A.4.3</span> Evaluating Evidence: Critical Value Approach<a href="review-of-statistical-inference.html#evaluating-evidence-critical-value-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Critical value</strong>: the value of the test statistic that results in a p-value equal to the significance level</p>
+<ul>
+<li>The larger the test statistic, the more evidence we have against <span class="math inline">\(H_0\)</span>.</li>
+<li>If the magnitude of the test statistic is larger than the critical value, we reject <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+<div id="finding-the-critical-value" class="section level4 hasAnchor" number="3.4.3.1">
+<h4><span class="header-section-number">A.4.3.1</span> Finding the Critical Value<a href="review-of-statistical-inference.html#finding-the-critical-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Critical value, <em>t</em>*: the value of t-statistic whose p-value is equal to significance level, <span class="math inline">\(\alpha\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:2sidecv"></span>
+<img src="images/critval2sided.png" alt="t* for 2-Sided Critical Value" width="367" />
+<p class="caption">
+Figure A.2: t* for 2-Sided Critical Value
+</p>
+</div>
+<p>As seen in Figure <a href="review-of-statistical-inference.html#fig:2sidecv">A.2</a>, the value of <em>t</em>* for a two-sided test will be given by typing into R the following:</p>
+<p>qt(1-<span class="math inline">\(\frac{\alpha}{2}\)</span>,df)</p>
+<p>This is because <em>t</em>* will be the area in the region <span class="math inline">\(1-\alpha + \alpha/2 = 1-\alpha/2\)</span></p>
+<p><strong>Nota bene</strong>: Remember that qt and pt are the approximations of qnorm and pnorm, respectively, which take into account the degrees of freedom.</p>
+<p>For a one sided test, we have two possible scenarios</p>
+<ul>
+<li><p><span class="math inline">\(H_a: \mu &gt; \mu_0\)</span> in this case, the area to the right of <em>t</em>* will be represented by <span class="math inline">\(\alpha\)</span>, so we will type qt(1-<span class="math inline">\(\alpha\)</span>) to find <em>t</em>*.</p></li>
+<li><p><span class="math inline">\(H_a: \mu &lt; \mu_0\)</span> in this case, the area to the left of - <em>t</em>* will be represented by <span class="math inline">\(\alpha\)</span>, so we will type qt(<span class="math inline">\(\alpha\)</span>) to find - <em>t</em>*, or -qt(<span class="math inline">\(\alpha\)</span>) to find <em>t</em>*</p></li>
+</ul>
+<p><strong>Note</strong>: By symmetry notice that -qt(<span class="math inline">\(\alpha\)</span>) = qt(1-<span class="math inline">\(\alpha\)</span>,df), thus typically for a one-sided test we will typically use qt(1-<span class="math inline">\(\alpha\)</span>,df).</p>
+<p>In review:</p>
+<ul>
+<li>Two-sided test
+<ul>
+<li>qt(1-<span class="math inline">\(\frac{\alpha}{2}\)</span>,df)</li>
+</ul></li>
+<li>One-sided test
+<ul>
+<li>qt(1-<span class="math inline">\(\alpha\)</span>,df)</li>
+</ul></li>
+</ul>
+</div>
+<div id="exercises" class="section level4 hasAnchor" number="3.4.3.2">
+<h4><span class="header-section-number">A.4.3.2</span> Exercises<a href="review-of-statistical-inference.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Find critical value of two-sided <em>t</em>-test at <span class="math inline">\(\alpha=0.1\)</span> with 10 df.</li>
+</ol>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="review-of-statistical-inference.html#cb162-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.1</span><span class="sc">/</span><span class="dv">2</span>,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 1.812461</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Find critical value of one-sided <em>t</em>-test at <span class="math inline">\(\alpha=0.02\)</span> with 55 df.</li>
+</ol>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="review-of-statistical-inference.html#cb164-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.02</span>,<span class="dv">55</span>)</span></code></pre></div>
+<pre><code>## [1] 2.103607</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Find critical value of one-sided <em>t</em>-test at <span class="math inline">\(\alpha=0.01\)</span> with 70 df.</li>
+</ol>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="review-of-statistical-inference.html#cb166-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.01</span>,<span class="dv">70</span>)</span></code></pre></div>
+<pre><code>## [1] 2.380807</code></pre>
+<hr />
+</div>
+</div>
+<div id="summary" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">A.4.4</span> Summary<a href="review-of-statistical-inference.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Based on your question of interest, write <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span>.</li>
+<li>Evaluate how dissimilar your sample is from <span class="math inline">\(H_0\)</span> by calculating the test statistic.</li>
+<li>Compare you sample with a benchmark. Two equivalent approaches:
+<ol style="list-style-type: decimal">
+<li>Compare p-value with significance level <span class="math inline">\(\alpha\)</span>.</li>
+<li>Compare your test statistic with the critical value.</li>
+</ol></li>
+<li>Write relevant conclusion for your analysis</li>
+</ul>
+<hr />
+</div>
+<div id="worked-examples" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">A.4.5</span> Worked Examples<a href="review-of-statistical-inference.html#worked-examples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question 1</strong>: You are in charge of quality control in your food company. You randomly sample 40 packs of cherry tomatoes, each labeled 1/2 lb. (227 g), and find their average weight is 226.5 g. Is the weight in our sample evidence that the machine that sorts the tomatoes needs revision? Suppose the sample standard deviation is 1.5 g.</p>
+<p>I think I’d want a two-sided test, so first we find the test statistic using Equation <a href="#eq:hyptstmean">(<strong>??</strong>)</a>,</p>
+<p><span class="math inline">\(t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}\)</span>,</p>
+<p>plug that into pt(t,df), then compare to significance value of 0.05.</p>
+<p>So,</p>
+<p><span class="math inline">\(t=\frac{226.5-227}{1.5/\sqrt{40}}=-2.108\)</span></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="review-of-statistical-inference.html#cb168-1" tabindex="-1"></a><span class="fu">pt</span>((<span class="fl">226.5</span><span class="dv">-227</span>)<span class="sc">/</span>(<span class="fl">1.5</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">40</span>)),<span class="dv">39</span>)</span></code></pre></div>
+<pre><code>## [1] 0.020746</code></pre>
+<p>Multiplying this by 2 (to account for both sides of the distribution) to get our p-value gives us <span class="math inline">\(\text{p-value}\approx 0.04\)</span>.</p>
+<p>Since this is less than the significance level of 0.05, we reject the null hypothesis. This is enough evidence that the machine needs revision. Stated statistically, the probability, or p-value, that we would get a sample mean of 226.5 g or less if the true population mean, or <span class="math inline">\(\mu\)</span>, was actually equal to 227 g is so low (<span class="math inline">\(\approx 4\%\)</span>), that we cannot say this is a chance happening and something is amiss with the sorting machine.</p>
+<p><strong>Using the Critical Value Method</strong></p>
+<ul>
+<li>This time we find <em>t</em>* using the significance level <span class="math inline">\(\alpha=0.05\)</span> and compare to the absolute value of our <em>t-stat</em> which we previously found to be -2.108.</li>
+<li>use qt(1-alpha/2,df)</li>
+</ul>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="review-of-statistical-inference.html#cb170-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>,<span class="dv">39</span>)</span></code></pre></div>
+<pre><code>## [1] 2.022691</code></pre>
+<p>Since <span class="math inline">\(t^*&lt;t\)</span>, we reject the null hypothesis. Our data support the claim that the population average weight of cherry tomato packs is different from 227 g.</p>
+<p><strong>Question 2</strong>: A consumer advocacy group is trying to claim that consumers are being cheated by the food company. Carry out an appropriate hypothesis test.</p>
+<ul>
+<li><span class="math inline">\(H_a: \mu &gt; \mu_0\)</span></li>
+</ul>
+<p>Only difference here from Question 1 is that now <span class="math inline">\(t=0.95\)</span> since for a one-sided test <span class="math inline">\(t=1-\alpha\)</span>. So,</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="review-of-statistical-inference.html#cb172-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>,<span class="dv">39</span>)</span></code></pre></div>
+<pre><code>## [1] 1.684875</code></pre>
+<hr />
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="practice-questions" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">A.5</span> Practice Questions<a href="review-of-statistical-inference.html#practice-questions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sampling-distributions-1" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">A.5.1</span> Sampling Distributions<a href="review-of-statistical-inference.html#sampling-distributions-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Statistical theory tells us the distribution of the sample means with a fixed sample size, under certain circumstances. The sampling distribution is an approximation of the density histogram of the sample means. WE know the sample means vary from sample to sample. The sampling distribution tells us the expected value (mean) of the distribution, and the standard deviation of the sample means.</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Suppose the variable <em>X</em> follows a normal distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. Consider taking random samples, each with size <em>n</em>, repeatedly. What is the sampling distribution of the mean?</li>
+</ol>
+<p>The sampling distribution is <span class="math inline">\(N(\mu,\frac{\sigma}{\sqrt{n}})\)</span> since <span class="math inline">\(X\approx N(\mu,\sigma)\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Suppose the variable <em>X</em> has an unknown distribution but known mean <span class="math inline">\(\mu\)</span> and known standard deviation <span class="math inline">\(\sigma\)</span>. What is the name of the statistical theory that informs us that the sampling distribution of the sample mean, <span class="math inline">\(\bar{x}\)</span>, can be well-approximated by a normal distribution?</li>
+</ol>
+<p>The Central Limit Theorem</p>
+<ol start="2" style="list-style-type: decimal">
+<li>An automatic machine in a manufacturing process produces sub-components. The lengths of the sub-components follow a normal distribution of the sample mean of 116 cm and a standard deviation of 4.8 cm.</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Find the probability that one selected sub-component is longer than 118 cm.</li>
+</ol>
+<p>Z-score here is <span class="math inline">\(\frac{118-116}{4.8}\)</span></p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="review-of-statistical-inference.html#cb174-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(<span class="dv">2</span><span class="sc">/</span><span class="fl">4.8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.3384611</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Find the probability that if 3 sub-components are randomly selected, their mean length exceeds 118 cm.</li>
+</ol>
+<p>z-score here is <span class="math inline">\(\frac{118-116}{4.8/\sqrt{3}}\)</span></p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="review-of-statistical-inference.html#cb176-1" tabindex="-1"></a>zscore<span class="ot">&lt;-</span>(<span class="dv">118-116</span>)<span class="sc">/</span>(<span class="fl">4.8</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">3</span>))</span>
+<span id="cb176-2"><a href="review-of-statistical-inference.html#cb176-2" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(zscore)</span></code></pre></div>
+<pre><code>## [1] 0.2352432</code></pre>
+</div>
+<div id="confidence-intervals-1" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">A.5.2</span> Confidence Intervals<a href="review-of-statistical-inference.html#confidence-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol start="3" style="list-style-type: decimal">
+<li>What are the goals of constructing a confidence interval?</li>
+</ol>
+<ul>
+<li>A confidence interval shows in what range we expect to find a sample mean (range of plausible values)</li>
+<li>provide estimate for unknown parameter of interest</li>
+<li>provide measure of uncertainty</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>How does increasing the confidence level affect the margin of error and the width of the confidence interval? Hint: sketching the standard normal distribution will be helpful</li>
+</ol>
+<ul>
+<li>When the confidence level increases, the margin of error and the width of the confidence interval increase as well. This is because we can be more certain the unknown parameter is contained within the confidence interval when it is wider, but this also increases the range within which it can be found, leading to a larger margin of error.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>How does increasing the sample size affect the margin of error and width of the confidence interval? Briefly explain.</li>
+</ol>
+<ul>
+<li>Increasing the sample size decreases the margin of error and width of confidence interval. This is because the margin of error and width of confidence interval are proportional to <span class="math inline">\(\frac{1}{\sqrt{n}}\)</span> where <em>n</em> is the sample size. So increasing <em>n</em> decreases the MOE and CI width.</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>Use R to find the value of the t-multiplier when constructing a confidence interval for the mean in the following situations:</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>94% CI with <span class="math inline">\(n=49\)</span>.</li>
+</ol>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="review-of-statistical-inference.html#cb178-1" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">97</span>,<span class="dv">48</span>)</span></code></pre></div>
+<pre><code>## [1] 1.926298</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>86% CI with <span class="math inline">\(n=82\)</span>.</li>
+</ol>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="review-of-statistical-inference.html#cb180-1" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">93</span>,<span class="dv">81</span>)</span></code></pre></div>
+<pre><code>## [1] 1.490412</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>74% CI with <span class="math inline">\(n=150\)</span>.</li>
+</ol>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="review-of-statistical-inference.html#cb182-1" tabindex="-1"></a><span class="fu">qt</span>(.<span class="dv">87</span>,<span class="dv">149</span>)</span></code></pre></div>
+<pre><code>## [1] 1.130695</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>A random sample of 100 students had a mean grade point average (GPA) of 3.2 with a standard deviation of 0.2.</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>Calculate a 97% CI for the mean GPA for all students</li>
+</ol>
+<ul>
+<li><p>Confidence interval is given by <span class="math inline">\(\bar{x} \pm t_{mult} \times \frac{s}{\sqrt{n}}\)</span></p></li>
+<li><p>Where the right half is the MOE. So,</p></li>
+</ul>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="review-of-statistical-inference.html#cb184-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.985</span>,<span class="dv">99</span>)<span class="sc">*</span><span class="fl">0.2</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## [1] 0.04403637</code></pre>
+<ul>
+<li>So confidence interval is <span class="math inline">\(3.2 \pm 0.044\)</span> or (3.156,3.244)</li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the margin of error for the confidence interval found in the previous part? what is the margin of error telling us?</li>
+</ol>
+<ul>
+<li>The margin of error is about 0.044 grade points. This tells us the range within which we expect the true mean GPA to be; it also gives us a measure of uncertainty of the mean GPA.</li>
+</ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Based on this confidence interval, is it reasonable to say that the mean GPA of all students is 3.25 or greater?</li>
+</ol>
+<ul>
+<li>Because 3.25 falls outside of our confidence interval, it is unlikely that that the true mean GPA of all students is 3.25 or greater.</li>
+</ul>
+</div>
+<div id="hypothesis-testing-1" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">A.5.3</span> Hypothesis Testing<a href="review-of-statistical-inference.html#hypothesis-testing-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol start="8" style="list-style-type: decimal">
+<li>What is the goal of conducting a hypothesis test?</li>
+</ol>
+<ul>
+<li>The goal of hypothesis testing is to determine the likelihood of obtaining a particular sample mean</li>
+<li>distinguish if sample statistic is due to random chance or reflects a real feature of phenomenon under study</li>
+</ul>
+<ol start="9" style="list-style-type: decimal">
+<li>Hypothesis statements are always about the <strong>population / sample statistic</strong> (choose one) of interest.</li>
+</ol>
+<ul>
+<li>sample statistic</li>
+</ul>
+<ol start="10" style="list-style-type: decimal">
+<li>For each of the situations, state the appropriate null and alternative hypotheses, in symbols and in words. Sketch how you would find the p-value based on the calculated test-statistic.</li>
+</ol>
+<!-- -->
+<ol style="list-style-type: lower-alpha">
+<li>David’s car averages 29 miles per gallon on the highway. He just switched to a new motor oil that is advertised as increasing gas mileage. He wants to investigate if the advertisement is accurate.</li>
+</ol>
+<ul>
+<li><span class="math inline">\(H_0: \mu = 29 \text{ mpg}\)</span></li>
+<li><span class="math inline">\(H_a: \mu &lt; 29 \text{ mpg}\)</span></li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>The diameter of a spindle in a small motor is supposed to be 4 millimeters. If the spindle is too small or too large, the motor will not function properly. The manufacturer wants to investigate further whether the mean diameter is moved away from the target.</li>
+</ol>
+<ul>
+<li><span class="math inline">\(H_0: \mu = 4 \text{ mm}\)</span></li>
+<li><span class="math inline">\(H_a: \mu \ne 4 \text{ mm}\)</span></li>
+</ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The average time in traffic between 2 points of a congested highway used to be 2 hours. The government invested money to improve travel times by building extra lanes and overpasses. Citizens want to access if travel times have improved, on average.</li>
+</ol>
+<ul>
+<li><span class="math inline">\(H_0: \mu = 2 \text{ hr}\)</span></li>
+<li><span class="math inline">\(H_a: \mu &lt; 2 \text{ hr}\)</span></li>
+</ul>
+<ol start="11" style="list-style-type: decimal">
+<li>To have more evidence against the null hypothesis, our test statistic should be <strong>larger / smaller</strong> (choose one) in magnitude. Briefly explain.</li>
+</ol>
+<ul>
+<li>Larger, since the test statistic is a measure of how dissimilar the sampled data is from the null hypothesis, a larger test statistic is more evidence against the null hypothesis.</li>
+</ul>
+<ol start="12" style="list-style-type: decimal">
+<li>How does increasing the difference between the sample mean and the population mean under the null hypothesis affect the test statistic and the evidence against the null hypothesis?</li>
+</ol>
+<ul>
+<li>Increasing the difference between the sample mean and population mean will increase the test statistic and provide more evidence against the null hypothesis.</li>
+</ul>
+<ol start="13" style="list-style-type: decimal">
+<li>How does increasing the sample size affect the test statistic and the evidence against the null hypothesis?</li>
+</ol>
+<ul>
+<li>Test statistic is given by <span class="math inline">\(t=\frac{\bar{x}-\mu}{s/\sqrt{n}}=\frac{(\bar{x}-\mu)\sqrt{n}}{s}\)</span>, so an increase in sample size will also increase the test-statistic and provide more evidence against the null hypothesis.</li>
+</ul>
+<ol start="14" style="list-style-type: decimal">
+<li>Use R to obtain the critical values of the following hypothesis tests:</li>
+</ol>
+<p>-find t-stat whose p-value is equal to the significance level <span class="math inline">\(\alpha\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(H_0: \mu = 3.5, H_a: \mu \ne 3.5, \text{ with } \alpha=0.8 \text{ and } n=96\)</span></li>
+</ol>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="review-of-statistical-inference.html#cb186-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.96</span>,<span class="dv">95</span>)</span></code></pre></div>
+<pre><code>## [1] 1.769615</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(H_0: \mu = 75, H_a: \mu &lt; 75, \text{ with } \alpha=0.12 \text{ and } n=43\)</span></li>
+</ol>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="review-of-statistical-inference.html#cb188-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.88</span>,<span class="dv">42</span>)</span></code></pre></div>
+<pre><code>## [1] 1.191879</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(H_0: \mu = 10, H_a: \mu &gt; 10, \text{ with } \alpha=0.045 \text{ and } n=132\)</span></li>
+</ol>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="review-of-statistical-inference.html#cb190-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span><span class="fl">-0.045</span>,<span class="dv">131</span>)</span></code></pre></div>
+<pre><code>## [1] 1.708027</code></pre>
+<ol start="15" style="list-style-type: decimal">
+<li>Use R to obtain the p-values of the following hypothesis tests:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(H_0: \mu=48, H_a: \mu \ne 48, \text{ with } t-stat=2.14 \text{ and } n=50.\)</span></li>
+</ol>
+<ul>
+<li>for a two sided test, multiply p-value by 2 to account for both sides</li>
+</ul>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="review-of-statistical-inference.html#cb192-1" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">2.14</span>,<span class="dv">49</span>))<span class="sc">*</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 0.03735955</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(H_0: \mu=3, H_a: \mu &gt;3, \text{ with } t-stat=0.78 \text{ and } n=316.\)</span></li>
+</ol>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="review-of-statistical-inference.html#cb194-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">0.78</span>,<span class="dv">315</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2179883</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(H_0: \mu=12, H_a: \mu &lt;12, \text{ with } t-stat=1.57 \text{ and } n=34.\)</span></li>
+</ol>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="review-of-statistical-inference.html#cb196-1" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">1.57</span>,<span class="dv">33</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9370224</code></pre>
+<ol start="16" style="list-style-type: decimal">
+<li>The 10-year historical average yield of corn in the United States is 160 bushels per acre. A survey of 50 farmers this year gives a sample mean yield of 158.4 bushels per acre, with a standard deviation of 5 bushels per acre. Does this sample provide evidence that the yield of corn has decreased from the 10-year historical average? Conduct an appropriate hypothesis test.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>State the null and alternative hypotheses.</li>
+</ol>
+<ul>
+<li><span class="math inline">\(H_0: \mu = 160 \text{ bushels per acre}\)</span></li>
+<li><span class="math inline">\(H_a: \mu &lt; 160 \text{ bushels per acre}\)</span></li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Calculate the test-statistic.</li>
+</ol>
+<ul>
+<li>Given by <span class="math inline">\(t^* = \frac{\bar{x}-\mu}{s/\sqrt{n}}\)</span> so,</li>
+</ul>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="review-of-statistical-inference.html#cb198-1" tabindex="-1"></a>tstar16<span class="ot">&lt;-</span>(<span class="fl">158.4</span><span class="dv">-160</span>)<span class="sc">/</span>((<span class="dv">5</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>)))</span>
+<span id="cb198-2"><a href="review-of-statistical-inference.html#cb198-2" tabindex="-1"></a>tstar16</span></code></pre></div>
+<pre><code>## [1] -2.262742</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Find the p-value and the critical value.</li>
+</ol>
+<ul>
+<li>Usign significance level, <span class="math inline">\(\alpha\)</span>, of 0.05:</li>
+<li><strong>p-value approach</strong></li>
+</ul>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="review-of-statistical-inference.html#cb200-1" tabindex="-1"></a><span class="fu">pt</span>(tstar16,<span class="dv">49</span>)</span></code></pre></div>
+<pre><code>## [1] 0.01405941</code></pre>
+<ul>
+<li><strong>critical value approach</strong></li>
+</ul>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="review-of-statistical-inference.html#cb202-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>,<span class="dv">49</span>)</span></code></pre></div>
+<pre><code>## [1] 1.676551</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>State a conclusion in context.</li>
+</ol>
+<ul>
+<li>Because the p-value is less than the significance level, and because the critical value is less than the magnitude of the t-statistic, we must reject the null hypothesis. Our data support the claim that the yield of corn this year has decreased from the 10-year historical average.</li>
+</ul>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>How would you interpret the calculated p-value?</li>
+</ol>
+<ul>
+<li>There is a probability of 0.014 that we will obtain a sample mean of 158.4 bushels per acre if the average yield this year is truly 160 bushels per acre.</li>
+</ul>
+</div>
+<div id="general-questions" class="section level3 hasAnchor" number="3.5.4">
+<h3><span class="header-section-number">A.5.4</span> General Questions<a href="review-of-statistical-inference.html#general-questions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol start="17" style="list-style-type: decimal">
+<li>Obtain the critical value of a hypothesis test where <span class="math inline">\(H_0: \mu=145,H_a: \mu \ne 145,\text{ with significance level } \alpha=0.02\)</span>. Suppose the sample size is 50.</li>
+</ol>
+<ul>
+<li>This is a <strong>two-sided</strong> test, so I’ll use qt(<span class="math inline">\(1-\alpha/2\)</span>,df)</li>
+</ul>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="review-of-statistical-inference.html#cb204-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.99</span>,<span class="dv">49</span>)</span></code></pre></div>
+<pre><code>## [1] 2.404892</code></pre>
+<ol start="18" style="list-style-type: decimal">
+<li>Obtain the t-multiplier for a 98% confidence interval. Suppose the sample size is 50.</li>
+</ol>
+<ul>
+<li>To find t-multiplier, I’ll use qt(<span class="math inline">\(1-\alpha/2\)</span>,df)</li>
+</ul>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="review-of-statistical-inference.html#cb206-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.99</span>,<span class="dv">49</span>)</span></code></pre></div>
+<pre><code>## [1] 2.404892</code></pre>
+<ol start="19" style="list-style-type: decimal">
+<li>Compare the critical value and the t-multiplier found in the previous two parts. What is the implication based on this comparison?</li>
+</ol>
+<ul>
+<li>The two values are equal. The implication is that conclusions from a two-sided hypothesis test conducted at significance level <span class="math inline">\(\alpha\)</span> will be consistent with conclusions from a <span class="math inline">\((1-\alpha) \times\)</span> 100% confidence interval.</li>
+</ul>
+<ol start="20" style="list-style-type: decimal">
+<li>Suppose the hypothesis test in question 17 is carried out and the p-value is 0.043. Which of the following confidence intervals is/are possible?</li>
+</ol>
+<ul>
+<li><p>(143.2,144.5)</p></li>
+<li><p>(151.3,154.6)</p></li>
+<li><p>(144.5,163.5)</p></li>
+<li><p>Since the p-value is higher than the significance level, <span class="math inline">\(\alpha=0.02\)</span>, we fail to reject the null hypothesis. Thus 145 must fall within the confidence interval, so only the CI (144.5,163.5) is possible.</p></li>
+</ul>
+<ol start="21" style="list-style-type: decimal">
+<li>A random sample of 85 banded archerfish were collected, and their lengths were measured and recorded. Their average length was 20cm with a standard deviation of 3cm.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Construct a 95% confidence interval for the population mean length of banded archerfish.</li>
+</ol>
+<ul>
+<li>So <span class="math inline">\(\alpha = 0.05\)</span> since the CI is 95%. Need to find t-multiplier and variance <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span></li>
+</ul>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="review-of-statistical-inference.html#cb208-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">84</span>)<span class="sc">*</span><span class="dv">3</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">85</span>)</span></code></pre></div>
+<pre><code>## [1] 0.647085</code></pre>
+<ul>
+<li>CI is <span class="math inline">\(20\pm 0.647\)</span> or (19.353,20.647)</li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Based on your confidence interval, is it plausible that the population mean length of banded archerfish is 21cm? Briefly explain.</li>
+</ol>
+<ul>
+<li>It is not plausible that the population mean length is 21cm since 21cm falls outside of the 95% confidence interval.</li>
+</ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Suppose you conduct the following hypothesis test. <span class="math inline">\(H_0: \mu=21,H_a:\mu \ne 21\)</span>. Without actually performing any additional calculations, what do you expect the p-value of this hypothesis test will be? Briefly explain.</li>
+</ol>
+<ul>
+<li><p>greater than 0.05</p></li>
+<li><p>less than 0.05</p></li>
+<li><p>The p-value will be smaller than 0.05, since this means that if the the probability that a sample mean will be 21.</p></li>
+</ul>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Conduct the hypothesis test to verify your answer to the previous part.</li>
+</ol>
+<ul>
+<li>Find p-value using pt()</li>
+</ul>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="review-of-statistical-inference.html#cb210-1" tabindex="-1"></a>t21<span class="ot">&lt;-</span>(<span class="dv">20-21</span>)<span class="sc">/</span>(<span class="dv">3</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">85</span>))</span>
+<span id="cb210-2"><a href="review-of-statistical-inference.html#cb210-2" tabindex="-1"></a>t21</span></code></pre></div>
+<pre><code>## [1] -3.073181</code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="review-of-statistical-inference.html#cb212-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(t21,<span class="dv">84</span>)</span></code></pre></div>
+<pre><code>## [1] 0.002855487</code></pre>
+<ul>
+<li>Find critical value</li>
+</ul>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="review-of-statistical-inference.html#cb214-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>,<span class="dv">84</span>)</span></code></pre></div>
+<pre><code>## [1] 1.98861</code></pre>
+<ul>
+<li>Since this is lower than <span class="math inline">\(\alpha=0.05\)</span> and the magnitude of the critical value (1.989 &lt; |-3.073|) we reject the null hypothesis. Our data supports the claim that the population mean does not equal 21cm.</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization-with-r-using-ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basics-of-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/13-Module-A.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
