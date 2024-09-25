@@ -1,0 +1,47 @@
+# Model Diagnostics & Remedial Measures in SLR
+
+## Introduction
+
+In this module, we learn how to ensure the regression model assumptions are met. And how to transform variables to make them meet the assumptions.
+
+## Assumptions in Linear Regression
+
+The assumptions are:
+
+1. errors have **mean 0**
+2. errors have **constant variance denoted by $\sigma^2$**
+3. errors are **independent**
+4. errors are **normally distributed**
+
+### Errors have mean 0
+
+Visually, this looks like data points being generally evenly scattered on both sides of the regression line. If this is not the case, then this indicates that the data do not have a linear relationship.
+
+#### Consequences of violating this assumption
+
+**Predictions will be biased**. Because of this, this assumption is the most crucial of all of the assumptions. Predicted values will systematically over- or under-estimate the true values.
+
+### Errors have Constant Variance
+
+I'm gonna think of this as a constant **tightness** of a spread. Visually, data which meets this assumption looks like generally the same tightness of data across the domain of the plot. For data which does **not** meet this assumption, it looks like very tightly fitting data on one side, but very spread out on the other. The vertical variance increases or decreases as we move across the plot.
+
+If this assumption is violated, **statistical inference will no longer be reliable**. Which means that the result of any hypothesis test, confidence interval, or prediction interval are no longer reliable.
+
+### Errors are Independent
+
+as in, the values of the response variable are independent from each other; any y does not depend on other values of the response variable.
+
+A consequence of violating this assumption is that **statistical inference will no longer be reliable**.
+
+### Errors are Normally Distributed
+
+If we were to create a density plot of the errors, it should be a normal distribution.
+
+Violating this assumption is not very consequential; this is the least crucial assumption to satisfy.
+
+## Assessing Regression Assumptions
+
+Some visualizations can help assessment:
+
+* scatterplot of _y_ against _x_ (for assumptions 1 and 2)
+
