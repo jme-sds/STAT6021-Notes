@@ -44,4 +44,129 @@ Violating this assumption is not very consequential; this is the least crucial a
 Some visualizations can help assessment:
 
 * scatterplot of _y_ against _x_ (for assumptions 1 and 2)
+* residual plot (assumptions 1 and 2)
+* Autocorrelation function (ACF) plot of residuals (assumption 3
+* Normal probability plot of residuals (often called QQ plot) (assumption 4)
+
+### Scatterplot
+
+Check scatterplot for:
+
+* no nonlinear pattern (assumption 1)
+* data points evenly scattered around fitted line (assumption 1)
+* vertical variation of data points constant (assumption 2)
+
+
+```{r message=FALSE}
+library(tidyverse)
+data <- openintro::elmhurst
+
+ggplot(data,aes(x=family_income,y=gift_aid))+
+  geom_point()+
+  geom_smooth(method=lm,se=FALSE)
+```
+
+
+### Residual Plot
+
+A residual plot is usually better than a basic scatterplot since it plots the residuals against the fitted values. We want to look at the following in a residual plot:
+
+* residuals should be **evenly scattered** across horizontal axis (assumption 1)
+* residuals should have **similar vertical variation** across plot (assumption 2)
+
+#### Practice Questions
+
+1. based on residual plot, which assumptions are met for the elmhurst dataset?
+
+```{r}
+result = lm(gift_aid~family_income,data=data)
+
+ggplot(result,aes(x=fitted.values,y=residuals))+
+         geom_point()
+```
+
+```{r}
+result$fitted.values
+```
+
+### ACF Plot
+
+Assumption 3 states that errors are **independent**. This implies that values of response variable are independent from each other.
+
+* if observations were obtained from random sample, probably independent.
+* if data has inherent sequence, it is likely observations are not independent. For example, if i record value of stock at the end of each day, the value at day 2 will likely be related to value at day one; so they are not independent.
+
+The **autocorrelation function (acf) plot** of residuals may be used to help assess if the assumption that the errors are independent is met. The acf plot should only be used as a confirmation, but not substitute understanding of the data.
+
+ACF plot is a plot where observations are plotted with the same observations pushed out of phase a little, or lagged, to see if there is correlation between points.
+
+some notes about acf plots:
+
+* the ACF at lag 0 is always 1, correlation of any vector with itself is always 1
+* dashed horizontal lines represent critical values, an ACF at any lag beyond the critical value indicates an ACF that is significant. We have evidence of correlation, and hence dependence, in our residuals
+* if observed values for response variables are independent, then we would expect the ACFs at lags greater than 0 to be insignificant. note that because we are conducting multiple hypothesis tests, don't be worried if ACFs are slightly beyond critical values at one or two isolated lags.
+
+### QQ Plot
+
+A normal probability plot (or QQ Plot) is used to assess if distribution of a variable is normal. It typically plots residuals against their theoretical residual if they followed a normal distribution. A QQ Line is typically overlaid. If plots fall closely to the QQ line, we have evidence that observations follow a normal distribution. 
+
+### Remedial Measures
+
+These transformations are ways of handling violations to assumptions one or two.
+
+* transforming response variable, _y_, affects both assumptions 1 and 2
+  
+  * visually, we can think of transforming _y_ in terms of stretching or squeezing the scatterplot of _y_ against _x_ vertically. This affects the shape of the relationship and the vertical spread.
+  * the choice on how we tranform y is based on handling assumption 2
+  
+* tranforming predictor variable, _x_, affects assumption 1 but does not theoretically affect assumption 2.
+
+  * visually this is the inverse of the last point, stretching/squeezing scatterplot horizontally. Thus this affects the shape, but not the spread of the data points.
+  
+* if assumption 2 is not bet, transform y to stabilize variance and make it constant
+* if assumption 1 is not met, transform x to find appropriate shape to relate the variables.
+* if neither assumption is met, tranform y first to stabilize variance (assumption 2), then check if assumption 1 is met, if not transform x.
+
+## Remedial Measures: Variance Stabilizing Transformations
+
+We transform the response variable to stabilize the variance (assumption 2), there are a couple of ways to decide the appropriate transformation
+
+1. pattern seen in residual plot can guide choice in how to transform response variable.
+2. Box-Cox plot
+
+### Use Pattern in Residual Plot
+
+stabilize variance of errors based on residual plot, if we see either of the following scenarios:
+
+* vertical variation of residuals **increasing** as fitted response increases, or as we move from left to right, or
+* vertical variation of residuals **decreasing** as we move left to right
+
+Note that increasing variance as fitted response increases is much more common with real data. Generally, larger values of a variable are associated with larger spread.
+
+We can transform _y_ using $y^*=y^{\lambda}$, with $\lambda$ chosen based on whether the variance of the residuals is increasing or decreasing with fitted response:
+
+* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
