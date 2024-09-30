@@ -145,7 +145,34 @@ Note that increasing variance as fitted response increases is much more common w
 
 We can transform _y_ using $y^*=y^{\lambda}$, with $\lambda$ chosen based on whether the variance of the residuals is increasing or decreasing with fitted response:
 
-* 
+* if the variance of the residuals is **increasing**, choose $\lambda<1$
+  
+  * if $\lambda=0$, it means we use a logarithmic transformation with base _e_, i.e. $y^*=log(y)=ln(y)$
+  
+* if the variance of the residuals is **decreasing**, choose $\lambda>1$
+
+So, based on the residual plot, we have a range of values for $\lambda$.
+
+### Box-Cox Plot
+
+The box-cox plot helps narrow the range of $\lambda$ to use. It is the plot of the log-likelihood function against $\lambda$, and choose the $\lambda$ that maximizes this log-likelihood function.
+
+```{r bcplot, echo=FALSE, fig.align='center',fig.cap="Answers"}
+knitr::include_graphics("images/bcplot.jpg")
+```
+
+On the box cox plot above, we can see an approximate 95% CI. Here's how to use the bcplot:
+
+* The three vertical lines correspond to the confidence interval (outer lines) and the optimal value (middle) of $\lambda$
+* choose a $\lambda$ within the CI, or close to it, that is easy to understand. Do not have to choose the optimal value, especially if it's difficult to interpret. For the above bc plot, we would choose $\lambda=2$, so a square transformation of y. transform response with $y^*=y^2$, regress $y^*$ against $x$.
+* if 1 lies in the CI, **transformation may not be necessary**.
+* If transformation is needed, a **log transformation is preferred**, since we can still interpret the estimated coefficients. It is difficult to interpret with any other type of transformation.
+* View the Box-Cox procedure as a guide for selecting a transformation, rather than being definitive.
+* Need to recheck the residuals after every transformation to assess if the transformation worked.
+
+### Interpretation with Log Transformed Response
+
+
 
 
 
