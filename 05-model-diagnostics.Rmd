@@ -157,7 +157,7 @@ So, based on the residual plot, we have a range of values for $\lambda$.
 
 The box-cox plot helps narrow the range of $\lambda$ to use. It is the plot of the log-likelihood function against $\lambda$, and choose the $\lambda$ that maximizes this log-likelihood function.
 
-```{r bcplot, echo=FALSE, fig.align='center',fig.cap="Answers"}
+```{r bcplot, echo=FALSE, fig.align='center',fig.cap="Box-Cox Plot"}
 knitr::include_graphics("images/bcplot.jpg")
 ```
 
@@ -172,22 +172,319 @@ On the box cox plot above, we can see an approximate 95% CI. Here's how to use t
 
 ### Interpretation with Log Transformed Response
 
+A log transformation on the response is preferred over any other transformation, as we can still interpret regression coefficients. A couple of ways to interpret the estimated slope $\hat{\beta}_1$:
 
+* the predicted response variable is **multiplied by a factor** of $\text{exp}(\hat{\beta}_1)$ for a one-unit increase in the predictor.
+* we may also subtract 1 from $\text{exp}(\hat{\beta}_1)$ to express the change as a percentage.
 
+  * if $\hat{\beta}_1$ is positive, we have a percent **increase**. The predicted response variable increases by $(\text{exp}(\hat{\beta}_1)-1)\times100$ percent for a one-unit increase in the predictor
 
+  * if $\hat{\beta}_1$ is negative, we have a percent **decrease**. The predicted response variable decreases by $(1-\text{exp}(\hat{\beta}_1))\times100$ for a one-unit increase in predictor.
+  
+## Remedial Measures: Linearization Transformations
 
+First ensure variance has been stabilized and assumption 2 is met. if not, transform predictor to meet assumption 1. 
 
+The general strategy for transforming the predictor variable is via a scatterplot of _y_ (or $y^*$) against _x_. Use the pattern in the plot to decide how to transform the predictor. Some examples below:
 
+```{r xstar, echo=FALSE, fig.align='center',fig.cap="Transformations of x"}
+knitr::include_graphics("images/xstar.jpg")
+```
 
+### Hierarchical Principle
 
+Something to be aware of is the **hierarchical principle**: if the relationship between the response and predictor is of a higher order polynomial (e.g. quadratic, cubic), the hierarchical principle states that the lower order terms should remain in the model. For example, if the relationship is of order _h_, fit $y=\beta_0+\beta_1x+\beta_2x^2+...+\beta_hx^h+\epsilon$ via a multiple linear regression framework. We will see how to do this in the next module.
 
+### Interpretation with Log Transformed Predictor
 
+A log transformation on the predictor is preferred over any other transformation, as we can still interpret the regression coefficient, $\hat{\beta}_1$, in a couple ways:
 
+* For an $a\%$ increase in the predictor, the predicted response **increases by** $\hat{\beta}_1\text{ log}(1+\frac{a}{100})$.
+* $\text{log}(1+\frac{1}{100})\approx\frac{1}{100}$ via Taylor Series. So an alternative interpretation is: for a 1\% increase in the predictor, the predicted response increases by approximately $\frac{\hat{\beta}_1}{100}$.
 
+### Interpretation with Log Transformed Response & Predictor
 
+If both response and predictor variables are log transformed, the regression coefficient, $\hat{\beta}_1$, can be interpreted a couple of ways:
 
+* * For an $a\%$ increase in the predictor, the predicted response is **multiplied by** $(1+\frac{a}{100})^{\hat{\beta}_1}$.
+* $(1+\frac{a}{100})^{\hat{\beta}_1}\approx1+\frac{\hat{\beta}_1}{100}$ via Taylor Series. So an alternative interpretation is: for a 1\% increase in the predictor, the predicted response **increases by approximately $\hat{\beta}_1$ percent**. Note this approximation works better when $\hat{\beta}_1$ is small in magnitude.
 
+### Some General Comments about Assessing Assumptions & Transformations
 
+* When assessing the assumptions with a residual plot, we are assessing if the assumptions are reasonably / approximately met.
+* With real data, assumptions are rarely met completely
+* If unsure, proceed with model building, and test how model performs on new data. If poor performance, go back to residual plot to assess what transformations will be appropriate.
+* Assess the plots to decide which variables need to be transformed, and how. The choice of transformation should go by what you see in the plots, not by trial and error.
+* A residual plot should always be produced after each transformation. A Box-Cox plot could also be produced. The plots should be assessed if the transformation helped in the way you intended.
+* Solve assumption 2 first, then assumption 1.
+
+## R Tutorial
+
+### Example 1: Used Car Prices (Mazdas)
+
+The linear regression model involves several assumptions; among them are:
+
+1. The errors, for each fixed value of _x_, have mean 0. This implies that the relationship as specified in the regression equation is appropriate.
+2. The errors, for each fixed value of _x_, have constant variance. That is, the variation in the errors is theoretically the same regardless of the value of _x_ (or $\hat{y}$).
+3. The errors are independent.
+4. The errors, for each fixed value of _x_, follow a normal distribution.
+
+To assess assumptions 1 and 2, examine scatterplots of:
+
+* _y_ versus _x_
+* residuals versus fitted values, $\hat{y}$.
+
+Assumption 3 is assessed based on knowledge of the data. An Autocorrection (ACF) plot of the residuals may also be used.
+
+Assumptions 4 is assessed with a normal probability plot, and is considered the least crucial of the assumptions.
+
+#### Model Diagnostics with Scatterplots
+
+We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2:
+
+```{r}
+Data<-read.table("datasets/mazda.txt", header=TRUE, sep="")
+library(tidyverse)
+```
+
+```{r}
+##scatterplot, and overlay regression line
+ggplot2::ggplot(Data, aes(x=Age,y=Price))+
+  geom_point()+
+  geom_smooth(method = "lm", se=FALSE)+
+  labs(x="Age", y="Sales Price", title="Scatterplot of Sales Price against Age")
+```
+
+Assumption 1:
+  
+  * data points should be evenly scattered on both sides of regression line. We do not see this, so assumption 1 is not met
+  
+Assumption 2:
+
+  * vertical spread should be constant as we move from left to right, however the spread seems to be decreasing from left to right; spread is increasing as the response increases.
+  
+#### Model Diagnostics with Residual Plots
+
+Sometimes a residual plot is easier to visualize than a scatterplot. First we fith SLR using `lm()`, then apply `plot()` function to an object created with `lm()` which produces four diagnostic plots. To display in a 2x2 array, specify `par(mfrow=c(2,2))` so the plotting window is split into a 2 by 2 array:
+
+```{r fig.height=6}
+result <- lm(Price~Age, data=Data)
+par(mfrow=c(2,2))
+plot(result)
+```
+
+**Residual Plot (top left)**: assumptions 1 and 2:
+
+* residuals on y-axis, fitted values on x-axis
+* red line represents average value fo residuals for differing values along x-axis; shouldn't be any apparent curvature to indicate the form of our model is reasonable.
+
+  * this is not what we see, we see curved pattern, so assumption 1 is not met.
+
+* for assumption 2, we want to see the vertical spread of the residuals to be fairly constant as we move left to right
+  
+  * we instead see vertical spread increasing, so assumption 2 is not met
+  
+**QQ Plot (top right)**: assumption 4
+
+* the normal probability plot
+* if residuals are normal, they should fall along the 45 degree line
+
+**Scale-Location Plot (bottom left)**: assumption 2, constant variance
+
+* SQRT of abs(standardized residuals) against fitted values
+* red line represents average value on the vertical axis for differing values along the x-axis.
+* if variance is constant red line should be horizontal and the vertical spread of plot should be constant
+
+**Influential Outliers (bottom right)**
+
+* data points that lie in the contour lines with large Cook's distance are influential.
+* None of data points have distance greater than 0.5
+* as a rule of thumb, observations with Cook's distance greater than 1 are flagged as influential
+
+Since we have determined that assumptions 1 and 2 are not met, we must transform the response variable first, to stabilize the variance.
+
+Based on the residual plot, we see that the variance of the residuals increases as we move from left to right. So, we know we need to transform the response variable using $y^*=y^{\lambda}$ with $\lambda<1$. A log transformation should be considered since we can still interpret regression coefficients.
+
+#### Box-Cox Transformation on y
+
+The Box Cox plot can be used to decide how to transform the response variable. The transformation takes the form $y^*=y^{\lambda}$ with the value of $\lambda$ to be chosen. If $\lambda=0$, we perform a log transformation.
+
+Use `boxcox()` function from the `MASS` package:
+
+```{r message=FALSE, fig.height=4}
+library(MASS)
+MASS::boxcox(result)
+```
+
+Can zoom in on the plot to have a better idea about the value of $\lamda$ we can use, by specifying the range of `lambda` inside the function:
+
+```{r fig.height=4}
+##adjust lambda for better visualization. Choose lambda between -0.5 and 0.5
+MASS::boxcox(result, lambda = seq(-0.5, 0.5, 1/10)) 
+```
+
+We can choose any value for $\lambda$ within the CI. A log transformation is preferred if possible, since we can still interpret coefficients. Since 0 lies in the CI, we choose $\lambda=0$, to log transform the response variable to get $y^*=\text{log}(y)$. We regress $y^*$ against _x_, and check the resulting residual plot:
+
+```{r fig.height=6}
+##transform y and then regress ystar on x
+ystar<-log(Data$Price)
+Data<-data.frame(Data,ystar)
+result.ystar<-lm(ystar~Age, data=Data)
+par(mfrow = c(2, 2))
+plot(result.ystar)
+```
+
+Now we reassess assumptions 1 and 2 after the transformation:
+
+* For assumption 2, we see the vertical spread of the residuals in the residual plot (top left) is fairly constant from left to right, so assumption 2 has been met. The log transformation worked!
+* Also notice that the residuals are now evenly scattered across the horizontal axis in residual plot (top left). So assumption 1 is met as well.
+
+There is no need for any other transformations.
+
+```{r}
+result.ystar
+```
+
+thus $\hat{y^*}=10.1878 - 0.1647x$, where $y^* = \text{log}(y)$. to interpret the slope:
+
+* The price of used mazdas is multiplied by $\text{exp}(-0.1647) = 0.8481481$ for each year older the car is.
+* the price of used mazdas decreases by $(1-0.8481481)\times 100$ percent, or 15.18519 \%, for each year older the car is.
+
+#### ACF Plot of Residuals
+
+We have yet to assess the assumption that the observed prices are independent from each other. Assuming that these prices are from different cars and not the same car measured repeatedly over tie, there is no reason to think the prices are dependent on each other.
+
+We can also produce an ACF Plot to confirm our thought:
+
+```{r fig.height=4}
+acf(result.ystar$residuals,main="ACF Plot of Residuals with ystar")
+```
+
+None of the ACFs beyond lag 0 are significant, so there's no evidence that the observations are dependent on each other.
+
+### Example 2: Galapagos Islands
+
+We'll focus on `Species` variable, which denotes the number of plant species found on particular island, and `Area`, which is the area of the island in squared kilometers.
+
+We wish to see how the number of plant species of an island is related to the area of the island.
+
+```{r}
+rm(list = ls())
+library(faraway)
+Data<-faraway::gala
+```
+
+#### Model Diagnostics
+
+Use scatterplot to assess assumptions 1 and 2:
+
+```{r fig.height=4.5}
+library(tidyverse)
+
+##scatterplot, and overlay regression line
+ggplot2::ggplot(Data, aes(x=Area,y=Species))+
+  geom_point()+
+  geom_smooth(method = "lm", se=FALSE)+
+  labs(x="Area of Island (sq km)", y="# of Plant Species", 
+       title="Scatterplot of Number of Plant Species against Area of Galapagos Island")
+```
+
+Assumption 1: data points evenly scattered on both sides of regression line, from left to right
+  
+  * this plot looks non-linear
+
+Assumption 2: vertical spread of data points should be constant as we move from left to right
+  
+  * can be difficult to assess with a scatterplot
+  * observations with small areas are closer to the line, which suggests the assumption is not met
+  
+#### Model Diagnostics with Residual Plots
+
+Residual plots are usually easier:
+
+```{r fig.height=5}
+result<-lm(Species~Area,data=Data)
+par(mfrow=c(2,2))
+plot(result)
+```
+
+Assumption 1:
+
+* Clearly the residual plot is nonlinear, so assumption 1 is not met
+
+Assumption 2:
+
+* the vertical variance of the plots appear to be higher for islands with larger fitted values, so assumption 2 is not met
+
+Since both assumptions 1 & 2 are not met, we must transform the response variable first, to stabilize variance.
+
+#### Box-Cox Transformation on y
+
+We see the variance of the residuals increasing from scale-location plot (bottom left), use boxcox plot to determine which value of $\lambda$ to use.
+
+```{r fig.height=4}
+library(MASS)
+MASS::boxcox(result)
+```
+
+Use $\lambda=0$ since it's inside the CI. Use log transformation.
+
+```{r fig.height=6}
+Data$y.star<-log(Data$Species)
+
+result.ystar<-lm(y.star~Area,data=Data)
+par(mfrow=c(2,2))
+plot(result.ystar)
+```
+
+Reassess Assumptions 1 and 2:
+
+**Assumption 1**:
+
+* Residual plot still appears nonlinear, so assumption 1 is not met
+
+**Assumption 2**:
+
+* vertical spread in residual plot is fairly constant as we move left to right. So assumption 2 is met, the log transform worked to stabilize the variance
+
+#### Transformation on $x$
+
+To determine which transform is most appropriate, create scatterplot of transformed response and predictor
+
+```{r}
+ggplot2::ggplot(Data, aes(x=Area,y=y.star))+
+  geom_point()+
+  geom_smooth(method = "lm", se=FALSE)+
+  labs(x="Area of Island (sq km)", y="Log # of Plant Species", 
+       title="Scatterplot of Log Number of Plant Species against Area of Galapagos Island")
+```
+
+Plot resembles a logarithmic curve, so we use a log transform on the predictor, then check our diagnostic plots to reassess the assumptions:
+
+```{r fig.height=6}
+##log transform predictor and add to dataframe
+Data$x.star<-log(Data$Area)
+
+##perform new regression
+result.xystar<-lm(y.star~x.star, data=Data)
+par(mfrow = c(2, 2))
+plot(result.xystar)
+```
+
+Based on residual plot (top left), both assumptions are met. The residuals are evenly scattered across the horizontal axis with no pattern. Also, the vertical spread of the residuals is constant -- so the transformation worked.
+
+#### Interpreting Coefficients with Log Transformed Response and Predictor
+
+Regression equation is given by:
+
+```{r}
+result.xystar
+```
+
+$\hat{y^*}=2.9037+0.3886x^*$ where $y^*=\text{log}(y)$ and $x^*=\text{log}(x)$. A couple ways to interpret slope:
+
+* For a 1\% increase in the area of a Galapagos island, the number of plant species found on the island is multiplied by $(1.01)^{0.3886} = 1.003874$, or
+* for a 1\% increase in area of island, the number of plant species increases by about 0.3886\%.
 
 
 
