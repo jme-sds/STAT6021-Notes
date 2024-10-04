@@ -1,0 +1,120 @@
+# Multiple Linear Regression
+
+## A Note on Notes
+
+I think the note taking for these courses has become inefficient; so from now on I'll just be reviewing prof's notes and then doing the R Tutorial.
+
+So, without further adieu...
+
+## R Tutorial
+
+We'll be using data on cherry trees from `openintro`.
+
+```{r}
+rm(list=ls())
+library(openintro)
+Data<-openintro::cherry
+```
+
+## Scatterplot matrix
+
+We'll use the `ggpairs()` function from `GGally` package:
+
+```{r}
+library(GGally)
+GGally::ggpairs(Data)
+```
+
+* the off diagonals give us the scatterplot and correlation between corresponding pairs of variables.
+
+## Fit MLR Using `lm()`
+
+To fit multiple linear regression (MLR)
+
+```{r}
+result<-lm(volume~diam+height,data=Data)
+```
+
+Another way to do this is:
+
+```{r}
+result<-lm(volume~.,data=Data)
+```
+
+The `.` informs `lm()` to use every column other than `volume` in the data frame as predictors.
+
+```{r}
+summary(result)
+```
+
+so the estimated regression equation is $\hat{y}=-57.9877+4.7802\text{(diam)}+0.3393\text{(height)}$
+
+## Inference with MLR
+
+Since the anova F statistic is 255 with small p-value, data supports that our model is useful.
+
+The confidence intervals for the coefficients can be found using `confint()`:
+
+```{r}
+confint(result,level = 0.95)
+```
+
+Confidence interval for the mean response and prediction interval for a new observation given a specific value of the predictors can also be found using `predict()` e.g.
+
+```{r}
+newdata<-data.frame(diam=10,height=80)
+
+predict(result,newdata,level=0.95,interval = "confidence")
+```
+
+```{r}
+predict(result,newdata,level=0.95,interval = "prediction")
+```
+
+These are the same functions as we did in SLR.
+
+Assessing regression assumptions:
+
+```{r}
+ggplot(Data,aes(x=diam,y=volume))+
+  geom_point()+
+  geom_smooth(method = lm)
+```
+
+```{r}
+ggplot(Data,aes(x=height,y=volume))+
+  geom_point()+
+  geom_smooth(method = lm)
+```
+
+```{r}
+library(MASS)
+
+par(mfrow=c(2,2))
+plot(result)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
