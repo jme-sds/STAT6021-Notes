@@ -1,0 +1,58 @@
+# General Linear _F_ Test
+
+## Practice Problems
+
+1. Carry out general linear F test to assess if we can drop x7 x8 x9 from the model with all predictors.
+
+$H_0: \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coefficient in }H_0\text{ is not zero.}$
+
+```{r}
+((113.91+10.01+33.84)/3)/(2172.59/29)
+```
+
+So $F_0 = 0.7019$
+
+p value is
+```{r}
+1-pf(0.7019,3,29)
+```
+
+
+critical value is:
+
+```{r}
+qf(1-0.05, 3, 29)
+```
+Since $F_0 < F_{\text{crit}}$, we fail to reject the null hypothesis. The data do not support the alternative hypothesis, the full model, so we go with the reduced model (without $x_7$,$x_8$,$x_9$)
+
+2. The value of $SS_R(x_1,x_2,x_3)$ is given by:
+
+```{r}
+0.22+82.55+3112.40
+```
+
+3. Value of $SS_{res}(x_1,x_2,x_3)$:
+
+```{r}
+(0.22+82.55+3112.40)-2172.59
+```
+
+4. Value of $SS_{res}(x_1,x_2,...,x_8)$:
+
+```{r}
+2172.59+33.84
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
