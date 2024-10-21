@@ -34,7 +34,7 @@ Since $F_0 < F_{\text{crit}}$, we fail to reject the null hypothesis. The data d
 3. Value of $SS_{res}(x_1,x_2,x_3)$:
 
 ```{r}
-(0.22+82.55+3112.40)-2172.59
+706.55+1.68+297.68+113.91+10.01+33.84+2172.59
 ```
 
 4. Value of $SS_{res}(x_1,x_2,...,x_8)$:
@@ -42,6 +42,88 @@ Since $F_0 < F_{\text{crit}}$, we fail to reject the null hypothesis. The data d
 ```{r}
 2172.59+33.84
 ```
+
+## R Tutorial
+
+```{r}
+data<-read.table("./datasets/Peruvian.txt",header = TRUE)
+head(data)
+```
+
+```{r}
+round(cor(data),3)
+```
+
+```{r}
+result<-lm(Systol_BP~fraclife+Weight+Forearm+Calf,data=data)
+summary(result)
+```
+consider dropping Forearm and Calf
+
+$H_0: \beta_{\text{Forearm}}=\beta_{\text{Calf}}=0$
+$H_a: \text{ at least one of the coefficients in }H_0\text{ is not 0.}$
+
+### Directly Comparing Full and Reduced Models
+
+```{r}
+reduced<-lm(Systol_BP~fraclife+Weight,data=data)
+
+anova(reduced,result)
+```
+
+Since the fstat is 0.2588 and pvalue is 0.7735, we fail to reject null hypothesis, thus there is little evidence of supporting the full model, go with reduced model.
+
+### Sequential Sum of Squares
+
+```{r}
+anova(result)
+```
+
+```{r}
+((50.5+1.0)/2)/(3389.8/34)
+```
+
+Corresponding p value is:
+
+```{r}
+1-pf(0.2582748,2,34)
+```
+ 
+and critical value is:
+
+```{r}
+qf(0.95,2,34)
+```
+
+
+Again, we fail to reject null, and go with reduced model
+
+## Multicollinearity
+
+```{r}
+all<-lm(Systol_BP~.,data=data)
+
+summary(all)
+```
+
+F test is significant, but many t tests are insignificant, indicates multicollinearity.
+
+```{r}
+round(cor(data[,-1]),3)
+```
+
+```{r}
+library(faraway)
+faraway::vif(all)
+```
+
+largest vif's belong to x2 and x3. VIFs above ten indicate strong multicollinearity
+
+
+
+
+
+
 
 
 
