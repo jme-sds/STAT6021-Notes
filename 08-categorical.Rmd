@@ -1,0 +1,96 @@
+# Categorical Predictors in MLR
+
+## Indicators & Dummy Variables
+
+```{r}
+rm(list=ls())
+data<-read.table("./datasets/insurance.txt",header=FALSE,sep="")
+colnames(data)<-c("time","size","firm")
+head(data)
+```
+
+```{r}
+##convert categorical predictor to factor
+data$firm<-factor(data$firm)
+
+library(ggplot2)
+
+##scatterplot with separate regression lines
+ggplot2::ggplot(data, aes(x=size, y=time, color=firm))+
+  geom_point()+
+  geom_smooth(method=lm, se=FALSE)+
+  labs(title="Scatterplot of Time to Adopt Innovation against Assets, by Firm Type")
+```
+
+```{r}
+result<-lm(time~size+firm, data=data)
+summary(result)
+```
+
+```{r}
+##model with interaction
+result.int<-lm(time~size*firm, data=data)
+summary(result.int) ##can drop interaction
+```
+
+Since size:firmstock pval is small, we can drop it from the model
+
+```{r}
+##can also do general linear F test. same as t test since only dropping one term
+anova(result,result.int)
+```
+
+```{r}
+##clear environment to start new example
+rm(list=ls())
+
+Data<-read.table("./datasets/wine.txt", header=TRUE, sep="")
+##convert Region to factor
+Data$Region<-factor(Data$Region) 
+##assign descriptive labels for each region
+levels(Data$Region) <- c("North", "Central", "Napa") 
+
+library(ggplot2)
+##scatterplot of Quality against Flavor, 
+##separated by Region
+ggplot2::ggplot(Data, aes(x=Flavor, y=Quality, color=Region))+
+  geom_point()+
+  geom_smooth(method=lm, se=FALSE)+
+  labs(title="Scatterplot of Wine Quality against Flavor, by Region")
+```
+
+```{r}
+##fit regression with no interaction
+reduced<-lm(Quality~Flavor+Region, data=Data)
+summary(reduced)
+```
+
+```{r}
+round(vcov(reduced),3)
+```
+
+```{r}
+##consider model with interactions 
+##(when slopes are not parallel)
+result<-lm(Quality~Flavor*Region, data=Data)
+
+##general linear F test for interaction terms
+anova(reduced,result)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
