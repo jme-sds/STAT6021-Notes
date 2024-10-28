@@ -1,0 +1,7 @@
+"0","##extracting slope
+summary(result)$coefficients[2,1]
+"
+"1","[1]"
+"1"," -0.04307165"
+"1","
+"

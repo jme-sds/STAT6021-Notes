@@ -1,0 +1,8 @@
+"0","preds <- predict(result,interval = ""prediction"")
+"
+"2","Warning in predict.lm(result, interval = ""prediction"") :"
+"2","
+ "
+"2"," predictions on current data refer to _future_ responses
+
+"

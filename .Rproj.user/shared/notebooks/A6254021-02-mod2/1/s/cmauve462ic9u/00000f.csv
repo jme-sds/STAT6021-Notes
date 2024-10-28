@@ -1,0 +1,4 @@
+"0","ggplot(Data, aes(x=Year))+"
+"0","  geom_bar()+"
+"0","  theme(axis.text.x = element_text(angle = 90))+"
+"0","  labs(x=""Year"", y=""Number of Students"", title=""Dist of Years"")"

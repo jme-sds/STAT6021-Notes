@@ -1,0 +1,2 @@
+"0","Data_by_age<-Data %>% "
+"0","  arrange(Age)"

@@ -1,0 +1,2 @@
+"0","Data %>% "
+"0","  summarize(avgSleep=mean(Sleep,na.rm = T),avgCourse=mean(Courses,na.rm = T),avgAge=mean(Age,na.rm=T),avgLun=mean(Lunch,na.rm = T))"

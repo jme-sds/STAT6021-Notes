@@ -1,0 +1,3 @@
+"0","ggplot(Data,aes(x=continent,fill=expectancy))+"
+"0","  geom_bar(position = ""stack"")+"
+"0","  labs(x=""Continent"", y=""Count"", title=""Life Expectancies by Continent"")"

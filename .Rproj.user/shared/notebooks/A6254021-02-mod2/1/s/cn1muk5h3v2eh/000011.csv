@@ -1,0 +1,7 @@
+"0","Data.all<-gapminder %>% "
+"0","  mutate(expectancy=ifelse(lifeExp<70,""Low"",""High""))"
+"0",""
+"0","ggplot(Data.all,aes(x=continent,fill=expectancy))+"
+"0","  geom_bar(position=""fill"")+"
+"0","  facet_wrap(~year)+"
+"0","  theme(axis.text.x = element_text(angle=90))"

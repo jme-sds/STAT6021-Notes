@@ -1,0 +1,7 @@
+"0","##extracting intercept
+summary(result)$coefficients[1,1]
+"
+"1","[1]"
+"1"," 24.31933"
+"1","
+"

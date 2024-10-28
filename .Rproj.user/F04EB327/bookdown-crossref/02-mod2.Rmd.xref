@@ -1,0 +1,25 @@
+h1:data-visualization-with-r-using-ggplot2 Data Visualization with R Using 
+h2:introduction Introduction
+h2:visualizations-with-a-single-categorical-variable Visualizations with a Single Categorical Variable
+h3:frequency-tables Frequency Tables
+h3:bar-charts Bar Charts
+h4:customize-title-and-labels-of-axes-in-bar-charts Customize Title and Labels of Axes in Bar Charts
+h4:create-a-bar-chart-using-proportions Create a Bar Chart using Proportions
+h2:visualizations-with-a-single-quantitative-variable Visualizations with a Single Quantitative Variable
+h3:number-summary 5 Number Summary
+h3:boxplots Boxplots
+h3:histograms Histograms
+h3:density-plots Density Plots
+h2:bivariate-visualizations Bivariate Visualizations
+h3:compare-quantitative-variable-across-categories Compare Quantitative Variable Across Categories
+h4:side-by-side-boxplots Side-by-Side Boxplots
+h4:violin-plots Violin Plots
+h3:summarizing-two-categorical-variables Summarizing Two Categorical Variables
+h4:two-way-tables Two-Way Tables
+h4:stacked-bar-charts Stacked Bar Charts
+h3:summarizing-two-quantitative-variables Summarizing Two Quantitative Variables
+h4:scatterplots Scatterplots
+h2:multivariate-visualizations Multivariate Visualizations
+h3:bar-charts-1 Bar Charts
+h3:scatterplots-1 Scatterplots
+

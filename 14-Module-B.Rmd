@@ -127,4 +127,4 @@ The order of the levels in the factor *practice* are:
 ## R Markdown
 
 ### Question 10
-As evidenced by the above, my answers were typed up using R Markdown, and an HTML file was created.
+As evidenced by the above, my answers were typed up using R Markdown, and an HTML file was created

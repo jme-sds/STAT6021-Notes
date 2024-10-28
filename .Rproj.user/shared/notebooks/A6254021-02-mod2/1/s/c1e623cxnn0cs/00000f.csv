@@ -1,0 +1,2 @@
+"0","ggplot(Data,aes(x=gdpPercap,y=lifeExp))+"
+"0","  geom_point(color=""blue"")"

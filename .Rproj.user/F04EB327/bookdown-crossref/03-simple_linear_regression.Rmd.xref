@@ -1,0 +1,30 @@
+h1:introduction-to-simple-linear-regression Introduction to Simple Linear Regression
+h2:introduction Introduction
+fig:scattercourses Scatterplot of Study Time vs. Number of Courses Taken
+h3:basic-ideas-with-statistics Basic Ideas with Statistics
+h4:population-vs.-sample Population vs. Sample
+h4:parameter-vs.-statistic Parameter vs. Statistic
+h3:motivation Motivation
+h4:practice-questions Practice Questions
+h2:simple-linear-regression-slr Simple Linear Regression (SLR)
+fig:3coursestudy Distribution of Study Time For 3 Courses
+h2:estimating-regression-coefficients-in-slr Estimating Regression Coefficients in SLR
+h2:estimating-variance-of-errors-in-slr Estimating Variance of Errors in SLR
+h3:practice-questions-1 Practice Questions
+fig:prac1 Answers
+h2:assessing-linear-association Assessing Linear Association
+h3:sum-of-squares Sum of Squares
+h3:anova-table ANOVA Table
+h3:anova-f-test ANOVA F Test
+h3:coefficient-of-determination Coefficient of Determination
+h3:correlation Correlation
+h4:how-strong-is-strong How strong is strong?
+h2:word-of-caution Word of Caution
+h2:r-tutorial R Tutorial
+h3:visualization Visualization
+h3:regression Regression
+h3:extract-values-from-r-objects Extract Values from R Objects
+h3:prediction Prediction
+h3:anova-table-1 ANOVA Table
+h3:correlation-1 Correlation
+

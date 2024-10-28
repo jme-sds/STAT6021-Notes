@@ -1,0 +1,3 @@
+"0","Data_by_age<-Data[order(Data$Age),]"
+"0","Data_by_age_des<-Data[order(-Data$Age),]"
+"0",""

@@ -1,0 +1,4 @@
+"0","kable(mod1cheatsheet,caption = ""Data Wrangling Cheat Sheet"")"
+"2","Error in gsub(""^\\s+|(?<!\\\\)\\s+$"", """", x, perl = TRUE) : 
+  input string 21 is invalid UTF-8
+"

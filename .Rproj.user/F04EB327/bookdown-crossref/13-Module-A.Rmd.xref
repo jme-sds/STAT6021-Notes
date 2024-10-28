@@ -1,0 +1,62 @@
+h1:appendix-appendix (APPENDIX) Appendix
+h1:review-of-statistical-inference Review of Statistical Inference
+h2:cheat-sheet Cheat Sheet
+h2:introduction-to-the-lesson Introduction to the Lesson
+h2:sampling-distributions Sampling Distributions
+h3:normal-distribution Normal Distribution
+eq:ndist
+If @ref(eq:ndist) is a good approximation for the distribution of data, we can estimate probabilities by integrating @ref(eq:ndist) over the relevant range(s).eq:zscore
+h3:population-samples Population & Samples
+h4:motivation Motivation
+h4:example Example
+h4:parameter-vs.-statistic Parameter vs. Statistic
+h3:sampling-distribution-of-sample-means Sampling Distribution of Sample Means
+h4:central-limit-theorem Central Limit Theorem
+h3:worked-example-textbook-spending Worked Example: Textbook Spending
+h4:practice-exercise Practice Exercise
+h4:where-do-we-go-from-here Where do we go from here?
+h2:confidence-intervals Confidence Intervals
+h3:intro-to-confidence-intervals Intro to Confidence Intervals
+h4:general-form-of-confidence-intervals General Form of Confidence Intervals
+eq:cigeneral
+The  reflects how precise we believe our estimate is, and is calculated using the confidence level .h4:confidence-levels-and-margin-of-error Confidence Levels and Margin of Error
+h4:confidence-interval-for-population-mean Confidence Interval for Population Mean
+eq:cipop
+h3:finding-multipliers Finding Multipliers
+h4:finding-multiplier-in-ci Finding Multiplier in CI
+eq:zstannorm
+Now we can apply these facts to find out why equation is the way it is.fig:stnormpdf Standard Normal PDF
+eq:moederived
+So this means that the population mean must be within the interval given by , which is the definition of our confidence interval.h4:exercise Exercise
+h3:t-distributions t distributions
+h4:degrees-of-freedom Degrees of Freedom
+h4:t-distribution-vs-standard-normal  Distribution vs Standard Normal
+h4:confidence-interval-for-population-mean-1 Confidence Interval for Population Mean
+eq:ciestimate
+Where  is the value from the  curve with area  between  and . The degrees of freedom is .h4:finding-multiplier Finding Multiplier
+h4:worked-example-banks-loan-to-deposit-ratio-ltdr Worked Example: Banks’ Loan-to-Deposit Ratio (LTDR)
+h2:hypothesis-testing Hypothesis Testing
+h3:hypotheses Hypotheses
+h4:motivation-1 Motivation
+h4:example-1 Example
+h4:stating-hypotheses Stating Hypotheses
+h4:one-sided-and-two-sided-tests One-sided and Two-sided Tests
+h3:evaluating-evidence-p-values Evaluating Evidence: p-values
+h4:test-statistics Test Statistics
+h4:statistic-level Statistic Level
+h4:the-p-value-approach The p-value Approach
+h4:distribution-of-a-statistic Distribution of a Statistic
+h4:finding-the-p-value Finding the p-value
+h4:decision Decision
+h3:evaluating-evidence-critical-value-approach Evaluating Evidence: Critical Value Approach
+h4:finding-the-critical-value Finding the Critical Value
+fig:2sidecv t* for 2-Sided Critical Value
+h4:exercises Exercises
+h3:summary Summary
+h3:worked-examples Worked Examples
+h2:practice-questions Practice Questions
+h3:sampling-distributions-1 Sampling Distributions
+h3:confidence-intervals-1 Confidence Intervals
+h3:hypothesis-testing-1 Hypothesis Testing
+h3:general-questions General Questions
+

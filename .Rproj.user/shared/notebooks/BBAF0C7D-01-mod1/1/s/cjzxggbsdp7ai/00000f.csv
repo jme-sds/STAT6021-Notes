@@ -1,0 +1,2 @@
+"0","Data<-Data %>% "
+"0","  mutate(deprived=ifelse(Sleep<7,""yes"",""no""))"

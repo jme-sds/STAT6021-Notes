@@ -1,0 +1,9 @@
+"0","library(tidyverse)"
+"0","library(openintro)"
+"2","Loading required package: airports
+"
+"2","Loading required package: cherryblossom
+"
+"2","Loading required package: usdata
+"
+"0","Data<-openintro::elmhurst"

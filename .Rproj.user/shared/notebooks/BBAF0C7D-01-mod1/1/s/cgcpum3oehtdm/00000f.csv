@@ -1,0 +1,4 @@
+"0","Data<-Data %>% "
+"0","  mutate(CourseLoad=case_when(Courses<=3 ~ ""light"","
+"0","                              Courses>3 & Courses <=5 ~""regular"","
+"0","                              Courses>5 ~ ""heavy""))"

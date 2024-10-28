@@ -1,0 +1,1 @@
+{"frames":[{"func":"plot(df$courses, df$study, xlab = \"# of Courses\", ylab = \"Study Time (Mins)\")","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in df$courses : object of type 'closure' is not subsettable\n"}

@@ -1,0 +1,17 @@
+h1:inference-with-simple-linear-regression-slr Inference with Simple Linear Regression (SLR)
+h2:introduction Introduction
+h2:hypothesis-testing-in-slr Hypothesis Testing in SLR
+h3:distribution-of-least-squares-estimators Distribution of Least Squares Estimators
+h3:testing-regression-coefficients Testing Regression Coefficients
+h2:confidence-intervals-for-regression-coefficients Confidence Intervals for Regression Coefficients
+h3:thought-questions Thought Questions
+h2:ci-of-the-mean-response CI of the Mean Response
+h2:prediction-interval-of-a-new-response Prediction Interval of a New Response
+h3:thought-questions-1 Thought Questions
+h2:r-tutorial R Tutorial
+h3:hypothesis-test-for-beta_1-and-beta_0 Hypothesis Test for  (and )
+h3:confidence-interval-for-beta_1-and-beta_0 Confidence Interval for  (and )
+h3:confidence-interval-for-mean-response-for-given-x Confidence Interval for Mean Response for Given 
+h3:prediction-interval-for-a-response-for-a-given-x Prediction Interval for a Response for a Given 
+h3:visualization-of-ci-for-mean-response-given-x-and-pi-of-response-given-x Visualization of CI for Mean Response Given  and PI of Response Given 
+

@@ -1,0 +1,7 @@
+"0","##correlation
+cor(Data$family_income,Data$gift_aid)
+"
+"1","[1]"
+"1"," -0.4985561"
+"1","
+"

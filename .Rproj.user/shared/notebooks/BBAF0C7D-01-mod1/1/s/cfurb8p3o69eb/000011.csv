@@ -1,0 +1,7 @@
+"0","SoccerPeeps_2nd<-Data[which(Data$Sport==""Soccer"" & Data$Year==""Second""),]"
+"0","dim(SoccerPeeps_2nd)"
+"1","[1]"
+"1"," 25"
+"1","  8"
+"1","
+"

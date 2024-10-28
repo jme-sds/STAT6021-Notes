@@ -1,0 +1,22 @@
+h1:data-wrangling-with-r Data Wrangling with R
+h2:cheat-sheet Cheat Sheet
+tab:echo Data Wrangling Cheat Sheet
+h2:data-wrangling-using-base-r-functions Data Wrangling Using Base R Functions
+h3:changing-column-names Changing Column Names
+h3:summarizing-variables 
+h3:summarizing-variable-by-groups 
+h3:create-a-new-variable-based-on-existing-variable 
+h3:combine-data-frames 
+h3:sort-data-frame-by-column-values 
+h2:data-wrangling-using-dplyr-functions Data Wrangling Using dplyr Functions
+h3:select-specific-columns-of-a-data-fram Select Specific Columns of a Data Fram
+h3:select-observations-by-conditions Select observations by conditions
+h3:change-column-name Change Column Name
+h3:summarizing-variables-1 Summarizing Variables
+h3:summarizing-variable-by-groups-1 Summarizing Variable by Groups
+h3:create-a-new-variable-based-on-existing-variables Create a New Variable Based on Existing Variable(s)
+h3:combine-data-frames-1 Combine Data Frames
+h3:sort-data-frame-by-column-values-1 Sort data frame by column values
+h3:more-about-combining-datasets More About Combining Datasets
+h3:a-note-about-missing-values A Note About Missing Values
+

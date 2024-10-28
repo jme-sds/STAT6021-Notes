@@ -1,0 +1,4 @@
+"0","ggplot(Data, aes(x=gdpPercap,y=lifeExp))+"
+"0","  geom_point(alpha=0.5)+"
+"0","  labs(x=""GDP"", y=""Life Exp"", "
+"0","       title=""Scatterplot of Life Exp against GDP"")"

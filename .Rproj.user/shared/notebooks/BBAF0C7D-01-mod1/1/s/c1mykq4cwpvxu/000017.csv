@@ -1,0 +1,1 @@
+"0","CourseLoad<-cut(Data$Courses,breaks=c(-Inf,3,5,Inf),labels=c(""light"",""regular"",""heavy""))"

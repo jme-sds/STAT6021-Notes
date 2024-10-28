@@ -1,0 +1,169 @@
+h1:about About
+h1:syllabus-week Syllabus Week
+h2:agenda Agenda
+h1:data-wrangling-with-r Data Wrangling with R
+h2:cheat-sheet Cheat Sheet
+tab:echo Data Wrangling Cheat Sheet
+h2:data-wrangling-using-base-r-functions Data Wrangling Using Base R Functions
+h3:changing-column-names Changing Column Names
+h3:summarizing-variables 
+h3:summarizing-variable-by-groups 
+h3:create-a-new-variable-based-on-existing-variable 
+h3:combine-data-frames 
+h3:sort-data-frame-by-column-values 
+h2:data-wrangling-using-dplyr-functions Data Wrangling Using dplyr Functions
+h3:select-specific-columns-of-a-data-fram Select Specific Columns of a Data Fram
+h3:select-observations-by-conditions Select observations by conditions
+h3:change-column-name Change Column Name
+h3:summarizing-variables-1 Summarizing Variables
+h3:summarizing-variable-by-groups-1 Summarizing Variable by Groups
+h3:create-a-new-variable-based-on-existing-variables Create a New Variable Based on Existing Variable(s)
+h3:combine-data-frames-1 Combine Data Frames
+h3:sort-data-frame-by-column-values-1 Sort data frame by column values
+h3:more-about-combining-datasets More About Combining Datasets
+h3:a-note-about-missing-values A Note About Missing Values
+h1:data-visualization-with-r-using-ggplot2 Data Visualization with R Using 
+h2:introduction Introduction
+h2:visualizations-with-a-single-categorical-variable Visualizations with a Single Categorical Variable
+h3:frequency-tables Frequency Tables
+h3:bar-charts Bar Charts
+h4:customize-title-and-labels-of-axes-in-bar-charts Customize Title and Labels of Axes in Bar Charts
+h4:create-a-bar-chart-using-proportions Create a Bar Chart using Proportions
+h2:visualizations-with-a-single-quantitative-variable Visualizations with a Single Quantitative Variable
+h3:number-summary 5 Number Summary
+h3:boxplots Boxplots
+h3:histograms Histograms
+h3:density-plots Density Plots
+h2:bivariate-visualizations Bivariate Visualizations
+h3:compare-quantitative-variable-across-categories Compare Quantitative Variable Across Categories
+h4:side-by-side-boxplots Side-by-Side Boxplots
+h4:violin-plots Violin Plots
+h3:summarizing-two-categorical-variables Summarizing Two Categorical Variables
+h4:two-way-tables Two-Way Tables
+h4:stacked-bar-charts Stacked Bar Charts
+h3:summarizing-two-quantitative-variables Summarizing Two Quantitative Variables
+h4:scatterplots Scatterplots
+h2:multivariate-visualizations Multivariate Visualizations
+h3:bar-charts-1 Bar Charts
+h3:scatterplots-1 Scatterplots
+h1:introduction-to-simple-linear-regression Introduction to Simple Linear Regression
+h2:introduction-1 Introduction
+fig:scattercourses Scatterplot of Study Time vs. Number of Courses Taken
+h3:basic-ideas-with-statistics Basic Ideas with Statistics
+h4:population-vs.-sample Population vs. Sample
+h4:parameter-vs.-statistic Parameter vs. Statistic
+h3:motivation Motivation
+h4:practice-questions Practice Questions
+h2:simple-linear-regression-slr Simple Linear Regression (SLR)
+fig:3coursestudy Distribution of Study Time For 3 Courses
+h2:estimating-regression-coefficients-in-slr Estimating Regression Coefficients in SLR
+h2:estimating-variance-of-errors-in-slr Estimating Variance of Errors in SLR
+h3:practice-questions-1 Practice Questions
+fig:prac1 Answers
+h2:assessing-linear-association Assessing Linear Association
+h3:sum-of-squares Sum of Squares
+h3:anova-table ANOVA Table
+h3:anova-f-test ANOVA F Test
+h3:coefficient-of-determination Coefficient of Determination
+h3:correlation Correlation
+h4:how-strong-is-strong How strong is strong?
+h2:word-of-caution Word of Caution
+h2:r-tutorial R Tutorial
+h3:visualization Visualization
+h3:regression Regression
+h3:extract-values-from-r-objects Extract Values from R Objects
+h3:prediction Prediction
+h3:anova-table-1 ANOVA Table
+h3:correlation-1 Correlation
+h1:inference-with-simple-linear-regression-slr Inference with Simple Linear Regression (SLR)
+h2:introduction-2 Introduction
+h2:hypothesis-testing-in-slr Hypothesis Testing in SLR
+h3:distribution-of-least-squares-estimators Distribution of Least Squares Estimators
+h3:testing-regression-coefficients Testing Regression Coefficients
+h2:confidence-intervals-for-regression-coefficients Confidence Intervals for Regression Coefficients
+h3:thought-questions Thought Questions
+h2:ci-of-the-mean-response CI of the Mean Response
+h2:prediction-interval-of-a-new-response Prediction Interval of a New Response
+h3:thought-questions-1 Thought Questions
+h2:r-tutorial-1 R Tutorial
+h3:hypothesis-test-for-beta_1-and-beta_0 Hypothesis Test for  (and )
+h3:confidence-interval-for-beta_1-and-beta_0 Confidence Interval for  (and )
+h3:confidence-interval-for-mean-response-for-given-x Confidence Interval for Mean Response for Given 
+h3:prediction-interval-for-a-response-for-a-given-x Prediction Interval for a Response for a Given 
+h3:visualization-of-ci-for-mean-response-given-x-and-pi-of-response-given-x Visualization of CI for Mean Response Given  and PI of Response Given 
+h1:appendix-appendix (APPENDIX) Appendix
+h1:review-of-statistical-inference Review of Statistical Inference
+h2:cheat-sheet-1 Cheat Sheet
+h2:introduction-to-the-lesson Introduction to the Lesson
+h2:sampling-distributions Sampling Distributions
+h3:normal-distribution Normal Distribution
+eq:ndist
+If @ref(eq:ndist) is a good approximation for the distribution of data, we can estimate probabilities by integrating @ref(eq:ndist) over the relevant range(s).eq:zscore
+h3:population-samples Population & Samples
+h4:motivation-1 Motivation
+h4:example Example
+h4:parameter-vs.-statistic-1 Parameter vs. Statistic
+h3:sampling-distribution-of-sample-means Sampling Distribution of Sample Means
+h4:central-limit-theorem Central Limit Theorem
+h3:worked-example-textbook-spending Worked Example: Textbook Spending
+h4:practice-exercise Practice Exercise
+h4:where-do-we-go-from-here Where do we go from here?
+h2:confidence-intervals Confidence Intervals
+h3:intro-to-confidence-intervals Intro to Confidence Intervals
+h4:general-form-of-confidence-intervals General Form of Confidence Intervals
+eq:cigeneral
+The  reflects how precise we believe our estimate is, and is calculated using the confidence level .h4:confidence-levels-and-margin-of-error Confidence Levels and Margin of Error
+h4:confidence-interval-for-population-mean Confidence Interval for Population Mean
+eq:cipop
+h3:finding-multipliers Finding Multipliers
+h4:finding-multiplier-in-ci Finding Multiplier in CI
+eq:zstannorm
+Now we can apply these facts to find out why equation is the way it is.fig:stnormpdf Standard Normal PDF
+eq:moederived
+So this means that the population mean must be within the interval given by , which is the definition of our confidence interval.h4:exercise Exercise
+h3:t-distributions t distributions
+h4:degrees-of-freedom Degrees of Freedom
+h4:t-distribution-vs-standard-normal  Distribution vs Standard Normal
+h4:confidence-interval-for-population-mean-1 Confidence Interval for Population Mean
+eq:ciestimate
+Where  is the value from the  curve with area  between  and . The degrees of freedom is .h4:finding-multiplier Finding Multiplier
+h4:worked-example-banks-loan-to-deposit-ratio-ltdr Worked Example: Banks’ Loan-to-Deposit Ratio (LTDR)
+h2:hypothesis-testing Hypothesis Testing
+h3:hypotheses Hypotheses
+h4:motivation-2 Motivation
+h4:example-1 Example
+h4:stating-hypotheses Stating Hypotheses
+h4:one-sided-and-two-sided-tests One-sided and Two-sided Tests
+h3:evaluating-evidence-p-values Evaluating Evidence: p-values
+h4:test-statistics Test Statistics
+h4:statistic-level Statistic Level
+h4:the-p-value-approach The p-value Approach
+h4:distribution-of-a-statistic Distribution of a Statistic
+h4:finding-the-p-value Finding the p-value
+h4:decision Decision
+h3:evaluating-evidence-critical-value-approach Evaluating Evidence: Critical Value Approach
+h4:finding-the-critical-value Finding the Critical Value
+fig:2sidecv t* for 2-Sided Critical Value
+h4:exercises Exercises
+h3:summary Summary
+h3:worked-examples Worked Examples
+h2:practice-questions-2 Practice Questions
+h3:sampling-distributions-1 Sampling Distributions
+h3:confidence-intervals-1 Confidence Intervals
+h3:hypothesis-testing-1 Hypothesis Testing
+h3:general-questions General Questions
+h1:basics-of-r Basics of R
+h2:getting-started-with-r Getting Started with R
+h3:question-1 Question 1
+h3:question-2 Question 2
+h3:question-3 Question 3
+h3:question-4 Question 4
+h2:topic-b.3-data-types-structures-in-r Topic B.3: Data Types & Structures in R
+h3:question-5 Question 5
+h3:question-6 Question 6
+h3:question-7 Question 7
+h3:question-8 Question 8
+h3:question-9 Question 9
+h2:r-markdown R Markdown
+h3:question-10 Question 10
+

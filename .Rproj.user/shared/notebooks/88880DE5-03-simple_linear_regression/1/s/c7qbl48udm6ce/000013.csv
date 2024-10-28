@@ -1,0 +1,5 @@
+"0","##fit regression"
+"0","result<-lm(study~courses, data=df)"
+"2","Error in model.frame.default(formula = study ~ courses, data = df, drop.unused.levels = TRUE) : 
+  'data' must be a data.frame, environment, or list
+"

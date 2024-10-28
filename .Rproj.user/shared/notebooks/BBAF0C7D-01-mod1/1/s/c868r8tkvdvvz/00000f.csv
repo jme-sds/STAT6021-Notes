@@ -1,0 +1,2 @@
+"0","sleep_mins<-Data$Sleep*60"
+"0","deprived<-ifelse(Data$Sleep<7,""yes"",""no"")"

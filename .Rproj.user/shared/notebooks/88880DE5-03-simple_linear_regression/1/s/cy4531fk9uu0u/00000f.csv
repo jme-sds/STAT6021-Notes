@@ -1,0 +1,4 @@
+"0","##create scatterplot with regression line overlaid"
+"0","plot(df$courses, df$study, xlab=""# of Courses"", ylab=""Study Time (Mins)"")"
+"2","Error in df$courses : object of type 'closure' is not subsettable
+"

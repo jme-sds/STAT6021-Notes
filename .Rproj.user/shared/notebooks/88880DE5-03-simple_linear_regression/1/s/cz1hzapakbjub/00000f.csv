@@ -1,0 +1,7 @@
+"0","##residual standard error
+sd(summary(result)$residuals)
+"
+"1","[1]"
+"1"," 4.733545"
+"1","
+"

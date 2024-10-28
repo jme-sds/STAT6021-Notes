@@ -1,0 +1,7 @@
+"0","Data<-read.csv(""datasets/ClassDataPrevious.csv"",header = TRUE)"
+"0","dim(Data)"
+"1","[1]"
+"1"," 298"
+"1","   8"
+"1","
+"

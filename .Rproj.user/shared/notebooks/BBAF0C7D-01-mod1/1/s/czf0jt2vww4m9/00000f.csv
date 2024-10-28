@@ -1,0 +1,2 @@
+"0","Data<-data.frame(Data,sleep_mins,deprived,CourseLoad,Year2)"
+"0","head(Data)"

@@ -1,0 +1,6 @@
+"0","summary(result)$coefficients[1,1] + summary(result)$coefficients[2,1]*50
+"
+"1","[1]"
+"1"," 22.16575"
+"1","
+"

@@ -1,0 +1,3 @@
+"0","library(knitr)"
+"0","mod1cheatsheet<-read.csv(""tables/mod1cheatsheet.csv"",header=TRUE)"
+"0","mod1cheatsheet"

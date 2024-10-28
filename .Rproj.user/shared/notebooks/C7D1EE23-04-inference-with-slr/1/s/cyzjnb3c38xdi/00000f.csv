@@ -1,0 +1,10 @@
+"0","##regular scatterplot"
+"0","##with regression line overlaid, and bounds of CI for mean y"
+"0","ggplot2::ggplot(Data, aes(x=family_income, y=gift_aid))+"
+"0","  geom_point() +"
+"0","  geom_smooth(method=lm)+"
+"0","  labs(x=""Family Income"", "
+"0","       y=""Gift Aid"", "
+"0","       title=""Scatterplot of Gift Aid against Family Income"")"
+"1","[38;5;254m`geom_smooth()` using formula = 'y ~ x'[39m
+"

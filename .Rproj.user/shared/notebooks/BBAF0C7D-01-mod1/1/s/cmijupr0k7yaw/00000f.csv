@@ -1,0 +1,2 @@
+"0","Data<-Data %>% "
+"0","  mutate(Sleep_mins=Sleep*60)"

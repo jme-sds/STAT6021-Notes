@@ -1,0 +1,2 @@
+"0","Data<-Data %>% "
+"0","  mutate(UpUnder=fct_collapse(Yr,under=c(""First"",""Second""),up=c(""Third"",""Fourth"")))"

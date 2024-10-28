@@ -1,0 +1,4 @@
+"0","ggplot(Data, aes(x=continent, fill=expectancy))+"
+"0","  geom_bar(position = ""fill"")+"
+"0","  labs(x=""Continent"", y=""Proportion"", "
+"0","       title=""Proportion of Life Expectancies by Continent"")"

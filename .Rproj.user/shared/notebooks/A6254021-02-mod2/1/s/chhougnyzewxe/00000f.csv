@@ -1,0 +1,2 @@
+"0","ggplot(Data,aes(x=Age))+"
+"0","  geom_density(color=""red"")"

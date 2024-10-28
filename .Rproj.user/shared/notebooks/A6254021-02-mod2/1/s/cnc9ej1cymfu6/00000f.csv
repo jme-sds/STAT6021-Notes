@@ -1,0 +1,4 @@
+"0","newData<-Data %>% "
+"0","  group_by(Year) %>% "
+"0","  summarize(Counts=n()) %>% "
+"0","  mutate(Percent=Counts/nrow(Data))"

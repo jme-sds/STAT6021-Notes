@@ -1,0 +1,6 @@
+"0","Data %>% "
+"0","  group_by(Yr,Comp) %>% "
+"0","  summarize(medSleep=median(Sleep,na.rm=T))"
+"1","[38;5;232m`summarise()` has grouped output by 'Yr'. You can
+override using the `.groups` argument.[39m
+"

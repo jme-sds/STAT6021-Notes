@@ -1,0 +1,2 @@
+"0","Data<-Data %>% "
+"0","  mutate(expectancy=ifelse(lifeExp<70,""Low"",""High""))"

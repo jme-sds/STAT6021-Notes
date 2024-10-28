@@ -1,0 +1,4 @@
+"0","##create dataframe"
+"0","df<-data.frame(study,courses)"
+"2","Error: object 'study' not found
+"

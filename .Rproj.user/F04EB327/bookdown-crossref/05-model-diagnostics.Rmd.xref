@@ -1,0 +1,39 @@
+h1:model-diagnostics-remedial-measures-in-slr Model Diagnostics & Remedial Measures in SLR
+h2:introduction Introduction
+h2:assumptions-in-linear-regression Assumptions in Linear Regression
+h3:errors-have-mean-0 Errors have mean 0
+h4:consequences-of-violating-this-assumption Consequences of violating this assumption
+h3:errors-have-constant-variance Errors have Constant Variance
+h3:errors-are-independent Errors are Independent
+h3:errors-are-normally-distributed Errors are Normally Distributed
+h2:assessing-regression-assumptions Assessing Regression Assumptions
+h3:scatterplot Scatterplot
+h3:residual-plot Residual Plot
+h4:practice-questions Practice Questions
+h3:acf-plot ACF Plot
+h3:qq-plot QQ Plot
+h3:remedial-measures Remedial Measures
+h2:remedial-measures-variance-stabilizing-transformations Remedial Measures: Variance Stabilizing Transformations
+h3:use-pattern-in-residual-plot Use Pattern in Residual Plot
+h3:box-cox-plot Box-Cox Plot
+fig:bcplot Box-Cox Plot
+h3:interpretation-with-log-transformed-response Interpretation with Log Transformed Response
+h2:remedial-measures-linearization-transformations Remedial Measures: Linearization Transformations
+fig:xstar Transformations of x
+h3:hierarchical-principle Hierarchical Principle
+h3:interpretation-with-log-transformed-predictor Interpretation with Log Transformed Predictor
+h3:interpretation-with-log-transformed-response-predictor Interpretation with Log Transformed Response & Predictor
+h3:some-general-comments-about-assessing-assumptions-transformations Some General Comments about Assessing Assumptions & Transformations
+h2:r-tutorial R Tutorial
+h3:example-1-used-car-prices-mazdas Example 1: Used Car Prices (Mazdas)
+h4:model-diagnostics-with-scatterplots Model Diagnostics with Scatterplots
+h4:model-diagnostics-with-residual-plots Model Diagnostics with Residual Plots
+h4:box-cox-transformation-on-y Box-Cox Transformation on y
+h4:acf-plot-of-residuals ACF Plot of Residuals
+h3:example-2-galapagos-islands Example 2: Galapagos Islands
+h4:model-diagnostics Model Diagnostics
+h4:model-diagnostics-with-residual-plots-1 Model Diagnostics with Residual Plots
+h4:box-cox-transformation-on-y-1 Box-Cox Transformation on y
+h4:transformation-on-x Transformation on 
+h4:interpreting-coefficients-with-log-transformed-response-and-predictor Interpreting Coefficients with Log Transformed Response and Predictor
+
